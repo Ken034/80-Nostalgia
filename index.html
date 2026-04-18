@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80后美好回忆 - 致我们逝去的童年</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #fff;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid #e8e8ed;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6e6e73;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1d1d1f;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1d1d1f;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #fbfbfd;
+            border-radius: 18px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1d1d1f;
+        }
+
+        .card p {
+            color: #86868b;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Full Width Section */
+        .full-section {
+            background: #f5f5f7;
+            padding: 100px 20px;
+        }
+
+        .full-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .full-content h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .full-content p {
+            font-size: 20px;
+            color: #86868b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Memory Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            gap: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-image {
+            flex: 1;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h3 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content p {
+            color: #86868b;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #f5f5f7;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">📼 80后回忆</div>
+            <div class="nav-links">
+                <a href="#tv">经典电视</a>
+                <a href="#toys">童年玩具</a>
+                <a href="#school">校园记忆</a>
+                <a href="#nature">自然时光</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="animate">致我们美好的80年代</h1>
+        <p class="animate">那些年的动画片、玩具、校园时光，承载着我们最纯真的回忆</p>
+    </section>
+
+    <!-- TV & Animation Section -->
+    <section id="tv">
+        <h2 class="section-title">📺 经典电视与动画</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🦁</div>
+                <h3>狮子王</h3>
+                <p>「生命循环」的旋律响起，辛巴的成长故事让我们第一次懂得了责任与勇气。那片荣耀大地，承载了我们多少童年的梦想。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎬</div>
+                <h3>动画城</h3>
+                <p>每周固定的约定，小红帽姐姐的声音是世界上最温柔的声音。《西游记》《葫芦兄弟》《黑猫警长》，每一部都是经典中的经典。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⛵</div>
+                <h3>鲁滨逊历险记</h3>
+                <p>一个人在荒岛上的生存奇迹，教会了我们坚强与智慧。每当遇到困难，总会想起鲁滨逊那份永不放弃的精神。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toys Section -->
+    <section class="full-section" id="toys">
+        <div class="full-content">
+            <h2>🚗 童年玩具时光</h2>
+            <p>那时候的玩具很简单，却带来了最简单的快乐</p>
+        </div>
+        <div class="grid" style="margin-top: 60px;">
+            <div class="card">
+                <div class="card-icon">🚙</div>
+                <h3>玩具车</h3>
+                <p>一辆小小的四驱车，能在地板上跑上一整天。改装、比赛、交换，那是属于男孩子们的浪漫。轨道上的每一次冲刺，都带着我们对速度的向往。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔮</div>
+                <h3>弹珠</h3>
+                <p>五彩斑斓的玻璃球，在地上碰撞出清脆的声响。「打中了吗？」「再来一局！」操场角落、胡同口，到处都是我们蹲着瞄准的身影。赢来的弹珠，是那个年代最珍贵的宝藏。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🪁</div>
+                <h3>其他玩具</h3>
+                <p>铁皮青蛙、陀螺、纸飞机、橡皮筋...每一个简单的玩具，都能让我们玩上一整天。没有电子屏幕的时代，我们的想象力就是最棒的游乐场。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Memories -->
+    <section id="school">
+        <h2 class="section-title">🏫 校园美好记忆</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-image">✏️</div>
+                <div class="timeline-content">
+                    <h3>课堂时光</h3>
+                    <p>朗朗的读书声，粉笔在黑板上写字的声音，课间十分钟的嬉笑打闹。同桌的你，借过的半块橡皮，传递的小纸条，都是青春最美的注脚。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-image">⚽</div>
+                <div class="timeline-content">
+                    <h3>操场岁月</h3>
+                    <p>体育课上的跑步、跳远、踢足球，课间操的广播体操音乐，放学后的篮球赛。汗水和欢笑交织的操场，见证了我们最美好的少年时光。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-image">🎒</div>
+                <div class="timeline-content">
+                    <h3>放学路上</h3>
+                    <p>三五成群结伴回家，路边的小卖部是最爱，一毛钱的冰棍、五毛钱的小零食。边走边聊，分享着今天的趣事，那条走了无数遍的路，如今却再也找不到了。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nature & Flowers -->
+    <section class="full-section" id="nature">
+        <div class="full-content">
+            <h2>🌸 喇叭花与自然时光</h2>
+            <p>大自然是我们最好的玩伴</p>
+        </div>
+        <div class="grid" style="margin-top: 60px;">
+            <div class="card">
+                <div class="card-icon">🌺</div>
+                <h3>喇叭花</h3>
+                <p>清晨绽放的牵牛花，像一个个小喇叭吹奏着夏日的乐章。我们会摘下来当小喇叭吹，虽然发不出声音，却能开心好久。紫色的、粉色的、白色的，开满了整个夏天。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🦋</div>
+                <h3>捉昆虫</h3>
+                <p>夏天的午后，拿着自制的网兜去捉蝴蝶、蜻蜓。知了在树上不停地叫着，我们在草丛里追逐嬉戏。那时的我们，对整个世界都充满了好奇。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌾</div>
+                <h3>田野时光</h3>
+                <p>金黄的麦田、绿油油的稻田、蜿蜒的小河沟。我们在田野里奔跑、捉迷藏、挖野菜。泥土的芬芳、青草的气息，是记忆里最温暖的味道。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>💕 献给所有80后的小伙伴们</p>
+        <p>愿我们永远保持那颗纯真的童心</p>
+        <p style="margin-top: 20px; font-size: 12px;">© 2024 80后美好回忆 | 用爱制作</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
