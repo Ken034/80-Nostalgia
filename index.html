@@ -1,21 +1,31 @@
-$ cat > /workspace/index.html << 'HTMLEOF'
+$ restore git repository...
+restore git repository success
+$ cd /workspace && cat > index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>80 后美好回忆 - 致我们逝去的童年</title>
-    <meta name="description" content="重温 80 后的经典回忆：狮子王、动画城、鲁滨逊历险记、玩具车、弹珠、校园时光">
+    <title>80后童年回忆 - 美好的时光</title>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --text: #1d1d1f;
+            --text-light: #86868b;
+            --bg: #ffffff;
+            --bg-secondary: #f5f5f7;
+            --card-bg: #ffffff;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: #fff;
-            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -28,35 +38,35 @@ $ cat > /workspace/index.html << 'HTMLEOF'
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            height: 48px;
         }
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
-            color: #1d1d1f;
+            color: var(--text);
             text-decoration: none;
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 24px;
         }
         .nav-links a {
+            color: var(--text);
             text-decoration: none;
-            color: #6e6e73;
-            font-size: 14px;
+            font-size: 12px;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #1d1d1f;
+            color: var(--primary);
         }
         /* Hero Section */
         .hero {
@@ -68,7 +78,7 @@ $ cat > /workspace/index.html << 'HTMLEOF'
             text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 0 20px;
+            padding: 20px;
             position: relative;
             overflow: hidden;
         }
@@ -79,230 +89,195 @@ $ cat > /workspace/index.html << 'HTMLEOF'
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1536240478700-b8690b51ae41?w=1920&h=1080&fit=crop') center/cover;
-            opacity: 0.2;
+            background: url('https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1920&q=80') center/cover;
+            opacity: 0.3;
         }
         .hero-content {
             position: relative;
             z-index: 1;
+            max-width: 800px;
         }
         .hero h1 {
-            font-size: 64px;
+            font-size: clamp(48px, 8vw, 80px);
             font-weight: 700;
             margin-bottom: 20px;
-            letter-spacing: -1px;
-            animation: fadeInUp 1s ease-out;
+            letter-spacing: -2px;
         }
         .hero p {
-            font-size: 24px;
-            max-width: 600px;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            font-size: clamp(20px, 4vw, 28px);
+            opacity: 0.9;
+            margin-bottom: 40px;
         }
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .hero-btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         /* Sections */
         section {
             padding: 100px 20px;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
         }
         .section-title {
-            font-size: 48px;
+            font-size: clamp(32px, 5vw, 48px);
             font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
         }
         .section-subtitle {
-            font-size: 20px;
-            color: #86868b;
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 60px;
             max-width: 600px;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
         }
         /* Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         .card {
-            background: #fbfbfd;
-            border-radius: 18px;
+            background: var(--card-bg);
+            border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
             cursor: pointer;
         }
         .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         .card-image {
             width: 100%;
-            height: 240px;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.4s;
         }
         .card:hover .card-image {
             transform: scale(1.05);
         }
         .card-content {
-            padding: 30px;
+            padding: 24px;
         }
-        .card h3 {
-            font-size: 26px;
+        .card-title {
+            font-size: 22px;
             font-weight: 600;
             margin-bottom: 12px;
-            color: #1d1d1f;
+            color: var(--text);
         }
-        .card p {
-            color: #86868b;
-            font-size: 16px;
+        .card-description {
+            font-size: 15px;
+            color: var(--text-light);
             line-height: 1.7;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .card-link {
             display: inline-flex;
             align-items: center;
-            color: #0066cc;
+            color: var(--primary);
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 14px;
             transition: color 0.3s;
         }
         .card-link:hover {
-            color: #004499;
-            text-decoration: underline;
+            color: var(--primary-dark);
         }
-        .card-link svg {
-            width: 16px;
-            height: 16px;
-            margin-left: 6px;
+        .card-link::after {
+            content: ' →';
+            margin-left: 4px;
             transition: transform 0.3s;
         }
-        .card-link:hover svg {
+        .card-link:hover::after {
             transform: translateX(4px);
         }
-        /* Full Width Section */
-        .full-section {
-            background: #f5f5f7;
-            padding: 100px 20px;
+        /* Full Width Card */
+        .full-card {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .full-card {
+                grid-template-columns: 1fr;
+            }
+        }
+        .full-card-image {
             width: 100%;
-            max-width: none;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
         }
-        .full-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
+        .full-card-content {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--bg-secondary);
         }
-        .full-content h2 {
-            font-size: 48px;
+        @media (max-width: 768px) {
+            .full-card-content {
+                padding: 40px 24px;
+            }
+        }
+        .full-card-title {
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 20px;
         }
-        .full-content p {
-            font-size: 20px;
-            color: #86868b;
-            max-width: 700px;
-            margin: 0 auto;
+        .full-card-description {
+            font-size: 17px;
+            color: var(--text-light);
             line-height: 1.8;
-        }
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 60px;
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            cursor: pointer;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-            padding: 30px 20px 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-        .gallery-overlay h4 {
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .gallery-overlay p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
+            margin-bottom: 24px;
         }
         /* Video Section */
         .video-section {
             background: #000;
             color: white;
             padding: 100px 20px;
-            width: 100%;
-            max-width: none;
         }
-        .video-section h2 {
-            font-size: 48px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
+        .video-section .section-title,
+        .video-section .section-subtitle {
+            color: white;
         }
-        .video-section > p {
-            text-align: center;
-            color: #a1a1a6;
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto 60px;
+        .video-section .section-subtitle {
+            opacity: 0.8;
         }
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .video-card {
-            background: #1c1c1e;
-            border-radius: 18px;
+            background: #1a1a1a;
+            border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s;
         }
         .video-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
         }
         .video-thumbnail {
             width: 100%;
@@ -317,177 +292,157 @@ $ cat > /workspace/index.html << 'HTMLEOF'
             transform: translate(-50%, -50%);
             width: 60px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255,255,255,0.9);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
-        .video-card:hover .play-button {
+        .play-button:hover {
             transform: translate(-50%, -50%) scale(1.1);
-            background: white;
         }
-        .play-button svg {
-            width: 24px;
-            height: 24px;
-            fill: #000;
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 12px solid var(--primary);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
             margin-left: 4px;
         }
-        .video-card h4 {
-            font-size: 20px;
-            font-weight: 600;
-            padding: 20px 20px 10px;
+        .video-card-content {
+            padding: 24px;
         }
-        .video-card p {
-            color: #86868b;
-            font-size: 14px;
-            padding: 0 20px 20px;
+        .video-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .video-card-source {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
         }
         .video-link {
-            display: block;
+            display: inline-block;
+            color: var(--primary);
             text-decoration: none;
-            color: inherit;
+            font-weight: 600;
+            font-size: 14px;
         }
-        /* Timeline */
-        .timeline {
+        .video-link:hover {
+            text-decoration: underline;
+        }
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 60px;
+        }
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .gallery-item {
             position: relative;
-            padding: 40px 0;
-        }
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 80px;
-            gap: 50px;
-        }
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        .timeline-image {
-            flex: 1;
-            height: 350px;
-            border-radius: 18px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1;
+            cursor: pointer;
         }
-        .timeline-image img {
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
-        .timeline-item:hover .timeline-image img {
-            transform: scale(1.05);
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
-        .timeline-content {
-            flex: 1;
-        }
-        .timeline-content h3 {
-            font-size: 32px;
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .timeline-content p {
-            color: #86868b;
-            font-size: 17px;
-            line-height: 1.8;
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
         }
         /* Footer */
         footer {
-            background: #f5f5f7;
+            background: var(--bg-secondary);
             padding: 60px 20px;
             text-align: center;
-            border-top: 1px solid #e8e8ed;
         }
-        footer p {
-            color: #86868b;
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-text {
+            color: var(--text-light);
             font-size: 14px;
-            margin-bottom: 10px;
+            line-height: 1.8;
+            margin-bottom: 30px;
         }
-        footer a {
-            color: #0066cc;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .social-links a {
+            color: var(--text);
             text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
         }
-        footer a:hover {
-            text-decoration: underline;
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        .copyright {
+            color: var(--text-light);
+            font-size: 12px;
         }
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-        .animate-on-scroll {
+        .fade-in {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
         }
-        .animate-on-scroll.visible {
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-            .hero p {
-                font-size: 18px;
-            }
-            .section-title {
-                font-size: 32px;
-            }
-            .full-content h2 {
-                font-size: 32px;
-            }
-            .timeline-item {
-                flex-direction: column !important;
-                gap: 30px;
-            }
-            .timeline-image {
-                width: 100%;
-                height: 250px;
-            }
             .nav-links {
                 display: none;
             }
-            .grid {
-                grid-template-columns: 1fr;
+            section {
+                padding: 60px 20px;
             }
-        }
-        /* Button Style */
-        .btn {
-            display: inline-block;
-            background: #0071e3;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 980px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: background 0.3s, transform 0.3s;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background: #0077ed;
-            transform: scale(1.02);
+            .full-card-content {
+                padding: 40px 24px;
+            }
+            .full-card-title {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
@@ -495,9 +450,9 @@ $ cat > /workspace/index.html << 'HTMLEOF'
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">📼 80 后回忆</a>
+            <a href="#" class="logo">80后回忆</a>
             <div class="nav-links">
-                <a href="#tv">经典电视</a>
+                <a href="#tv">经典动画</a>
                 <a href="#toys">童年玩具</a>
                 <a href="#school">校园记忆</a>
                 <a href="#nature">自然时光</a>
@@ -508,250 +463,405 @@ $ cat > /workspace/index.html << 'HTMLEOF'
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>致我们美好的 80 年代</h1>
-            <p>那些年的动画片、玩具、校园时光，承载着我们最纯真的回忆</p>
-        </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-            </svg>
+            <h1>致我们美好的80年代童年</h1>
+            <p>那些年的动画片、玩具、校园时光，承载着最纯真的回忆</p>
+            <a href="#tv" class="hero-btn">开始回忆之旅</a>
         </div>
     </section>
     <!-- TV & Animation Section -->
     <section id="tv">
-        <div class="section-header animate-on-scroll">
-            <h2 class="section-title">📺 经典电视与动画</h2>
-            <p class="section-subtitle">那些陪伴我们成长的经典作品，至今仍在心中闪闪发光</p>
-        </div>
+        <h2 class="section-title fade-in">经典动画与电视剧</h2>
+        <p class="section-subtitle fade-in">每天下午5点半，准时守在电视机前的期待</p>
+        
         <div class="grid">
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&h=600&fit=crop" alt="狮子王" class="card-image">
+            <!-- 狮子王 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80" alt="狮子王" class="card-image">
                 <div class="card-content">
-                    <h3>狮子王</h3>
-                    <p>「生命循环」的旋律响起，辛巴的成长故事让我们第一次懂得了责任与勇气。荣耀石上的那一幕，成为了我们心中永恒的经典。Hakuna Matata，无忧无虑的生活态度影响了一代人。</p>
-                    <a href="https://www.disneyplus.com/movies/the-lion-king/1S5qJHLkWNki" target="_blank" class="card-link">
-                        观看预告片 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
+                    <h3 class="card-title">🦁 狮子王 (The Lion King)</h3>
+                    <p class="card-description">
+                        "哈库纳·玛塔塔"——这句歌词伴随了整个童年。辛巴的成长故事教会我们勇气与责任。
+                        每年暑假必重播的经典，木法沙之死让多少人流泪，刀疤的狡猾让人恨得牙痒痒。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=狮子王%20国语%20完整版" target="_blank" class="card-link">观看经典片段</a>
                 </div>
             </div>
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8efe85?w=800&h=600&fit=crop" alt="动画城" class="card-image">
+            <!-- 动画城 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&q=80" alt="动画城" class="card-image">
                 <div class="card-content">
-                    <h3>动画城</h3>
-                    <p>每周固定的约定，小红帽姐姐的声音是世界上最温柔的声音。《西游记》《葫芦兄弟》《黑猫警长》《舒克和贝塔》，每一部都是经典中的经典。那是我们最期待的时刻。</p>
-                    <a href="https://search.bilibili.com/all?keyword=动画城%20经典" target="_blank" class="card-link">
-                        回顾经典片段 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
+                    <h3 class="card-title">📺 动画城</h3>
+                    <p class="card-description">
+                        中央电视台的王牌动画栏目，每周六下午的约定。《西游记》《哪吒传奇》《海尔兄弟》
+                        《蓝猫淘气三千问》...主持人小鹿姐姐、哆来咪的声音是童年的背景音乐。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=动画城%20经典回顾" target="_blank" class="card-link">回顾经典节目</a>
                 </div>
             </div>
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop" alt="鲁滨逊历险记" class="card-image">
+            <!-- 鲁滨逊历险记 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="鲁滨逊历险记" class="card-image">
                 <div class="card-content">
-                    <h3>鲁滨逊历险记</h3>
-                    <p>一个人在荒岛上的生存奇迹，教会了我们坚强与智慧。造房子、种粮食、养山羊，鲁滨逊用双手创造了属于自己的家园。那份永不放弃的精神，深深印在我们心中。</p>
-                    <a href="https://www.youtube.com/results?search_query=%E9%B2%81%E6%BB%A8%E9%80%8A%E6%BC%82%E6%B5%81%E8%AE%B0+%E5%8A%A8%E7%94%BB" target="_blank" class="card-link">
-                        查看相关视频 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
+                    <h3 class="card-title">🏝️ 鲁滨逊历险记</h3>
+                    <p class="card-description">
+                        日本动画版《鲁滨逊一家漂流记》，讲述一家人在海难后流落荒岛的生存故事。
+                        星期五的忠诚、荒岛上的智慧生存，让我们懂得了坚韧与希望。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=鲁滨逊历险记%20动画" target="_blank" class="card-link">重温冒险故事</a>
+                </div>
+            </div>
+            <!-- 黑猫警长 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" alt="黑猫警长" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🐱 黑猫警长</h3>
+                    <p class="card-description">
+                        "眼睛瞪得像铜铃，耳朵竖得像天线..."这首主题曲人人会唱。
+                        黑猫警长、白鸽侦探、一只耳，国产动画的巅峰之作，正义的化身。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=黑猫警长%20全集" target="_blank" class="card-link">观看全集</a>
+                </div>
+            </div>
+            <!-- 葫芦兄弟 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1560159752-d6d28a8a0a1d?w=800&q=80" alt="葫芦兄弟" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🥒 葫芦兄弟</h3>
+                    <p class="card-description">
+                        七个葫芦娃各显神通：大力娃、千里眼、铁头娃、火娃、水娃、隐身娃、宝葫芦。
+                        蛇精和蝎子精是童年最深的反派印象，"如意如意按我心意"咒语至今难忘。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=葫芦兄弟%20完整版" target="_blank" class="card-link">重温经典</a>
+                </div>
+            </div>
+            <!-- 舒克贝塔 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1585647347483-22b66260dfff?w=800&q=80" alt="舒克贝塔" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">✈️ 舒克和贝塔</h3>
+                    <p class="card-description">
+                        郑渊洁童话改编，开飞机的舒克和开坦克的贝塔。
+                        "舒克舒克舒克，开飞机的舒克；贝塔贝塔贝塔，开坦克的贝塔"
+                        两只小老鼠的冒险故事，教会我们友谊与勇敢。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=舒克和贝塔%20老版" target="_blank" class="card-link">观看老版动画</a>
                 </div>
             </div>
         </div>
     </section>
     <!-- Toys Section -->
-    <section class="full-section" id="toys">
-        <div class="full-content animate-on-scroll">
-            <h2>🚗 童年玩具时光</h2>
-            <p>那时候的玩具很简单，却带来了最简单的快乐</p>
+    <section id="toys" style="background: var(--bg-secondary);">
+        <h2 class="section-title fade-in">童年玩具时光</h2>
+        <p class="section-subtitle fade-in">没有手机电脑的年代，简单的玩具带来最纯粹的快乐</p>
+        
+        <div class="grid">
+            <!-- 玩具车 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=800&q=80" alt="玩具车" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🚗 玩具车</h3>
+                    <p class="card-description">
+                        回力车、四驱车、遥控车。男孩子口袋里永远装着几辆小汽车，
+                        在地上推着玩能玩一整天。奥迪双钻四驱车是当时的奢侈品，
+                        "旋风冲锋龙卷风"的喊声回荡在每个午后。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20玩具车%20回忆" target="_blank" class="card-link">回顾经典玩具车</a>
+                </div>
+            </div>
+            <!-- 弹珠 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=800&q=80" alt="弹珠" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🔮 弹珠 (玻璃球)</h3>
+                    <p class="card-description">
+                        五颜六色的玻璃球，有普通的透明珠，也有珍贵的"猫眼"。
+                        下课铃一响，操场上全是蹲着打弹珠的身影。
+                        赢了别人的弹珠能高兴一整天，输了的回家还要被妈妈说。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20打弹珠%20游戏" target="_blank" class="card-link">看弹珠游戏视频</a>
+                </div>
+            </div>
+            <!-- 铁皮青蛙 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1558877385-83a2961fa5fa?w=800&q=80" alt="铁皮青蛙" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🐸 铁皮青蛙</h3>
+                    <p class="card-description">
+                        上紧发条就会蹦蹦跳跳的绿色小青蛙，最简单的机械玩具。
+                        还有铁皮小鸡、铁皮火车，发条转动时的"咔哒咔哒"声是童年的背景音。
+                        几分钱一个，却是无价的快乐。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=铁皮青蛙%20怀旧玩具" target="_blank" class="card-link">怀旧玩具展示</a>
+                </div>
+            </div>
+            <!-- 纸飞机 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80" alt="纸飞机" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">✈️ 纸飞机</h3>
+                    <p class="card-description">
+                        作业本撕下一页，折成各种形状的纸飞机。
+                        比谁飞得远、飞得久，教室里、走廊上、操场上，
+                        到处是飞舞的纸飞机。有时候还会在机翼上写下小心愿。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=纸飞机%20童年回忆" target="_blank" class="card-link">纸飞机的折法</a>
+                </div>
+            </div>
+            <!-- 陀螺 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1612459495494-49ebfbda6151?w=800&q=80" alt="陀螺" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🌀 陀螺</h3>
+                    <p class="card-description">
+                        木制陀螺配上鞭子，抽得越狠转得越久。
+                        冬天在冰面上抽陀螺是北方孩子的专属乐趣。
+                        后来有了战斗陀螺，动漫周边让陀螺再次风靡。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20抽陀螺" target="_blank" class="card-link">抽陀螺视频</a>
+                </div>
+            </div>
+            <!-- 翻花绳 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1606081480183-26dae95dc28e?w=800&q=80" alt="翻花绳" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🧵 翻花绳</h3>
+                    <p class="card-description">
+                        一根绳子在手指间翻出各种花样：降落伞、面条、大桥、蝴蝶...
+                        女孩子们的最爱，两个人配合才能完成的花样。
+                        简单却充满智慧的传统游戏。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=翻花绳%20教程" target="_blank" class="card-link">翻花绳教程</a>
+                </div>
+            </div>
         </div>
-        <div class="grid" style="max-width: 1200px; margin: 60px auto 0;">
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=800&h=600&fit=crop" alt="玩具车" class="card-image">
-                <div class="card-content">
-                    <h3>玩具车</h3>
-                    <p>一辆小小的四驱车，能在地板上跑上一整天。改装、比赛、交换，那是属于男孩子们的浪漫。轨道上的每一次冲刺，都带着我们对速度的向往。还记得那家总是挤满人的玩具店吗？</p>
-                    <a href="https://search.bilibili.com/all?keyword=%E5%9B%9B%E9%A9%B1%E8%BD%A6%20%E6%80%80%E6%97%A7" target="_blank" class="card-link">
-                        回味四驱车时光 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=800&h=600&fit=crop" alt="弹珠" class="card-image">
-                <div class="card-content">
-                    <h3>弹珠</h3>
-                    <p>五彩斑斓的玻璃球，在地上碰撞出清脆的声响。「打中了吗？」「再来一局！」操场角落、胡同口，到处都是我们蹲着瞄准的身影。赢来的弹珠，小心翼翼地装在口袋里，是那个年代最珍贵的宝藏。</p>
-                    <a href="https://search.bilibili.com/all?keyword=%E5%BC%B9%E7%8F%A0%20%E6%80%80%E6%97%A7" target="_blank" class="card-link">
-                        看看弹珠游戏 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=800&h=600&fit=crop" alt="其他玩具" class="card-image">
-                <div class="card-content">
-                    <h3>其他玩具</h3>
-                    <p>铁皮青蛙、陀螺、纸飞机、橡皮筋、溜溜球、变形金刚...每一个简单的玩具，都能让我们玩上一整天。没有电子屏幕的时代，我们的想象力就是最棒的游乐场。</p>
-                    <a href="https://search.bilibili.com/all?keyword=80%E5%90%8E%E7%8E%A9%E5%85%B7%20%E6%80%80%E6%97%A7" target="_blank" class="card-link">
-                        探索更多玩具 
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </a>
-                </div>
+        <!-- Full Card: 游戏机 -->
+        <div class="full-card fade-in" style="margin-top: 30px;">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80" alt="红白机" class="full-card-image">
+            <div class="full-card-content">
+                <h3 class="full-card-title">🎮 红白机 (小霸王)</h3>
+                <p class="full-card-description">
+                    任天堂红白机，国内叫"小霸王学习机"。插上卡带，连接电视，
+                    超级玛丽、魂斗罗、双截龙、坦克大战、俄罗斯方块...
+                    两个手柄，一根吹气就能续命的卡带，周末约小伙伴来家里打游戏是最幸福的事。
+                    "选关密码"是当时最神秘的存在，谁能记住所有游戏的秘籍就是孩子王。
+                </p>
+                <a href="https://search.bilibili.com/all?keyword=红白机%20经典游戏" target="_blank" class="card-link">回顾经典游戏</a>
             </div>
         </div>
     </section>
-    <!-- School Memories -->
+    <!-- School Memory Section -->
     <section id="school">
-        <div class="section-header animate-on-scroll">
-            <h2 class="section-title">🏫 校园美好记忆</h2>
-            <p class="section-subtitle">那段青葱岁月，是我们人生中最美好的篇章</p>
-        </div>
-        <div class="timeline">
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop" alt="课堂时光">
-                </div>
-                <div class="timeline-content">
-                    <h3>课堂时光</h3>
-                    <p>朗朗的读书声，粉笔在黑板上写字的哒哒声，课间十分钟的嬉笑打闹。同桌的你，借过的半块橡皮，传递的小纸条，上课偷看的漫画书，都是青春最美的注脚。那些年我们一起罚站的走廊，如今想来竟有些怀念。</p>
-                </div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=800&h=600&fit=crop" alt="操场岁月">
-                </div>
-                <div class="timeline-content">
-                    <h3>操场岁月</h3>
-                    <p>体育课上的跑步、跳远、踢足球，课间操的广播体操音乐，放学后的篮球赛。汗水和欢笑交织的操场，见证了我们最美好的少年时光。还记得那个总是抢不到球的下午吗？还记得赢得比赛后的欢呼吗？</p>
+        <h2 class="section-title fade-in">校园美好记忆</h2>
+        <p class="section-subtitle fade-in">朗朗读书声，操场上的欢笑，那些年我们一起度过的校园时光</p>
+        
+        <div class="grid">
+            <!-- 课堂时光 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="课堂时光" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">📚 课堂时光</h3>
+                    <p class="card-description">
+                        木质课桌椅，绿色黑板，粉笔灰在阳光下飞舞。
+                        眼保健操的音乐响起，全班闭眼做操；课间十分钟冲出教室；
+                        传纸条、偷偷吃零食、被老师点名回答问题...
+                        那时候觉得漫长的课堂，如今却是最怀念的时光。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20小学%20回忆" target="_blank" class="card-link">校园回忆视频</a>
                 </div>
             </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-image">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" alt="放学路上">
+            <!-- 操场岁月 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=800&q=80" alt="操场岁月" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">⚽ 操场岁月</h3>
+                    <p class="card-description">
+                        煤渣跑道、水泥篮球场、土操场。
+                        体育课是最期待的课，踢足球、打篮球、跳皮筋、丢沙包。
+                        运动会是盛大的节日，为班级加油呐喊，
+                        拿了奖状能高兴好几天，贴在墙上最显眼的位置。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20操场%20游戏" target="_blank" class="card-link">操场游戏回顾</a>
                 </div>
-                <div class="timeline-content">
-                    <h3>放学路上</h3>
-                    <p>三五成群结伴回家，路边的小卖部是最爱，一毛钱的冰棍、五毛钱的小零食、一集水浒卡能开心好几天。边走边聊，分享着今天的趣事，那条走了无数遍的路，如今却再也找不到了。</p>
+            </div>
+            <!-- 放学路上 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1515542706656-8e6ef1763e33?w=800&q=80" alt="放学路上" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🚲 放学路上</h3>
+                    <p class="card-description">
+                        背着书包，三五成群走在回家的路上。
+                        路过小卖部买根冰棍、集水浒卡、交换奥特曼卡片。
+                        夏天一路踩水坑，冬天一起哈着白气。
+                        那段路不长，却装满了整个童年的欢声笑语。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20放学%20回忆" target="_blank" class="card-link">放学路上的回忆</a>
+                </div>
+            </div>
+            <!-- 考试记忆 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80" alt="考试记忆" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">📝 考试记忆</h3>
+                    <p class="card-description">
+                        期中期末考试前的紧张复习，家长签字的压力。
+                        考好了能得到新文具作为奖励，考砸了要挨批评。
+                        那时候的烦恼很简单，一张试卷就能左右心情。
+                        现在想来，那竟是人生中最单纯的焦虑。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20考试%20回忆" target="_blank" class="card-link">考试那些事儿</a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Nature & Flowers -->
-    <section class="full-section" id="nature">
-        <div class="full-content animate-on-scroll">
-            <h2>🌸 喇叭花与自然时光</h2>
-            <p>大自然是我们最好的玩伴，那些简单的美好永远珍藏心底</p>
+    <!-- Nature & Flowers Section -->
+    <section id="nature" style="background: var(--bg-secondary);">
+        <h2 class="section-title fade-in">喇叭花与自然时光</h2>
+        <p class="section-subtitle fade-in">田野里的野花、树梢上的知了、夜晚的萤火虫，大自然是最好的游乐场</p>
+        
+        <div class="grid">
+            <!-- 喇叭花 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=800&q=80" alt="喇叭花" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🌸 喇叭花 (牵牛花)</h3>
+                    <p class="card-description">
+                        清晨绽放的紫色小花，形状像小喇叭，因此得名。
+                        爬满篱笆墙、缠绕在树枝上，农村孩子最常见的野花。
+                        摘下来可以当小喇叭吹（虽然吹不响），
+                        花瓣上的露珠是早晨最美的装饰。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=牵牛花%20喇叭花" target="_blank" class="card-link">认识喇叭花</a>
+                </div>
+            </div>
+            <!-- 捉昆虫 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=800&q=80" alt="捉昆虫" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🦋 捉昆虫</h3>
+                    <p class="card-description">
+                        夏天拿着网兜捉蝴蝶、蜻蜓，
+                        翻开石头找西瓜虫（潮虫），
+                        用面筋粘知了，
+                        晚上打着手电筒捉萤火虫装在瓶子里当灯笼。
+                        那些小生命是我们最好的玩伴。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=童年%20捉昆虫" target="_blank" class="card-link">童年捉虫回忆</a>
+                </div>
+            </div>
+            <!-- 麦田时光 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="麦田" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">🌾 麦田时光</h3>
+                    <p class="card-description">
+                        金黄的麦浪随风起伏，在田埂上奔跑，
+                        用麦秆编戒指、吹口哨，
+                        收割后的麦秸垛是天然的蹦床，
+                        躺在上面看云朵慢慢飘过。
+                        乡村孩子的乐园，简单却无比快乐。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20农村%20童年" target="_blank" class="card-link">乡村童年回忆</a>
+                </div>
+            </div>
+            <!-- 小溪玩耍 -->
+            <div class="card fade-in">
+                <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=800&q=80" alt="小溪" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">💧 小溪玩耍</h3>
+                    <p class="card-description">
+                        夏天最热的时候，跑到村边的小溪里玩水。
+                        摸鱼、抓螃蟹、打水仗，
+                        把脚泡在清凉的溪水里，
+                        用树叶折小船放在水中漂流。
+                        那是最天然的空调房。
+                    </p>
+                    <a href="https://search.bilibili.com/all?keyword=童年%20小溪%20玩水" target="_blank" class="card-link">小溪玩耍视频</a>
+                </div>
+            </div>
         </div>
-        <div class="gallery-grid" style="max-width: 1200px; margin: 60px auto 0;">
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1596564239344-7c8c2cdb9dfa?w=600&h=450&fit=crop" alt="喇叭花">
-                <div class="gallery-overlay">
-                    <h4>喇叭花</h4>
-                    <p>清晨绽放的牵牛花，像小喇叭吹奏夏日乐章</p>
-                </div>
+        <!-- Gallery -->
+        <div class="gallery fade-in">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1534234828563-02511c750b62?w=400&q=80" alt="西瓜">
+                <div class="gallery-caption">🍉 夏天的大西瓜</div>
             </div>
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=600&h=450&fit=crop" alt="捉蝴蝶">
-                <div class="gallery-overlay">
-                    <h4>捉蝴蝶</h4>
-                    <p>拿着网兜追逐彩蝶，充满好奇的童年</p>
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=400&q=80" alt="萤火虫">
+                <div class="gallery-caption">✨ 夜晚的萤火虫</div>
             </div>
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=450&fit=crop" alt="田野">
-                <div class="gallery-overlay">
-                    <h4>田野时光</h4>
-                    <p>金黄麦田里的奔跑，泥土芬芳的记忆</p>
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1550948537-130a1ce83314?w=400&q=80" alt="向日葵">
+                <div class="gallery-caption">🌻 田野里的向日葵</div>
             </div>
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=600&h=450&fit=crop" alt="夏日昆虫">
-                <div class="gallery-overlay">
-                    <h4>夏日昆虫</h4>
-                    <p>捉知了、观察蚂蚁，探索自然的奥秘</p>
-                </div>
-            </div>
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1463130476111-4e00ce848c17?w=600&h=450&fit=crop" alt="小溪边">
-                <div class="gallery-overlay">
-                    <h4>小溪边</h4>
-                    <p>摸鱼捉虾，清凉的溪水带走夏日炎热</p>
-                </div>
-            </div>
-            <div class="gallery-item animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1533240332313-0dbdd31c16ca?w=600&h=450&fit=crop" alt="星空">
-                <div class="gallery-overlay">
-                    <h4>夏夜星空</h4>
-                    <p>躺在院子里数星星，听爷爷奶奶讲故事</p>
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?w=400&q=80" alt="稻田">
+                <div class="gallery-caption">🌾 金色的稻田</div>
             </div>
         </div>
     </section>
     <!-- Video Review Section -->
-    <section class="video-section" id="videos">
-        <h2 class="animate-on-scroll">🎬 视频回顾</h2>
-        <p class="animate-on-scroll">让我们一起重温那些经典瞬间</p>
+    <section id="videos" class="video-section">
+        <h2 class="section-title fade-in">视频回顾</h2>
+        <p class="section-subtitle fade-in">点击观看更多80后童年回忆视频</p>
+        
         <div class="video-grid">
-            <a href="https://www.youtube.com/results?search_query=%E7%8B%AE%E5%AD%90%E7%8E%8B+%E4%B8%AD%E6%96%87%E9%85%8D%E9%9F%B3" target="_blank" class="video-link">
-                <div class="video-card animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&h=400&fit=crop" alt="狮子王回顾" class="video-thumbnail">
-                    <div class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <h4>狮子王经典回顾</h4>
-                    <p>重温辛巴的成长历程，感受生命的循环</p>
+            <!-- Video 1 -->
+            <div class="video-card fade-in">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=600&q=80" alt="经典动画合集" class="video-thumbnail">
+                    <div class="play-button"></div>
                 </div>
-            </a>
-            <a href="https://search.bilibili.com/all?keyword=%E5%8A%A8%E7%94%BB%E5%9F%8E%20%E7%BB%8F%E5%85%B8" target="_blank" class="video-link">
-                <div class="video-card animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1517604931442-71053e3e2c28?w=600&h=400&fit=crop" alt="动画城回忆" class="video-thumbnail">
-                    <div class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <h4>动画城经典合集</h4>
-                    <p>小红帽姐姐带我们走进动画的世界</p>
+                <div class="video-card-content">
+                    <h4 class="video-card-title">80后经典动画大合集</h4>
+                    <p class="video-card-source">来源：Bilibili</p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20经典动画%20合集" target="_blank" class="video-link">立即观看 →</a>
                 </div>
-            </a>
-            <a href="https://search.bilibili.com/all?keyword=80%E5%90%8E%E7%AB%A5%E5%B9%B4%E5%9B%9E%E5%BF%86" target="_blank" class="video-link">
-                <div class="video-card animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1518023559843-ac8b179514bd?w=600&h=400&fit=crop" alt="80 后童年" class="video-thumbnail">
-                    <div class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <h4>80 后童年回忆录</h4>
-                    <p>那些年的玩具、游戏和美好时光</p>
+            </div>
+            <!-- Video 2 -->
+            <div class="video-card fade-in">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1558877385-83a2961fa5fa?w=600&q=80" alt="怀旧玩具" class="video-thumbnail">
+                    <div class="play-button"></div>
                 </div>
-            </a>
+                <div class="video-card-content">
+                    <h4 class="video-card-title">那些年我们玩过的玩具</h4>
+                    <p class="video-card-source">来源：Bilibili</p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20怀旧玩具%20大全" target="_blank" class="video-link">立即观看 →</a>
+                </div>
+            </div>
+            <!-- Video 3 -->
+            <div class="video-card fade-in">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80" alt="校园回忆" class="video-thumbnail">
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-card-content">
+                    <h4 class="video-card-title">80后校园生活全记录</h4>
+                    <p class="video-card-source">来源：YouTube & Bilibili</p>
+                    <a href="https://search.bilibili.com/all?keyword=80后%20校园生活%20回忆" target="_blank" class="video-link">立即观看 →</a>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Footer -->
     <footer>
-        <p>💕 献给所有 80 后的小伙伴们</p>
-        <p>愿我们永远保持那颗纯真的童心</p>
-        <p style="margin-top: 20px; font-size: 12px;">
-            © 2024 80 后美好回忆 | 用爱制作 | 
-            <a href="https://github.com/" target="_blank">GitHub</a>
-        </p>
+        <div class="footer-content">
+            <div class="footer-logo">80后童年回忆</div>
+            <p class="footer-text">
+                献给所有80后朋友们的美好回忆。<br>
+                那些年我们一起追过的动画、玩过的玩具、度过的校园时光，<br>
+                虽然已经长大，但童心永存。
+            </p>
+            <div class="social-links">
+                <a href="https://search.bilibili.com/all?keyword=80后童年回忆" target="_blank">Bilibili合集</a>
+                <a href="https://www.youtube.com/results?search_query=80后童年回忆" target="_blank">YouTube频道</a>
+                <a href="#">关于我们</a>
+            </div>
+            <p class="copyright">© 2024 80后童年回忆网站 | 致敬我们美好的童年</p>
+        </div>
     </footer>
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
-        // Intersection Observer for scroll animations
+        // Scroll Animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -763,48 +873,33 @@ $ cat > /workspace/index.html << 'HTMLEOF'
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.hero');
-            const scrolled = window.pageYOffset;
-            hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
         // Navbar background on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
                 nav.style.background = 'rgba(255, 255, 255, 0.95)';
-                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             } else {
                 nav.style.background = 'rgba(255, 255, 255, 0.8)';
-                nav.style.boxShadow = 'none';
             }
         });
     </script>
 </body>
 </html>
 HTMLEOF
-$ wc -l /workspace/index.html && head -20 /workspace/index.html
-wc -l /workspace/index.html && head -20 /workspace/index.html
-439 /workspace/index.html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>80后美好回忆 - 致我们逝去的童年</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: #fff;
-            color: #1d1d1f;
-            line-height: 1.6;
-        }
+echo "✅ Website created successfully at /workspace/index.html"
