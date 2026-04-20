@@ -1,905 +1,1790 @@
-$ restore git repository...
-restore git repository success
-$ cd /workspace && cat > index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>80后童年回忆 - 美好的时光</title>
-    <style>
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --text: #1d1d1f;
-            --text-light: #86868b;
-            --bg: #ffffff;
-            --bg-secondary: #f5f5f7;
-            --card-bg: #ffffff;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 48px;
-        }
-        .logo {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-        }
-        .nav-links {
-            display: flex;
-            gap: 24px;
-        }
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 12px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1920&q=80') center/cover;
-            opacity: 0.3;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-        }
-        .hero h1 {
-            font-size: clamp(48px, 8vw, 80px);
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-        .hero p {
-            font-size: clamp(20px, 4vw, 28px);
-            opacity: 0.9;
-            margin-bottom: 40px;
-        }
-        .hero-btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background: white;
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .hero-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        /* Sections */
-        section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-        .section-subtitle {
-            font-size: clamp(18px, 3vw, 24px);
-            color: var(--text-light);
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.4s, box-shadow 0.4s;
-            cursor: pointer;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        .card-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
-        .card:hover .card-image {
-            transform: scale(1.05);
-        }
-        .card-content {
-            padding: 24px;
-        }
-        .card-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-        .card-description {
-            font-size: 15px;
-            color: var(--text-light);
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-        .card-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-        .card-link:hover {
-            color: var(--primary-dark);
-        }
-        .card-link::after {
-            content: ' →';
-            margin-left: 4px;
-            transition: transform 0.3s;
-        }
-        .card-link:hover::after {
-            transform: translateX(4px);
-        }
-        /* Full Width Card */
-        .full-card {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 768px) {
-            .full-card {
-                grid-template-columns: 1fr;
-            }
-        }
-        .full-card-image {
-            width: 100%;
-            height: 100%;
-            min-height: 400px;
-            object-fit: cover;
-        }
-        .full-card-content {
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: var(--bg-secondary);
-        }
-        @media (max-width: 768px) {
-            .full-card-content {
-                padding: 40px 24px;
-            }
-        }
-        .full-card-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .full-card-description {
-            font-size: 17px;
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 24px;
-        }
-        /* Video Section */
-        .video-section {
-            background: #000;
-            color: white;
-            padding: 100px 20px;
-        }
-        .video-section .section-title,
-        .video-section .section-subtitle {
-            color: white;
-        }
-        .video-section .section-subtitle {
-            opacity: 0.8;
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .video-card {
-            background: #1a1a1a;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: transform 0.4s;
-        }
-        .video-card:hover {
-            transform: translateY(-5px);
-        }
-        .video-thumbnail {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            position: relative;
-        }
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .play-button:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        .play-button::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 12px solid var(--primary);
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            margin-left: 4px;
-        }
-        .video-card-content {
-            padding: 24px;
-        }
-        .video-card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .video-card-source {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 12px;
-        }
-        .video-link {
-            display: inline-block;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .video-link:hover {
-            text-decoration: underline;
-        }
-        /* Gallery */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 60px;
-        }
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .gallery-item:hover .gallery-caption {
-            opacity: 1;
-        }
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .footer-text {
-            color: var(--text-light);
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .social-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-        .social-links a:hover {
-            color: var(--primary);
-        }
-        .copyright {
-            color: var(--text-light);
-            font-size: 12px;
-        }
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            section {
-                padding: 60px 20px;
-            }
-            .full-card-content {
-                padding: 40px 24px;
-            }
-            .full-card-title {
-                font-size: 28px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>80后回忆录 - 致我们的童年</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=ZCOOL+XiaoWei&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --retro-orange: #e8731a;
+    --retro-brown: #6b3a2a;
+    --retro-yellow: #f0c040;
+    --retro-green: #4a7c3f;
+    --retro-red: #c0392b;
+    --retro-cream: #fdf5e6;
+    --retro-blue: #2e86ab;
+    --retro-pink: #e84393;
+  }
+
+  body {
+    font-family: 'ZCOOL KuaiLe', 'Microsoft YaHei', sans-serif;
+    background-color: #f5e6c8;
+    color: #3d2b1f;
+    overflow-x: hidden;
+  }
+
+  /* ===== 复古背景图案 ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(232,115,26,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(46,134,171,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(232,67,147,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 波点装饰 */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle, rgba(139,69,19,0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== 导航栏 ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, var(--retro-brown) 0%, #8b5e3c 100%);
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-bottom: 4px solid var(--retro-yellow);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav li {
+    position: relative;
+  }
+
+  nav a {
+    display: block;
+    color: #fdf5e6;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 16px 28px;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+  }
+
+  nav a:hover {
+    background: rgba(240,192,64,0.3);
+    color: var(--retro-yellow);
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 3px;
+    background: var(--retro-yellow);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+  }
+
+  nav a:hover::after {
+    width: 80%;
+  }
+
+  /* ===== 头部 ===== */
+  header {
+    position: relative;
+    margin-top: 56px;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f093fb 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.08) 40px, rgba(255,255,255,0.08) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.08) 40px, rgba(255,255,255,0.08) 80px);
+  }
+
+  header h1 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 56px;
+    color: #fff;
+    text-shadow: 4px 4px 0 var(--retro-brown), 6px 6px 0 rgba(0,0,0,0.15);
+    margin-bottom: 15px;
+    position: relative;
+    animation: titleFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  header p {
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  /* 飘落的星星装饰 */
+  .stars-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    font-size: 20px;
+    animation: starFall linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes starFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===== 通用Section ===== */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 70px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-header h2 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 40px;
+    color: var(--retro-brown);
+    display: inline-block;
+    position: relative;
+    padding: 10px 50px;
+  }
+
+  .section-header h2::before,
+  .section-header h2::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--retro-orange);
+    font-size: 24px;
+  }
+
+  .section-header h2::before { left: 10px; }
+  .section-header h2::after { right: 10px; }
+
+  .section-header .divider {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--retro-orange), transparent);
+    margin: 15px auto 0;
+    border-radius: 2px;
+  }
+
+  .section-header p {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #7a6555;
+  }
+
+  /* ===== 卡片网格 ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(107,58,42,0.12);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(139,69,19,0.1);
+  }
+
+  .card:hover {
+    transform: translateY(-8px) rotate(0.5deg);
+    box-shadow: 0 16px 40px rgba(107,58,42,0.2);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-body {
+    padding: 20px 24px 24px;
+  }
+
+  .card-body h3 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 22px;
+    color: var(--retro-brown);
+    margin-bottom: 8px;
+  }
+
+  .card-body p {
+    font-size: 15px;
+    color: #7a6555;
+    line-height: 1.7;
+  }
+
+  .card-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--retro-orange), var(--retro-yellow));
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ===== 动画片区域 ===== */
+  #cartoons {
+    background: linear-gradient(180deg, rgba(253,245,230,0) 0%, rgba(253,245,230,0.8) 100%);
+  }
+
+  /* 每个动画片的独特背景 */
+  .cartoon-hlw .card-image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  .cartoon-szw .card-image {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+  .cartoon-ml .card-image {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+  .cartoon-hxz .card-image {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  }
+  .cartoon-xhz .card-image {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  }
+  .cartoon-tm .card-image {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  }
+  .cartoon-hmt .card-image {
+    background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+  }
+  .cartoon-lx .card-image {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  }
+  .cartoon-cj .card-image {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  }
+
+  /* CSS动画角色 */
+  .char-huluwa {
+    width: 60px; height: 80px;
+    position: relative;
+    animation: huluBounce 2s ease-in-out infinite;
+  }
+  @keyframes huluBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  .char-huluwa .head {
+    width: 40px; height: 40px;
+    background: #ffd700;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    border: 2px solid #c0392b;
+  }
+  .char-huluwa .head::before {
+    content: '';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid #27ae60;
+  }
+  .char-huluwa .body {
+    width: 36px; height: 30px;
+    background: #c0392b;
+    margin: 2px auto 0;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .char-lion {
+    font-size: 80px;
+    animation: lionRoar 3s ease-in-out infinite;
+  }
+  @keyframes lionRoar {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .char-mickey {
+    width: 70px; height: 70px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: relative;
+    animation: mickeyWave 2s ease-in-out infinite;
+  }
+  @keyframes mickeyWave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+  }
+  .char-mickey::before, .char-mickey::after {
+    content: '';
+    position: absolute;
+    width: 35px; height: 35px;
+    background: #2c3e50;
+    border-radius: 50%;
+    top: -15px;
+  }
+  .char-mickey::before { left: -5px; }
+  .char-mickey::after { right: -5px; }
+  .char-mickey .face {
+    position: absolute;
+    bottom: 5px; left: 50%;
+    transform: translateX(-50%);
+    width: 45px; height: 30px;
+    background: #f5c6aa;
+    border-radius: 50%;
+  }
+
+  .char-flower {
+    font-size: 70px;
+    animation: flowerSpin 4s linear infinite;
+  }
+  @keyframes flowerSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  .char-cat {
+    width: 60px; height: 60px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: relative;
+    animation: catPatrol 3s ease-in-out infinite;
+  }
+  @keyframes catPatrol {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+  }
+  .char-cat::before {
+    content: '';
+    position: absolute;
+    top: 15px; left: 12px;
+    width: 12px; height: 12px;
+    background: #f1c40f;
+    border-radius: 50%;
+    box-shadow: 24px 0 0 #f1c40f;
+  }
+  .char-cat::after {
+    content: '';
+    position: absolute;
+    top: -10px; left: 5px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid #2c3e50;
+    box-shadow: 34px 4px 0 #2c3e50;
+  }
+
+  .char-transformer {
+    width: 60px; height: 70px;
+    background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
+    border-radius: 8px;
+    position: relative;
+    animation: transform 3s ease-in-out infinite;
+  }
+  @keyframes transform {
+    0%, 100% { transform: scaleY(1); border-radius: 8px; }
+    50% { transform: scaleY(0.7) scaleX(1.3); border-radius: 4px; }
+  }
+  .char-transformer::before {
+    content: '⚡';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+  }
+
+  .char-totoro {
+    font-size: 80px;
+    animation: totoroFloat 3s ease-in-out infinite;
+  }
+  @keyframes totoroFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+  }
+
+  .char-saint {
+    width: 50px; height: 70px;
+    position: relative;
+    animation: saintPunch 1.5s ease-in-out infinite;
+  }
+  @keyframes saintPunch {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+  .char-saint .armor {
+    width: 50px; height: 40px;
+    background: linear-gradient(135deg, #f1c40f, #e67e22);
+    border-radius: 8px 8px 0 0;
+    margin: 0 auto;
+  }
+  .char-saint .head {
+    width: 30px; height: 30px;
+    background: #f5c6aa;
+    border-radius: 50%;
+    margin: 0 auto -5px;
+    position: relative;
+  }
+  .char-saint .head::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 12px;
+    background: #f1c40f;
+    border-radius: 6px;
+  }
+
+  .char-doraemon {
+    width: 70px; height: 70px;
+    background: #3498db;
+    border-radius: 50%;
+    position: relative;
+    animation: doraJump 2s ease-in-out infinite;
+  }
+  @keyframes doraJump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  .char-doraemon::before {
+    content: '';
+    position: absolute;
+    bottom: 5px; left: 50%;
+    transform: translateX(-50%);
+    width: 50px; height: 35px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .char-doraemon::after {
+    content: '🔔';
+    position: absolute;
+    bottom: 15px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+  }
+
+  /* ===== 玩具区域 ===== */
+  #toys {
+    background: linear-gradient(180deg, rgba(240,248,255,0) 0%, rgba(240,248,255,0.6) 100%);
+  }
+
+  .toy-demo {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 5px;
+  }
+
+  /* 四驱车动画 */
+  .demo-car {
+    background: linear-gradient(180deg, #87ceeb 0%, #87ceeb 60%, #8b7355 60%, #654321 100%);
+  }
+  .demo-car .road {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: #555;
+    border-top: 3px dashed #ffd700;
+  }
+  .demo-car .car {
+    position: absolute;
+    bottom: 38%;
+    animation: carDrive 3s linear infinite;
+  }
+  @keyframes carDrive {
+    0% { left: -80px; }
+    100% { left: calc(100% + 80px); }
+  }
+  .car-body {
+    width: 60px; height: 25px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 5px 15px 3px 3px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .car-body::before {
+    content: '';
+    position: absolute;
+    top: -10px; left: 10px;
+    width: 35px; height: 14px;
+    background: linear-gradient(135deg, #ff6b6b, #e74c3c);
+    border-radius: 5px 10px 0 0;
+  }
+  .car-body::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 8px;
+    width: 12px; height: 12px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 30px 0 0 #333;
+    border: 2px solid #666;
+  }
+  .car-spark {
+    position: absolute;
+    right: -15px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    animation: spark 0.5s infinite;
+  }
+  @keyframes spark {
+    0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+    50% { opacity: 0.5; transform: translateY(-50%) scale(0.6); }
+  }
+
+  /* 弹珠动画 */
+  .demo-marble {
+    background: linear-gradient(180deg, #e8d5b7 0%, #d4a76a 100%);
+  }
+  .marble {
+    position: absolute;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 2px 2px 6px rgba(0,0,0,0.2);
+  }
+  .marble-1 {
+    background: radial-gradient(circle at 35% 35%, #ff8a80, #c62828);
+    animation: marbleBounce1 3s ease-in-out infinite;
+  }
+  .marble-2 {
+    background: radial-gradient(circle at 35% 35%, #82b1ff, #1565c0);
+    animation: marbleBounce2 3s ease-in-out infinite 0.5s;
+  }
+  .marble-3 {
+    background: radial-gradient(circle at 35% 35%, #b9f6ca, #2e7d32);
+    animation: marbleBounce3 3s ease-in-out infinite 1s;
+  }
+  .marble-4 {
+    background: radial-gradient(circle at 35% 35%, #fff9c4, #f9a825);
+    animation: marbleBounce1 3s ease-in-out infinite 1.5s;
+  }
+  @keyframes marbleBounce1 {
+    0% { left: 10%; top: 60%; }
+    25% { left: 30%; top: 20%; }
+    50% { left: 55%; top: 50%; }
+    75% { left: 75%; top: 25%; }
+    100% { left: 10%; top: 60%; }
+  }
+  @keyframes marbleBounce2 {
+    0% { left: 80%; top: 30%; }
+    25% { left: 60%; top: 60%; }
+    50% { left: 35%; top: 25%; }
+    75% { left: 15%; top: 55%; }
+    100% { left: 80%; top: 30%; }
+  }
+  @keyframes marbleBounce3 {
+    0% { left: 50%; top: 15%; }
+    25% { left: 20%; top: 50%; }
+    50% { left: 70%; top: 65%; }
+    75% { left: 85%; top: 35%; }
+    100% { left: 50%; top: 15%; }
+  }
+
+  /* 悠悠球动画 */
+  .demo-yoyo {
+    background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 100%);
+    display: flex;
+    justify-content: center;
+  }
+  .yoyo-string {
+    width: 2px;
+    height: 80px;
+    background: #666;
+    position: relative;
+    margin-top: 0;
+    animation: yoyoString 2s ease-in-out infinite;
+  }
+  @keyframes yoyoString {
+    0%, 100% { height: 30px; }
+    50% { height: 100px; }
+  }
+  .yoyo-ball {
+    position: absolute;
+    bottom: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 36px; height: 36px;
+    background: radial-gradient(circle at 40% 40%, #ff6b6b, #c0392b);
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.3);
+    animation: yoyoSpin 2s ease-in-out infinite;
+  }
+  @keyframes yoyoSpin {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    50% { transform: translateX(-50%) rotate(360deg); }
+  }
+  .yoyo-ball::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px; height: 12px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .yoyo-hand {
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+  }
+
+  /* 拍画片动画 */
+  .demo-cards {
+    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .game-card {
+    width: 55px; height: 75px;
+    border-radius: 6px;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .game-card:nth-child(1) {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    animation: cardFlip 3s ease-in-out infinite;
+  }
+  .game-card:nth-child(2) {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    animation: cardFlip 3s ease-in-out infinite 0.5s;
+  }
+  .game-card:nth-child(3) {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    animation: cardFlip 3s ease-in-out infinite 1s;
+  }
+  .game-card:nth-child(4) {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    animation: cardFlip 3s ease-in-out infinite 1.5s;
+  }
+  @keyframes cardFlip {
+    0%, 40%, 100% { transform: rotateY(0deg); }
+    50%, 90% { transform: rotateY(180deg); }
+  }
+
+  /* 纸飞机动画 */
+  .demo-plane {
+    background: linear-gradient(180deg, #87ceeb 0%, #e0f7fa 100%);
+  }
+  .paper-plane {
+    position: absolute;
+    font-size: 40px;
+    animation: planeFly 5s linear infinite;
+  }
+  @keyframes planeFly {
+    0% { left: -40px; top: 70%; transform: rotate(-10deg); }
+    25% { top: 30%; transform: rotate(5deg); }
+    50% { top: 50%; transform: rotate(-5deg); }
+    75% { top: 20%; transform: rotate(10deg); }
+    100% { left: calc(100% + 40px); top: 40%; transform: rotate(-10deg); }
+  }
+  .cloud {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.6;
+  }
+  .cloud:nth-child(2) { top: 10%; left: 20%; animation: cloudDrift 8s linear infinite; }
+  .cloud:nth-child(3) { top: 30%; left: 60%; animation: cloudDrift 10s linear infinite 2s; }
+  .cloud:nth-child(4) { top: 50%; left: 40%; animation: cloudDrift 12s linear infinite 4s; }
+  @keyframes cloudDrift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(30px); }
+  }
+
+  /* 沙包动画 */
+  .demo-sandbag {
+    background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sandbag {
+    width: 40px; height: 50px;
+    background: linear-gradient(135deg, #8d6e63, #6d4c41);
+    border-radius: 8px 8px 12px 12px;
+    position: relative;
+    animation: sandbagThrow 2s ease-in-out infinite;
+  }
+  @keyframes sandbagThrow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(-60px) rotate(180deg); }
+    60% { transform: translateY(-30px) rotate(270deg); }
+  }
+  .sandbag::before {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 2px dashed rgba(255,255,255,0.4);
+    border-radius: 4px;
+  }
+
+  /* ===== 活动区域 ===== */
+  #activities {
+    background: linear-gradient(180deg, rgba(232,245,233,0) 0%, rgba(232,245,233,0.5) 100%);
+  }
+
+  /* 春游动画 */
+  .demo-spring {
+    background: linear-gradient(180deg, #87ceeb 0%, #90ee90 60%, #228b22 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .sun {
+    position: absolute;
+    top: 10px; right: 30px;
+    font-size: 40px;
+    animation: sunGlow 3s ease-in-out infinite;
+  }
+  @keyframes sunGlow {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.1); filter: brightness(1.2); }
+  }
+  .butterfly {
+    position: absolute;
+    font-size: 24px;
+    animation: butterflyFly 6s ease-in-out infinite;
+  }
+  @keyframes butterflyFly {
+    0% { left: 10%; top: 40%; }
+    25% { left: 30%; top: 20%; }
+    50% { left: 60%; top: 35%; }
+    75% { left: 80%; top: 15%; }
+    100% { left: 10%; top: 40%; }
+  }
+  .flower-field {
+    position: absolute;
+    bottom: 5px; left: 0; right: 0;
+    display: flex;
+    justify-content: space-around;
+    font-size: 22px;
+  }
+  .flower-field span {
+    animation: flowerSway 2s ease-in-out infinite;
+  }
+  .flower-field span:nth-child(2) { animation-delay: 0.3s; }
+  .flower-field span:nth-child(3) { animation-delay: 0.6s; }
+  .flower-field span:nth-child(4) { animation-delay: 0.9s; }
+  .flower-field span:nth-child(5) { animation-delay: 1.2s; }
+  @keyframes flowerSway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  .kids {
+    position: absolute;
+    bottom: 25px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    animation: kidsWalk 4s ease-in-out infinite;
+  }
+  @keyframes kidsWalk {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  /* 捉迷藏动画 */
+  .demo-hide {
+    background: linear-gradient(180deg, #87ceeb 0%, #c8e6c9 50%, #81c784 100%);
+    position: relative;
+  }
+  .hide-tree {
+    position: absolute;
+    bottom: 0;
+    font-size: 80px;
+    line-height: 1;
+  }
+  .hide-tree:nth-child(1) { left: 10%; }
+  .hide-tree:nth-child(2) { left: 60%; font-size: 60px; }
+  .hide-tree:nth-child(3) { right: 5%; font-size: 70px; }
+  .hide-kid {
+    position: absolute;
+    bottom: 10px;
+    font-size: 35px;
+    animation: hidePeek 4s ease-in-out infinite;
+  }
+  @keyframes hidePeek {
+    0%, 40%, 100% { opacity: 0; transform: translateX(0); }
+    50%, 90% { opacity: 1; transform: translateX(20px); }
+  }
+  .hide-seeker {
+    position: absolute;
+    bottom: 10px; left: 40%;
+    font-size: 35px;
+    animation: seekerLook 4s ease-in-out infinite;
+  }
+  @keyframes seekerLook {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-20deg); }
+    75% { transform: rotate(20deg); }
+  }
+
+  /* 放风筝动画 */
+  .demo-kite {
+    background: linear-gradient(180deg, #64b5f6 0%, #e3f2fd 100%);
+    position: relative;
+  }
+  .kite {
+    position: absolute;
+    top: 15px; left: 60%;
+    animation: kiteFloat 4s ease-in-out infinite;
+  }
+  @keyframes kiteFloat {
+    0%, 100% { transform: translate(0, 0) rotate(5deg); }
+    25% { transform: translate(-15px, -10px) rotate(-5deg); }
+    50% { transform: translate(10px, -20px) rotate(10deg); }
+    75% { transform: translate(-5px, -5px) rotate(-3deg); }
+  }
+  .kite-body {
+    width: 40px; height: 50px;
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+  }
+  .kite-tail {
+    position: absolute;
+    top: 48px; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 40px;
+    background: #666;
+  }
+  .kite-tail::after {
+    content: '🎀';
+    position: absolute;
+    bottom: -10px; left: -8px;
+    font-size: 14px;
+    animation: tailWave 1s ease-in-out infinite;
+  }
+  @keyframes tailWave {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+  }
+  .kite-string {
+    position: absolute;
+    top: 85px; left: 60%;
+    width: 1px; height: 60px;
+    background: #999;
+    transform-origin: top;
+    animation: stringWave 4s ease-in-out infinite;
+  }
+  @keyframes stringWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+  }
+  .kite-person {
+    position: absolute;
+    bottom: 5px; left: 55%;
+    font-size: 30px;
+  }
+
+  /* 跳皮筋 */
+  .demo-rubber {
+    background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .rubber-band {
+    width: 180px; height: 60px;
+    border: 4px solid #e91e63;
+    border-radius: 30px;
+    position: relative;
+    animation: rubberStretch 2s ease-in-out infinite;
+  }
+  @keyframes rubberStretch {
+    0%, 100% { width: 180px; height: 60px; }
+    50% { width: 200px; height: 40px; }
+  }
+  .rubber-person {
+    position: absolute;
+    font-size: 28px;
+  }
+  .rubber-person:nth-child(1) { left: -15px; top: 50%; transform: translateY(-50%); }
+  .rubber-person:nth-child(2) { right: -15px; top: 50%; transform: translateY(-50%); }
+  .rubber-jumper {
+    position: absolute;
+    font-size: 30px;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    animation: rubberJump 1.5s ease-in-out infinite;
+  }
+  @keyframes rubberJump {
+    0%, 100% { top: -20px; }
+    50% { top: -40px; }
+  }
+
+  /* ===== 校园记忆 ===== */
+  #school {
+    background: linear-gradient(180deg, rgba(255,248,225,0) 0%, rgba(255,248,225,0.6) 100%);
+  }
+
+  /* 踢毽子动画 */
+  .demo-jianzi {
+    background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .jianzi {
+    position: relative;
+    margin-bottom: 20px;
+    animation: jianziFly 2s ease-in-out infinite;
+  }
+  @keyframes jianziFly {
+    0% { bottom: 20px; transform: rotate(0deg); }
+    25% { bottom: 100px; transform: rotate(90deg); }
+    50% { bottom: 120px; transform: rotate(180deg); }
+    75% { bottom: 60px; transform: rotate(270deg); }
+    100% { bottom: 20px; transform: rotate(360deg); }
+  }
+  .jianzi-top {
+    width: 30px; height: 15px;
+    background: linear-gradient(135deg, #e91e63, #ff5722);
+    border-radius: 50% 50% 0 0;
+    margin: 0 auto;
+  }
+  .jianzi-base {
+    width: 16px; height: 25px;
+    background: #8d6e63;
+    margin: 0 auto;
+    border-radius: 0 0 3px 3px;
+  }
+  .jianzi-feather {
+    position: absolute;
+    top: -5px;
+    width: 4px; height: 20px;
+    border-radius: 2px;
+  }
+  .jianzi-feather:nth-child(1) { left: 2px; background: #e91e63; transform: rotate(-20deg); }
+  .jianzi-feather:nth-child(2) { left: 8px; background: #ff5722; transform: rotate(-10deg); }
+  .jianzi-feather:nth-child(3) { right: 8px; background: #ff9800; transform: rotate(10deg); }
+  .jianzi-feather:nth-child(4) { right: 2px; background: #e91e63; transform: rotate(20deg); }
+  .jianzi-player {
+    position: absolute;
+    bottom: 5px;
+    font-size: 35px;
+  }
+  .jianzi-player.left { left: 20%; }
+  .jianzi-player.right { right: 20%; }
+
+  /* 乒乓球动画 */
+  .demo-pingpong {
+    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pp-table {
+    width: 160px; height: 8px;
+    background: #1565c0;
+    border-radius: 4px;
+    position: relative;
+  }
+  .pp-net {
+    position: absolute;
+    top: -15px; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 20px;
+    background: #fff;
+  }
+  .pp-net::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -15px;
+    width: 32px; height: 2px;
+    background: #fff;
+  }
+  .pp-ball {
+    position: absolute;
+    width: 12px; height: 12px;
+    background: radial-gradient(circle at 35% 35%, #fff, #ff9800);
+    border-radius: 50%;
+    top: -20px;
+    animation: ppBounce 1.5s ease-in-out infinite;
+  }
+  @keyframes ppBounce {
+    0% { left: 10px; top: -25px; }
+    25% { left: 50%; top: -45px; }
+    50% { left: calc(100% - 20px); top: -25px; }
+    75% { left: 50%; top: -45px; }
+    100% { left: 10px; top: -25px; }
+  }
+  .pp-player {
+    position: absolute;
+    font-size: 28px;
+    bottom: -35px;
+  }
+  .pp-player.left { left: -10px; animation: ppSwing 1.5s ease-in-out infinite; }
+  .pp-player.right { right: -10px; animation: ppSwing 1.5s ease-in-out infinite 0.75s; }
+  @keyframes ppSwing {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  /* 黑板报动画 */
+  .demo-blackboard {
+    background: #2e7d32;
+    border: 8px solid #8d6e63;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+  }
+  .chalk-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 16px;
+    animation: chalkWrite 4s ease-in-out infinite;
+    text-align: center;
+  }
+  @keyframes chalkWrite {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .chalk-text:nth-child(1) { font-size: 20px; color: #ffd54f; }
+  .chalk-text:nth-child(2) { animation-delay: 0.5s; }
+  .chalk-text:nth-child(3) { animation-delay: 1s; color: #ef9a9a; }
+
+  /* 小卖部动画 */
+  .demo-shop {
+    background: linear-gradient(180deg, #fff8e1 0%, #ffecb3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+  .shop-item {
+    width: 50px; height: 60px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    animation: shopBounce 2s ease-in-out infinite;
+  }
+  .shop-item:hover { transform: scale(1.2) rotate(5deg) !important; }
+  .shop-item:nth-child(1) { background: #ff7043; animation-delay: 0s; }
+  .shop-item:nth-child(2) { background: #42a5f5; animation-delay: 0.2s; }
+  .shop-item:nth-child(3) { background: #66bb6a; animation-delay: 0.4s; }
+  .shop-item:nth-child(4) { background: #ab47bc; animation-delay: 0.6s; }
+  .shop-item:nth-child(5) { background: #ffa726; animation-delay: 0.8s; }
+  .shop-item:nth-child(6) { background: #ef5350; animation-delay: 1s; }
+  @keyframes shopBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* ===== 时间线 ===== */
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--retro-orange), var(--retro-brown));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 15px 40px;
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  .timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+  }
+  .timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    width: 16px; height: 16px;
+    background: var(--retro-orange);
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .timeline-item:nth-child(odd)::before { right: -8px; }
+  .timeline-item:nth-child(even)::before { left: -8px; }
+
+  .timeline-content {
+    background: #fff;
+    padding: 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: inline-block;
+    max-width: 100%;
+  }
+  .timeline-content h4 {
+    color: var(--retro-brown);
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .timeline-content p {
+    font-size: 14px;
+    color: #7a6555;
+    line-height: 1.6;
+  }
+  .timeline-year {
+    font-size: 13px;
+    color: var(--retro-orange);
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 页脚 ===== */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--retro-brown) 0%, #4a2c1a 100%);
+    color: #fdf5e6;
+    text-align: center;
+    padding: 50px 20px;
+    margin-top: 40px;
+    border-top: 5px solid var(--retro-yellow);
+  }
+  footer h3 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--retro-yellow);
+  }
+  footer p {
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+  .heart-beat {
+    display: inline-block;
+    color: #e74c3c;
+    font-size: 24px;
+    animation: heartbeat 1.2s infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+  }
+
+  /* ===== 回到顶部 ===== */
+  .back-top {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    width: 50px; height: 50px;
+    background: var(--retro-orange);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(232,115,26,0.4);
+    transition: all 0.3s;
+    z-index: 999;
+    display: none;
+  }
+  .back-top:hover {
+    transform: translateY(-3px);
+    background: var(--retro-brown);
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 768px) {
+    header h1 { font-size: 36px; }
+    header p { font-size: 18px; }
+    .section-header h2 { font-size: 30px; }
+    .grid { grid-template-columns: 1fr; }
+    nav a { padding: 12px 16px; font-size: 14px; }
+    .timeline::before { left: 20px; }
+    .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 50px; padding-right: 15px; }
+    .timeline-item::before { left: 12px !important; right: auto !important; }
+  }
+
+  /* ===== 滚动条美化 ===== */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #f5e6c8; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--retro-orange), var(--retro-brown));
+    border-radius: 5px;
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">80后回忆</a>
-            <div class="nav-links">
-                <a href="#tv">经典动画</a>
-                <a href="#toys">童年玩具</a>
-                <a href="#school">校园记忆</a>
-                <a href="#nature">自然时光</a>
-                <a href="#videos">视频回顾</a>
-            </div>
+
+<!-- 导航 -->
+<nav>
+  <ul>
+    <li><a href="#cartoons">📺 动画城</a></li>
+    <li><a href="#toys">🎮 玩具天地</a></li>
+    <li><a href="#activities">🏃 童年活动</a></li>
+    <li><a href="#school">🏫 校园记忆</a></li>
+    <li><a href="#timeline">📅 时光轴</a></li>
+  </ul>
+</nav>
+
+<!-- 头部 -->
+<header>
+  <div class="stars-container">
+    <span class="star" style="left:5%; animation-duration:6s; animation-delay:0s;">⭐</span>
+    <span class="star" style="left:15%; animation-duration:8s; animation-delay:1s;">✨</span>
+    <span class="star" style="left:25%; animation-duration:7s; animation-delay:2s;">⭐</span>
+    <span class="star" style="left:40%; animation-duration:9s; animation-delay:0.5s;">✨</span>
+    <span class="star" style="left:55%; animation-duration:6s; animation-delay:3s;">⭐</span>
+    <span class="star" style="left:70%; animation-duration:8s; animation-delay:1.5s;">✨</span>
+    <span class="star" style="left:85%; animation-duration:7s; animation-delay:2.5s;">⭐</span>
+    <span class="star" style="left:95%; animation-duration:9s; animation-delay:0.8s;">✨</span>
+  </div>
+  <h1>🎮 80后回忆录 🎮</h1>
+  <p>那些年，我们一起追过的动画、玩过的游戏、度过的童年</p>
+</header>
+
+<!-- ===== 动画城 ===== -->
+<section id="cartoons">
+  <div class="section-header">
+    <h2>动画城经典</h2>
+    <div class="divider"></div>
+    <p>每天下午5点半，准时守在电视机前的期待</p>
+  </div>
+  <div class="grid">
+    <!-- 葫芦娃 -->
+    <div class="card cartoon-hlw">
+      <div class="card-image">
+        <div class="char-huluwa">
+          <div class="head"></div>
+          <div class="body"></div>
         </div>
-    </nav>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>致我们美好的80年代童年</h1>
-            <p>那些年的动画片、玩具、校园时光，承载着最纯真的回忆</p>
-            <a href="#tv" class="hero-btn">开始回忆之旅</a>
+      </div>
+      <div class="card-body">
+        <h3>葫芦兄弟</h3>
+        <p>葫芦娃，葫芦娃，一根藤上七朵花。大娃力大无穷，二娃千里眼顺风耳，三娃铜头铁臂...每个娃都有独特本领！</p>
+        <span class="card-tag">1986年</span>
+      </div>
+    </div>
+    <!-- 狮子王 -->
+    <div class="card cartoon-szw">
+      <div class="card-image">
+        <div class="char-lion">🦁</div>
+      </div>
+      <div class="card-body">
+        <h3>狮子王</h3>
+        <p>Hakuna Matata！辛巴的成长故事，教会我们勇敢面对困难。彭彭和丁满的友情最珍贵！</p>
+        <span class="card-tag">1994年</span>
+      </div>
+    </div>
+    <!-- 米老鼠 -->
+    <div class="card cartoon-ml">
+      <div class="card-image">
+        <div class="char-mickey">
+          <div class="face"></div>
         </div>
-    </section>
-    <!-- TV & Animation Section -->
-    <section id="tv">
-        <h2 class="section-title fade-in">经典动画与电视剧</h2>
-        <p class="section-subtitle fade-in">每天下午5点半，准时守在电视机前的期待</p>
-        
-        <div class="grid">
-            <!-- 狮子王 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80" alt="狮子王" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🦁 狮子王 (The Lion King)</h3>
-                    <p class="card-description">
-                        "哈库纳·玛塔塔"——这句歌词伴随了整个童年。辛巴的成长故事教会我们勇气与责任。
-                        每年暑假必重播的经典，木法沙之死让多少人流泪，刀疤的狡猾让人恨得牙痒痒。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=狮子王%20国语%20完整版" target="_blank" class="card-link">观看经典片段</a>
-                </div>
-            </div>
-            <!-- 动画城 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&q=80" alt="动画城" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">📺 动画城</h3>
-                    <p class="card-description">
-                        中央电视台的王牌动画栏目，每周六下午的约定。《西游记》《哪吒传奇》《海尔兄弟》
-                        《蓝猫淘气三千问》...主持人小鹿姐姐、哆来咪的声音是童年的背景音乐。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=动画城%20经典回顾" target="_blank" class="card-link">回顾经典节目</a>
-                </div>
-            </div>
-            <!-- 鲁滨逊历险记 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="鲁滨逊历险记" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🏝️ 鲁滨逊历险记</h3>
-                    <p class="card-description">
-                        日本动画版《鲁滨逊一家漂流记》，讲述一家人在海难后流落荒岛的生存故事。
-                        星期五的忠诚、荒岛上的智慧生存，让我们懂得了坚韧与希望。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=鲁滨逊历险记%20动画" target="_blank" class="card-link">重温冒险故事</a>
-                </div>
-            </div>
-            <!-- 黑猫警长 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" alt="黑猫警长" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🐱 黑猫警长</h3>
-                    <p class="card-description">
-                        "眼睛瞪得像铜铃，耳朵竖得像天线..."这首主题曲人人会唱。
-                        黑猫警长、白鸽侦探、一只耳，国产动画的巅峰之作，正义的化身。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=黑猫警长%20全集" target="_blank" class="card-link">观看全集</a>
-                </div>
-            </div>
-            <!-- 葫芦兄弟 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1560159752-d6d28a8a0a1d?w=800&q=80" alt="葫芦兄弟" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🥒 葫芦兄弟</h3>
-                    <p class="card-description">
-                        七个葫芦娃各显神通：大力娃、千里眼、铁头娃、火娃、水娃、隐身娃、宝葫芦。
-                        蛇精和蝎子精是童年最深的反派印象，"如意如意按我心意"咒语至今难忘。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=葫芦兄弟%20完整版" target="_blank" class="card-link">重温经典</a>
-                </div>
-            </div>
-            <!-- 舒克贝塔 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1585647347483-22b66260dfff?w=800&q=80" alt="舒克贝塔" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">✈️ 舒克和贝塔</h3>
-                    <p class="card-description">
-                        郑渊洁童话改编，开飞机的舒克和开坦克的贝塔。
-                        "舒克舒克舒克，开飞机的舒克；贝塔贝塔贝塔，开坦克的贝塔"
-                        两只小老鼠的冒险故事，教会我们友谊与勇敢。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=舒克和贝塔%20老版" target="_blank" class="card-link">观看老版动画</a>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>米老鼠和唐老鸭</h3>
+        <p>每周六下午的约定！米奇的智慧、唐老鸭的暴躁、高飞的憨厚，迪士尼带来的无尽欢乐。</p>
+        <span class="card-tag">经典动画</span>
+      </div>
+    </div>
+    <!-- 花仙子 -->
+    <div class="card cartoon-hxz">
+      <div class="card-image">
+        <div class="char-flower">🌸</div>
+      </div>
+      <div class="card-body">
+        <h3>花仙子</h3>
+        <p>小蓓带着花钥匙，寻找七色花的旅程。每个女孩心中都有一个花仙子的梦想，那是关于美的启蒙。</p>
+        <span class="card-tag">1979年</span>
+      </div>
+    </div>
+    <!-- 黑猫警长 -->
+    <div class="card cartoon-xhz">
+      <div class="card-image">
+        <div class="char-cat"></div>
+      </div>
+      <div class="card-body">
+        <h3>黑猫警长</h3>
+        <p>眼睛瞪得像铜铃，射出闪电般的机灵！黑猫警长骑着摩托车，保卫森林和平。一只耳永远在逃跑~</p>
+        <span class="card-tag">1984年</span>
+      </div>
+    </div>
+    <!-- 变形金刚 -->
+    <div class="card cartoon-tm">
+      <div class="card-image">
+        <div class="char-transformer"></div>
+      </div>
+      <div class="card-body">
+        <h3>变形金刚</h3>
+        <p>汽车人，变形出发！擎天柱大哥的正义宣言，威震天的邪恶阴谋。每个男孩都想要一个变形金刚玩具！</p>
+        <span class="card-tag">1984年</span>
+      </div>
+    </div>
+    <!-- 龙猫 -->
+    <div class="card cartoon-hmt">
+      <div class="card-image">
+        <div class="char-totoro">🐱</div>
+      </div>
+      <div class="card-body">
+        <h3>龙猫</h3>
+        <p>多多洛~大大的毛茸茸的身体，撑着荷叶在雨中等待猫巴士。宫崎骏带给我们的温暖童话。</p>
+        <span class="card-tag">1988年</span>
+      </div>
+    </div>
+    <!-- 圣斗士 -->
+    <div class="card cartoon-lx">
+      <div class="card-image">
+        <div class="char-saint">
+          <div class="head"></div>
+          <div class="armor"></div>
         </div>
-    </section>
-    <!-- Toys Section -->
-    <section id="toys" style="background: var(--bg-secondary);">
-        <h2 class="section-title fade-in">童年玩具时光</h2>
-        <p class="section-subtitle fade-in">没有手机电脑的年代，简单的玩具带来最纯粹的快乐</p>
-        
-        <div class="grid">
-            <!-- 玩具车 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=800&q=80" alt="玩具车" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🚗 玩具车</h3>
-                    <p class="card-description">
-                        回力车、四驱车、遥控车。男孩子口袋里永远装着几辆小汽车，
-                        在地上推着玩能玩一整天。奥迪双钻四驱车是当时的奢侈品，
-                        "旋风冲锋龙卷风"的喊声回荡在每个午后。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20玩具车%20回忆" target="_blank" class="card-link">回顾经典玩具车</a>
-                </div>
-            </div>
-            <!-- 弹珠 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=800&q=80" alt="弹珠" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🔮 弹珠 (玻璃球)</h3>
-                    <p class="card-description">
-                        五颜六色的玻璃球，有普通的透明珠，也有珍贵的"猫眼"。
-                        下课铃一响，操场上全是蹲着打弹珠的身影。
-                        赢了别人的弹珠能高兴一整天，输了的回家还要被妈妈说。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20打弹珠%20游戏" target="_blank" class="card-link">看弹珠游戏视频</a>
-                </div>
-            </div>
-            <!-- 铁皮青蛙 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1558877385-83a2961fa5fa?w=800&q=80" alt="铁皮青蛙" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🐸 铁皮青蛙</h3>
-                    <p class="card-description">
-                        上紧发条就会蹦蹦跳跳的绿色小青蛙，最简单的机械玩具。
-                        还有铁皮小鸡、铁皮火车，发条转动时的"咔哒咔哒"声是童年的背景音。
-                        几分钱一个，却是无价的快乐。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=铁皮青蛙%20怀旧玩具" target="_blank" class="card-link">怀旧玩具展示</a>
-                </div>
-            </div>
-            <!-- 纸飞机 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80" alt="纸飞机" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">✈️ 纸飞机</h3>
-                    <p class="card-description">
-                        作业本撕下一页，折成各种形状的纸飞机。
-                        比谁飞得远、飞得久，教室里、走廊上、操场上，
-                        到处是飞舞的纸飞机。有时候还会在机翼上写下小心愿。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=纸飞机%20童年回忆" target="_blank" class="card-link">纸飞机的折法</a>
-                </div>
-            </div>
-            <!-- 陀螺 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1612459495494-49ebfbda6151?w=800&q=80" alt="陀螺" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🌀 陀螺</h3>
-                    <p class="card-description">
-                        木制陀螺配上鞭子，抽得越狠转得越久。
-                        冬天在冰面上抽陀螺是北方孩子的专属乐趣。
-                        后来有了战斗陀螺，动漫周边让陀螺再次风靡。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20抽陀螺" target="_blank" class="card-link">抽陀螺视频</a>
-                </div>
-            </div>
-            <!-- 翻花绳 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1606081480183-26dae95dc28e?w=800&q=80" alt="翻花绳" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🧵 翻花绳</h3>
-                    <p class="card-description">
-                        一根绳子在手指间翻出各种花样：降落伞、面条、大桥、蝴蝶...
-                        女孩子们的最爱，两个人配合才能完成的花样。
-                        简单却充满智慧的传统游戏。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=翻花绳%20教程" target="_blank" class="card-link">翻花绳教程</a>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>圣斗士星矢</h3>
+        <p>燃烧吧，我的小宇宙！天马流星拳！为了雅典娜，五位青铜圣斗士永不放弃的热血战斗。</p>
+        <span class="card-tag">1986年</span>
+      </div>
+    </div>
+    <!-- 哆啦A梦 -->
+    <div class="card cartoon-cj">
+      <div class="card-image">
+        <div class="char-doraemon"></div>
+      </div>
+      <div class="card-body">
+        <h3>哆啦A梦</h3>
+        <p>蓝胖子从四维口袋里掏出各种神奇道具：竹蜻蜓、任意门、时光机...谁不想要一个哆啦A梦呢？</p>
+        <span class="card-tag">经典动画</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 玩具天地 ===== -->
+<section id="toys">
+  <div class="section-header">
+    <h2>玩具天地</h2>
+    <div class="divider"></div>
+    <p>没有iPad的年代，这些就是我们的全部快乐</p>
+  </div>
+  <div class="grid">
+    <!-- 四驱车 -->
+    <div class="card">
+      <div class="card-image demo-car">
+        <div class="road"></div>
+        <div class="car">
+          <div class="car-body">
+            <span class="car-spark">💨</span>
+          </div>
         </div>
-        <!-- Full Card: 游戏机 -->
-        <div class="full-card fade-in" style="margin-top: 30px;">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80" alt="红白机" class="full-card-image">
-            <div class="full-card-content">
-                <h3 class="full-card-title">🎮 红白机 (小霸王)</h3>
-                <p class="full-card-description">
-                    任天堂红白机，国内叫"小霸王学习机"。插上卡带，连接电视，
-                    超级玛丽、魂斗罗、双截龙、坦克大战、俄罗斯方块...
-                    两个手柄，一根吹气就能续命的卡带，周末约小伙伴来家里打游戏是最幸福的事。
-                    "选关密码"是当时最神秘的存在，谁能记住所有游戏的秘籍就是孩子王。
-                </p>
-                <a href="https://search.bilibili.com/all?keyword=红白机%20经典游戏" target="_blank" class="card-link">回顾经典游戏</a>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>🏎️ 四驱车</h3>
+        <p>冲锋战神、旋风冲锋、音速战神！攒零花钱买电池，在轨道上飞驰。马达的嗡嗡声是最美妙的音乐，超车那一刻的激动永生难忘。</p>
+        <span class="card-tag">男孩最爱</span>
+      </div>
+    </div>
+    <!-- 弹珠 -->
+    <div class="card">
+      <div class="card-image demo-marble">
+        <div class="marble marble-1"></div>
+        <div class="marble marble-2"></div>
+        <div class="marble marble-3"></div>
+        <div class="marble marble-4"></div>
+      </div>
+      <div class="card-body">
+        <h3>🔮 玻璃弹珠</h3>
+        <p>蹲在地上，眯着一只眼瞄准，大拇指一弹——"啪！"击中对方的弹珠！每颗弹珠都是宝贝，花纹越漂亮越珍贵。赢来的弹珠装在口袋里叮当响。</p>
+        <span class="card-tag">经典游戏</span>
+      </div>
+    </div>
+    <!-- 悠悠球 -->
+    <div class="card">
+      <div class="card-image demo-yoyo">
+        <div class="yoyo-hand">🤚</div>
+        <div class="yoyo-string">
+          <div class="yoyo-ball"></div>
         </div>
-    </section>
-    <!-- School Memory Section -->
-    <section id="school">
-        <h2 class="section-title fade-in">校园美好记忆</h2>
-        <p class="section-subtitle fade-in">朗朗读书声，操场上的欢笑，那些年我们一起度过的校园时光</p>
-        
-        <div class="grid">
-            <!-- 课堂时光 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="课堂时光" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">📚 课堂时光</h3>
-                    <p class="card-description">
-                        木质课桌椅，绿色黑板，粉笔灰在阳光下飞舞。
-                        眼保健操的音乐响起，全班闭眼做操；课间十分钟冲出教室；
-                        传纸条、偷偷吃零食、被老师点名回答问题...
-                        那时候觉得漫长的课堂，如今却是最怀念的时光。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20小学%20回忆" target="_blank" class="card-link">校园回忆视频</a>
-                </div>
-            </div>
-            <!-- 操场岁月 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=800&q=80" alt="操场岁月" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">⚽ 操场岁月</h3>
-                    <p class="card-description">
-                        煤渣跑道、水泥篮球场、土操场。
-                        体育课是最期待的课，踢足球、打篮球、跳皮筋、丢沙包。
-                        运动会是盛大的节日，为班级加油呐喊，
-                        拿了奖状能高兴好几天，贴在墙上最显眼的位置。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20操场%20游戏" target="_blank" class="card-link">操场游戏回顾</a>
-                </div>
-            </div>
-            <!-- 放学路上 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1515542706656-8e6ef1763e33?w=800&q=80" alt="放学路上" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🚲 放学路上</h3>
-                    <p class="card-description">
-                        背着书包，三五成群走在回家的路上。
-                        路过小卖部买根冰棍、集水浒卡、交换奥特曼卡片。
-                        夏天一路踩水坑，冬天一起哈着白气。
-                        那段路不长，却装满了整个童年的欢声笑语。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20放学%20回忆" target="_blank" class="card-link">放学路上的回忆</a>
-                </div>
-            </div>
-            <!-- 考试记忆 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80" alt="考试记忆" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">📝 考试记忆</h3>
-                    <p class="card-description">
-                        期中期末考试前的紧张复习，家长签字的压力。
-                        考好了能得到新文具作为奖励，考砸了要挨批评。
-                        那时候的烦恼很简单，一张试卷就能左右心情。
-                        现在想来，那竟是人生中最单纯的焦虑。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20考试%20回忆" target="_blank" class="card-link">考试那些事儿</a>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>🪀 悠悠球</h3>
+        <p>睡眠、遛狗、环绕世界、巴黎铁塔！手上的功夫决定了你在小伙伴中的地位。火力少年王播出后，全校都在玩悠悠球。</p>
+        <span class="card-tag">技巧之王</span>
+      </div>
+    </div>
+    <!-- 拍画片 -->
+    <div class="card">
+      <div class="card-image demo-cards">
+        <div class="game-card">关</div>
+        <div class="game-card">张</div>
+        <div class="game-card">赵</div>
+        <div class="game-card">马</div>
+      </div>
+      <div class="card-body">
+        <h3>🃏 拍画片 / 水浒卡</h3>
+        <p>用力一拍，翻过来就赢了！小浣熊干脆面里的水浒卡，为了集齐108将，吃了多少包干脆面。三国卡、龙珠卡，每种都要收集！</p>
+        <span class="card-tag">收集控</span>
+      </div>
+    </div>
+    <!-- 纸飞机 -->
+    <div class="card">
+      <div class="card-image demo-plane">
+        <span class="paper-plane">✈️</span>
+        <span class="cloud">☁️</span>
+        <span class="cloud">☁️</span>
+        <span class="cloud">☁️</span>
+      </div>
+      <div class="card-body">
+        <h3>✈️ 纸飞机</h3>
+        <p>用作业本折的纸飞机，哈一口气，用力掷出！比谁飞得远、飞得高。尖头的、平头的、带翼的，每种折法都有不同的飞行效果。</p>
+        <span class="card-tag">最简单的快乐</span>
+      </div>
+    </div>
+    <!-- 沙包 -->
+    <div class="card">
+      <div class="card-image demo-sandbag">
+        <div class="sandbag"></div>
+      </div>
+      <div class="card-body">
+        <h3>🎯 丢沙包</h3>
+        <p>妈妈用碎布缝的沙包，里面装满沙子或大米。课间和同学们一起玩，被砸中的下场，接住的可以救人。躲闪腾挪，身手敏捷！</p>
+        <span class="card-tag">课间必备</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 童年活动 ===== -->
+<section id="activities">
+  <div class="section-header">
+    <h2>童年活动</h2>
+    <div class="divider"></div>
+    <p>没有补习班的周末，我们在阳光下奔跑</p>
+  </div>
+  <div class="grid">
+    <!-- 春游 -->
+    <div class="card">
+      <div class="card-image demo-spring">
+        <span class="sun">☀️</span>
+        <span class="butterfly">🦋</span>
+        <span class="kids">👧👦👧</span>
+        <div class="flower-field">
+          <span>🌷</span><span>🌻</span><span>🌸</span><span>🌺</span><span>🌼</span>
         </div>
-    </section>
-    <!-- Nature & Flowers Section -->
-    <section id="nature" style="background: var(--bg-secondary);">
-        <h2 class="section-title fade-in">喇叭花与自然时光</h2>
-        <p class="section-subtitle fade-in">田野里的野花、树梢上的知了、夜晚的萤火虫，大自然是最好的游乐场</p>
-        
-        <div class="grid">
-            <!-- 喇叭花 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=800&q=80" alt="喇叭花" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🌸 喇叭花 (牵牛花)</h3>
-                    <p class="card-description">
-                        清晨绽放的紫色小花，形状像小喇叭，因此得名。
-                        爬满篱笆墙、缠绕在树枝上，农村孩子最常见的野花。
-                        摘下来可以当小喇叭吹（虽然吹不响），
-                        花瓣上的露珠是早晨最美的装饰。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=牵牛花%20喇叭花" target="_blank" class="card-link">认识喇叭花</a>
-                </div>
-            </div>
-            <!-- 捉昆虫 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=800&q=80" alt="捉昆虫" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🦋 捉昆虫</h3>
-                    <p class="card-description">
-                        夏天拿着网兜捉蝴蝶、蜻蜓，
-                        翻开石头找西瓜虫（潮虫），
-                        用面筋粘知了，
-                        晚上打着手电筒捉萤火虫装在瓶子里当灯笼。
-                        那些小生命是我们最好的玩伴。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=童年%20捉昆虫" target="_blank" class="card-link">童年捉虫回忆</a>
-                </div>
-            </div>
-            <!-- 麦田时光 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="麦田" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">🌾 麦田时光</h3>
-                    <p class="card-description">
-                        金黄的麦浪随风起伏，在田埂上奔跑，
-                        用麦秆编戒指、吹口哨，
-                        收割后的麦秸垛是天然的蹦床，
-                        躺在上面看云朵慢慢飘过。
-                        乡村孩子的乐园，简单却无比快乐。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20农村%20童年" target="_blank" class="card-link">乡村童年回忆</a>
-                </div>
-            </div>
-            <!-- 小溪玩耍 -->
-            <div class="card fade-in">
-                <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=800&q=80" alt="小溪" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">💧 小溪玩耍</h3>
-                    <p class="card-description">
-                        夏天最热的时候，跑到村边的小溪里玩水。
-                        摸鱼、抓螃蟹、打水仗，
-                        把脚泡在清凉的溪水里，
-                        用树叶折小船放在水中漂流。
-                        那是最天然的空调房。
-                    </p>
-                    <a href="https://search.bilibili.com/all?keyword=童年%20小溪%20玩水" target="_blank" class="card-link">小溪玩耍视频</a>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>🌳 春游 / 秋游</h3>
+        <p>每学期最期待的日子！背着小书包，装满零食：旺旺雪饼、AD钙奶、火腿肠。和同学们一路唱歌一路走，到了目的地就开始分享美食、拍照留念。</p>
+        <span class="card-tag">最期待的日子</span>
+      </div>
+    </div>
+    <!-- 捉迷藏 -->
+    <div class="card">
+      <div class="card-image demo-hide">
+        <span class="hide-tree">🌳</span>
+        <span class="hide-tree">🌲</span>
+        <span class="hide-tree">🌳</span>
+        <span class="hide-kid">🧒</span>
+        <span class="hide-seeker">🙈</span>
+      </div>
+      <div class="card-body">
+        <h3>🙈 捉迷藏</h3>
+        <p>"一、二、三...九十九、一百！我来啦！"藏在大树后、楼道里、草堆中，心跳加速，屏住呼吸，生怕被发现。被找到时的尖叫和笑声回荡在巷子里。</p>
+        <span class="card-tag">经典游戏</span>
+      </div>
+    </div>
+    <!-- 放风筝 -->
+    <div class="card">
+      <div class="card-image demo-kite">
+        <div class="kite">
+          <div class="kite-body"></div>
+          <div class="kite-tail"></div>
         </div>
-        <!-- Gallery -->
-        <div class="gallery fade-in">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1534234828563-02511c750b62?w=400&q=80" alt="西瓜">
-                <div class="gallery-caption">🍉 夏天的大西瓜</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=400&q=80" alt="萤火虫">
-                <div class="gallery-caption">✨ 夜晚的萤火虫</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1550948537-130a1ce83314?w=400&q=80" alt="向日葵">
-                <div class="gallery-caption">🌻 田野里的向日葵</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?w=400&q=80" alt="稻田">
-                <div class="gallery-caption">🌾 金色的稻田</div>
-            </div>
+        <div class="kite-string"></div>
+        <span class="kite-person">🧒</span>
+      </div>
+      <div class="card-body">
+        <h3>🪁 放风筝</h3>
+        <p>春天的田野上，举着爸爸做的风筝奔跑。燕子、蝴蝶、蜈蚣...看着风筝越飞越高，手中的线轴飞快转动。线断了的那一刻，追着风筝跑了好几里地。</p>
+        <span class="card-tag">春天的记忆</span>
+      </div>
+    </div>
+    <!-- 跳皮筋 -->
+    <div class="card">
+      <div class="card-image demo-rubber">
+        <div class="rubber-band">
+          <span class="rubber-person">👧</span>
+          <span class="rubber-person">👧</span>
+          <span class="rubber-jumper">🤸‍♀️</span>
         </div>
-    </section>
-    <!-- Video Review Section -->
-    <section id="videos" class="video-section">
-        <h2 class="section-title fade-in">视频回顾</h2>
-        <p class="section-subtitle fade-in">点击观看更多80后童年回忆视频</p>
-        
-        <div class="video-grid">
-            <!-- Video 1 -->
-            <div class="video-card fade-in">
-                <div style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=600&q=80" alt="经典动画合集" class="video-thumbnail">
-                    <div class="play-button"></div>
-                </div>
-                <div class="video-card-content">
-                    <h4 class="video-card-title">80后经典动画大合集</h4>
-                    <p class="video-card-source">来源：Bilibili</p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20经典动画%20合集" target="_blank" class="video-link">立即观看 →</a>
-                </div>
-            </div>
-            <!-- Video 2 -->
-            <div class="video-card fade-in">
-                <div style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1558877385-83a2961fa5fa?w=600&q=80" alt="怀旧玩具" class="video-thumbnail">
-                    <div class="play-button"></div>
-                </div>
-                <div class="video-card-content">
-                    <h4 class="video-card-title">那些年我们玩过的玩具</h4>
-                    <p class="video-card-source">来源：Bilibili</p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20怀旧玩具%20大全" target="_blank" class="video-link">立即观看 →</a>
-                </div>
-            </div>
-            <!-- Video 3 -->
-            <div class="video-card fade-in">
-                <div style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80" alt="校园回忆" class="video-thumbnail">
-                    <div class="play-button"></div>
-                </div>
-                <div class="video-card-content">
-                    <h4 class="video-card-title">80后校园生活全记录</h4>
-                    <p class="video-card-source">来源：YouTube & Bilibili</p>
-                    <a href="https://search.bilibili.com/all?keyword=80后%20校园生活%20回忆" target="_blank" class="video-link">立即观看 →</a>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <h3>🤸‍♀️ 跳皮筋</h3>
+        <p>"马兰开花二十一，二五六、二五七、二八二九三十一！"女孩子们的专属游戏，皮筋从脚踝升到头顶，难度越来越高。跳得好的女生是全校的明星！</p>
+        <span class="card-tag">女孩最爱</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 校园记忆 ===== -->
+<section id="school">
+  <div class="section-header">
+    <h2>校园记忆</h2>
+    <div class="divider"></div>
+    <p>那些年，教室、操场、走廊里的欢声笑语</p>
+  </div>
+  <div class="grid">
+    <!-- 踢毽子 -->
+    <div class="card">
+      <div class="card-image demo-jianzi">
+        <div class="jianzi">
+          <div class="jianzi-feather"></div>
+          <div class="jianzi-feather"></div>
+          <div class="jianzi-feather"></div>
+          <div class="jianzi-feather"></div>
+          <div class="jianzi-top"></div>
+          <div class="jianzi-base"></div>
         </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">80后童年回忆</div>
-            <p class="footer-text">
-                献给所有80后朋友们的美好回忆。<br>
-                那些年我们一起追过的动画、玩过的玩具、度过的校园时光，<br>
-                虽然已经长大，但童心永存。
-            </p>
-            <div class="social-links">
-                <a href="https://search.bilibili.com/all?keyword=80后童年回忆" target="_blank">Bilibili合集</a>
-                <a href="https://www.youtube.com/results?search_query=80后童年回忆" target="_blank">YouTube频道</a>
-                <a href="#">关于我们</a>
-            </div>
-            <p class="copyright">© 2024 80后童年回忆网站 | 致敬我们美好的童年</p>
+        <span class="jianzi-player left">🧒</span>
+        <span class="jianzi-player right">👧</span>
+      </div>
+      <div class="card-body">
+        <h3>🦵 踢毽子</h3>
+        <p>课间十分钟，走廊里、操场上，到处是踢毽子的身影。单踢、双踢、花样踢，比比谁踢得多。毽子是用铜钱和鸡毛做的，彩色的羽毛在阳光下闪闪发光。</p>
+        <span class="card-tag">课间十分钟</span>
+      </div>
+    </div>
+    <!-- 乒乓球 -->
+    <div class="card">
+      <div class="card-image demo-pingpong">
+        <div class="pp-table">
+          <div class="pp-net"></div>
+          <div class="pp-ball"></div>
+          <span class="pp-player left">🏓</span>
+          <span class="pp-player right">🏓</span>
         </div>
-    </footer>
-    <script>
-        // Scroll Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.8)';
-            }
-        });
-    </script>
+      </div>
+      <div class="card-body">
+        <h3>🏓 打乒乓球</h3>
+        <p>水泥乒乓球台，用砖头或书包当球网。放学后的操场是最热闹的，围观的人比打球的人还多。赢了的人继续守擂，输了的下场排队等候。</p>
+        <span class="card-tag">国球启蒙</span>
+      </div>
+    </div>
+    <!-- 黑板报 -->
+    <div class="card">
+      <div class="card-image demo-blackboard">
+        <div class="chalk-text">📐 好好学习 天天向上 📐</div>
+        <div class="chalk-text">—— 本期黑板报 ——</div>
+        <div class="chalk-text">🌟 庆祝六一儿童节 🌟</div>
+      </div>
+      <div class="card-body">
+        <h3>📝 黑板报</h3>
+        <p>每次出黑板报都是大展身手的机会！粉笔在黑板上画出五彩斑斓的世界。字写得好的同学负责标题，画画好的同学负责插图。出完黑板报，满手都是粉笔灰。</p>
+        <span class="card-tag">班级荣誉</span>
+      </div>
+    </div>
+    <!-- 小卖部 -->
+    <div class="card">
+      <div class="card-image demo-shop">
+        <div class="shop-item">🍭</div>
+        <div class="shop-item">🧃</div>
+        <div class="shop-item">🍫</div>
+        <div class="shop-item">🍦</div>
+        <div class="shop-item">🌶️</div>
+        <div class="shop-item">🥤</div>
+      </div>
+      <div class="card-body">
+        <h3>🏪 学校小卖部</h3>
+        <p>五毛钱的辣条、一毛钱的冰棍、两毛钱的无花果、五毛钱的AD钙奶。下课铃一响，冲向小卖部的速度比体育课跑步还快！那是童年最幸福的消费。</p>
+        <span class="card-tag">美食天堂</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 时光轴 ===== -->
+<section id="timeline">
+  <div class="section-header">
+    <h2>时光轴</h2>
+    <div class="divider"></div>
+    <p>80后的一天，从早到晚都是快乐</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">🌅 早上 7:00</div>
+        <h4>背着书包上学去</h4>
+        <p>脖子上挂着钥匙，背着黄色小书包，和邻居小伙伴一起走路上学。路边的早餐摊飘着油条的香味。</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">📖 上午 8:00</div>
+        <h4>早读 & 上课</h4>
+        <h4>早读 & 上课</h4>
+        <p>朗朗读书声从教室传出。语文课上背诵课文，数学课上偷偷在桌洞里看漫画书。</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">🏃 课间 10:00</div>
+        <h4>课间十分钟</h4>
+        <p>冲出教室！踢毽子、跳皮筋、丢沙包、拍画片...十分钟也要玩出花样。上课铃响了才恋恋不舍地跑回教室。</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">🍚 中午 12:00</div>
+        <h4>午饭 & 午休</h4>
+        <p>铝饭盒里装着妈妈做的饭菜，和同学们围坐在一起吃。吃完在课桌上趴着午休，偷偷和同桌说悄悄话。</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">📺 下午 17:30</div>
+        <h4>动画城时间！</h4>
+        <p>放学飞奔回家，打开电视调到央视一套。动画城、大风车，这是每天最幸福的时刻！谁要是错过了，第二天就没法和同学讨论了。</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">🌙 晚上 19:00</div>
+        <h4>晚饭后玩耍</h4>
+        <p>吃完饭，和小伙伴们在院子里继续玩耍。捉迷藏、一二三木头人、老鹰捉小鸡...直到妈妈喊"回家睡觉啦！"才依依不舍地散去。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <h3>致我们永不褪色的童年 <span class="heart-beat">❤️</span></h3>
+  <p>那些年没有智能手机，没有WiFi，但我们有最纯粹的快乐</p>
+  <p>80后的童年，是一生中最美好的时光</p>
+  <p style="margin-top: 20px; opacity: 0.6; font-size: 14px;">—— 献给所有80后的小伙伴们 ——</p>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+
+<script>
+  // 回到顶部按钮显示/隐藏
+  window.addEventListener('scroll', function() {
+    const btn = document.getElementById('backTop');
+    if (window.scrollY > 500) {
+      btn.style.display = 'block';
+    } else {
+      btn.style.display = 'none';
+    }
+  });
+
+  // 平滑滚动
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // 滚动动画 - 卡片进入视口时淡入
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .timeline-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
 </body>
 </html>
-HTMLEOF
-echo "✅ Website created successfully at /workspace/index.html"
