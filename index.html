@@ -77,6 +77,67 @@
     color: var(--yellow);
   }
 
+  /* ===== MUSIC PLAYER ===== */
+  .music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: linear-gradient(135deg, #5c3a1e, #8b5e3c);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 3px solid var(--yellow);
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: musicPulse 2s ease-in-out infinite;
+  }
+
+  .music-player:hover {
+    transform: scale(1.1);
+  }
+
+  .music-player.playing {
+    animation: musicSpin 3s linear infinite;
+  }
+
+  @keyframes musicPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    50% { box-shadow: 0 4px 30px rgba(240,192,64,0.5); }
+  }
+
+  @keyframes musicSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .music-player span {
+    font-size: 28px;
+  }
+
+  .music-tooltip {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: rgba(92,58,30,0.95);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .music-player:hover .music-tooltip {
+    opacity: 1;
+  }
+
   /* ===== HEADER ===== */
   header {
     position: relative;
@@ -358,6 +419,14 @@
   .c-lm  .card-image { background: linear-gradient(135deg, #fccb90, #d57eeb); }
   .c-sds .card-image { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
   .c-dla .card-image { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+  
+  /* Digital section backgrounds */
+  .c-qq  .card-image { background: linear-gradient(135deg, #12b7f5, #0099ff); }
+  .c-farm .card-image { background: linear-gradient(135deg, #8bc34a, #4caf50); }
+  .c-mhw .card-image { background: linear-gradient(135deg, #e91e63, #9c27b0); }
+  .c-ring .card-image { background: linear-gradient(135deg, #ff9800, #ffc107); }
+  .c-dtt .card-image { background: linear-gradient(135deg, #f06292, #ec407a); }
+  .c-mp3 .card-image { background: linear-gradient(135deg, #607d8b, #455a64); }
 
   /* ===== CSS CHARACTERS ===== */
   .char-huluwa {
@@ -469,6 +538,51 @@
     content:'🔔'; position:absolute; bottom:15px; left:50%;
     transform:translateX(-50%); font-size:16px;
   }
+
+  /* Digital section characters */
+  .char-qq {
+    width:70px; height:70px; position:relative;
+    animation:qqWaddle 2s ease-in-out infinite;
+  }
+  @keyframes qqWaddle { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+  .char-qq::before {
+    content:''; position:absolute; top:0; left:50%;
+    transform:translateX(-50%); width:50px; height:45px;
+    background:#fff; border-radius:50% 50% 45% 45%;
+  }
+  .char-qq::after {
+    content:''; position:absolute; top:15px; left:50%;
+    transform:translateX(-50%); width:10px; height:10px;
+    background:#000; border-radius:50%;
+    box-shadow:20px 0 0 #000;
+  }
+  
+  .char-farm {
+    width:80px; height:60px; position:relative;
+    animation:farmGrow 3s ease-in-out infinite;
+  }
+  @keyframes farmGrow { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.1)} }
+  .char-farm::before {
+    content:'🌱'; position:absolute; bottom:0; left:10px;
+    font-size:30px; animation:plantGrow 2s ease-in-out infinite;
+  }
+  .char-farm::after {
+    content:'🥬'; position:absolute; bottom:5px; left:45px;
+    font-size:35px; animation:plantGrow 2s ease-in-out infinite 0.5s;
+  }
+  @keyframes plantGrow { 0%,100%{transform:scale(0.9)} 50%{transform:scale(1.1)} }
+  
+  .char-mars { font-size:60px; animation:marsTwinkle 2s ease-in-out infinite; }
+  @keyframes marsTwinkle { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
+  
+  .char-ring { font-size:60px; animation:ringVibrate 0.5s ease-in-out infinite; }
+  @keyframes ringVibrate { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+  
+  .char-photo { font-size:60px; animation:photoFlash 2s ease-in-out infinite; }
+  @keyframes photoFlash { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)} }
+  
+  .char-mp3 { font-size:60px; animation:mp3Bounce 2s ease-in-out infinite; }
+  @keyframes mp3Bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
   /* ===== TOY DEMOS ===== */
   .toy-demo { height:160px; position:relative; overflow:hidden; }
@@ -733,6 +847,7 @@
     <li><a href="#activities">🏃 童年活动</a></li>
     <li><a href="#school">🏫 校园记忆</a></li>
     <li><a href="#timeline">📅 时光轴</a></li>
+    <li><a href="#digital">💻 数码回忆</a></li>
   </ul>
 </nav>
 
@@ -1270,6 +1385,114 @@
   </div>
 </section>
 
+<!-- ===== 数码回忆 ===== -->
+<section id="digital">
+  <div class="section-header">
+    <h2>💻 数码回忆</h2>
+    <div class="divider"></div>
+    <p>QQ、偷菜、火星文……那些年的网络记忆</p>
+  </div>
+  <div class="grid">
+
+    <!-- QQ -->
+    <div class="card c-qq">
+      <a href="https://baike.baidu.com/item/QQ" target="_blank" rel="noopener" class="card-image">
+        <div class="char-qq"></div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/QQ" target="_blank" rel="noopener">🐧 QQ企鹅</a></h3>
+        <p>"咳咳咳"的上线提示音，滴滴滴的消息声。QQ等级、太阳月亮星星、隐身对其可见、分组命名"我的宝贝"。</p>
+        <div class="card-footer">
+          <span class="card-tag">社交神器</span>
+          <a href="https://baike.baidu.com/item/QQ" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- QQ农场 -->
+    <div class="card c-farm">
+      <a href="https://baike.baidu.com/item/QQ农场" target="_blank" rel="noopener" class="card-image">
+        <div class="char-farm"></div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/QQ农场" target="_blank" rel="noopener">🌾 QQ农场偷菜</a></h3>
+        <p>定闹钟半夜起来偷菜！"你家白菜熟了！""别偷我的！"好友排行榜上的偷菜王，是最高荣誉。</p>
+        <div class="card-footer">
+          <span class="card-tag">全民偷菜</span>
+          <a href="https://baike.baidu.com/item/QQ农场" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 火星文 -->
+    <div class="card c-mhw">
+      <a href="https://baike.baidu.com/item/火星文" target="_blank" rel="noopener" class="card-image">
+        <div class="char-mars">📝</div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/火星文" target="_blank" rel="noopener">✨ 火星文</a></h3>
+        <p>莪们の青春，伱卟懂。用火星文写说说、改网名，那是属于8090后的密码，大人们看不懂。</p>
+        <div class="card-footer">
+          <span class="card-tag">非主流文化</span>
+          <a href="https://baike.baidu.com/item/火星文" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 彩铃 -->
+    <div class="card c-ring">
+      <a href="https://baike.baidu.com/item/彩铃" target="_blank" rel="noopener" class="card-image">
+        <div class="char-ring">🎵</div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/彩铃" target="_blank" rel="noopener">🎶 手机彩铃</a></h3>
+        <p>"我愿意为你，我愿意为你……"每个月花几块钱开通彩铃，让打电话的人听到你的个性音乐。</p>
+        <div class="card-footer">
+          <span class="card-tag">个性表达</span>
+          <a href="https://baike.baidu.com/item/彩铃" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大头贴 -->
+    <div class="card c-dtt">
+      <a href="https://baike.baidu.com/item/大头贴" target="_blank" rel="noopener" class="card-image">
+        <div class="char-photo">📸</div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/大头贴" target="_blank" rel="noopener">🖼️ 大头贴</a></h3>
+        <p>和闺蜜去拍大头贴，选各种边框和贴纸，一本大头贴相册是最珍贵的友谊见证。</p>
+        <div class="card-footer">
+          <span class="card-tag">青春纪念</span>
+          <a href="https://baike.baidu.com/item/大头贴" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MP3 -->
+    <div class="card c-mp3">
+      <a href="https://baike.baidu.com/item/MP3播放器" target="_blank" rel="noopener" class="card-image">
+        <div class="char-mp3">🎧</div>
+        <div class="link-overlay"><span>🔍 了解更多</span></div>
+      </a>
+      <div class="card-body">
+        <h3><a href="https://baike.baidu.com/item/MP3播放器" target="_blank" rel="noopener">🎵 MP3播放器</a></h3>
+        <p>攒钱买的第一台MP3，128M能存几十首歌。耳机线缠在衣服里，上课偷偷听周杰伦。</p>
+        <div class="card-footer">
+          <span class="card-tag">音乐随身</span>
+          <a href="https://baike.baidu.com/item/MP3播放器" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer>
   <h3>致我们永不褪色的童年 <span class="heart-beat">❤️</span></h3>
   <p>那些年没有智能手机，没有WiFi，但我们有最纯粹的快乐</p>
@@ -1307,7 +1530,42 @@
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
+
+  // Music Player - Classic 80s/90s Chinese songs
+  const musicPlayer = document.createElement('div');
+  musicPlayer.className = 'music-player';
+  musicPlayer.innerHTML = '<span class=\"music-tooltip\">点击播放怀旧金曲</span>🎵';
+  document.body.appendChild(musicPlayer);
+
+  const songs = [
+    { name: '童年', artist: '罗大佑' },
+    { name: '光阴的故事', artist: '罗大佑' },
+    { name: '同桌的你', artist: '老狼' },
+    { name: '小虎队 - 爱', artist: '小虎队' },
+    { name: '红蜻蜓', artist: '小虎队' }
+  ];
+  
+  let isPlaying = false;
+  let currentSongIndex = 0;
+  
+  musicPlayer.addEventListener('click', function() {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      this.classList.add('playing');
+      this.querySelector('.music-tooltip').textContent = '正在播放：' + songs[currentSongIndex].name;
+      // In a real implementation, you would play audio here
+      alert('🎵 正在播放：' + songs[currentSongIndex].name + ' - ' + songs[currentSongIndex].artist + '\n\n（实际使用时可添加真实音频文件）');
+    } else {
+      this.classList.remove('playing');
+      this.querySelector('.music-tooltip').textContent = '点击播放怀旧金曲';
+    }
+  });
 </script>
+
+<!-- Hidden audio elements for future implementation -->
+<audio id="bgm1" loop>
+  <source src="" type="audio/mp3">
+</audio>
 
 </body>
 </html>
