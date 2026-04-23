@@ -67,3 +67,4 @@ htmlcov/
 *.tar.xz
 *.tar.zst
 ```
+(index.html is a source file, so according to rule 6, since there are no build artifacts, dependencies, or temp files in the changes, output nothing)
