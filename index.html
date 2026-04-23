@@ -3,74 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>80后回忆录 - 致我们的童年</title>
+<title>1980-2008 年 80 后的美好回忆 - 无价的情怀</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap');
-
+  
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  
   :root {
-    --orange: #e8731a;
-    --brown: #5c3a1e;
-    --yellow: #f0c040;
-    --green: #4a7c3f;
-    --red: #c0392b;
-    --cream: #fdf5e6;
-    --blue: #2e86ab;
-    --pink: #e84393;
-    --text-dark: #2c1810;
-    --text-mid: #5a4a3a;
-    --text-light: #8a7a6a;
-    --card-bg: #ffffff;
-    --link-color: #2e86ab;
+    --primary: #e8731a;
+    --secondary: #5c3a1e;
+    --accent: #f0c040;
+    --bg-warm: #fff8f0;
+    --bg-retro: #f5e6d0;
+    --text-dark: #3a2818;
+    --text-mid: #6b5340;
+    --text-light: #9a8570;
   }
-
+  
+  html { scroll-behavior: smooth; }
+  
   body {
     font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-    background-color: #f5e6c8;
+    background: linear-gradient(180deg, #fff8f0 0%, #f5e6d0 100%);
     color: var(--text-dark);
-    line-height: 1.8;
-    font-size: 16px;
+    line-height: 1.7;
     overflow-x: hidden;
   }
-
+  
+  /* ===== BACKGROUND PATTERN ===== */
   body::before {
     content: '';
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: radial-gradient(circle, rgba(139,69,19,0.06) 1px, transparent 1px);
-    background-size: 28px 28px;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20px 20px, rgba(232,115,26,0.08) 2px, transparent 2px),
+      radial-gradient(circle at 60px 60px, rgba(92,58,30,0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
   }
-
-  /* ===== NAV ===== */
+  
+  /* ===== NAVIGATION ===== */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
-    background: linear-gradient(135deg, #5c3a1e 0%, #8b5e3c 100%);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    border-bottom: 3px solid var(--yellow);
+    background: linear-gradient(135deg, #8b5e3c 0%, #5c3a1e 100%);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    border-bottom: 4px solid var(--accent);
   }
-
+  
   nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-
+  
+  nav li { margin: 0; }
+  
   nav a {
     display: block;
-    color: #fdf5e6;
+    color: #fff;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 14px 24px;
+    padding: 16px 22px;
     letter-spacing: 1px;
     transition: all 0.3s;
+    position: relative;
   }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 3px;
+    background: var(--accent);
+    transform: translateX(-50%);
+    transition: width 0.3s;
+  }
+  
+  nav a:hover { background: rgba(240,192,64,0.2); color: var(--accent); }
+  nav a:hover::after { width: 80%; }
+  
+  /* ===== HERO HEADER ===== */
 
   nav a:hover {
     background: rgba(240,192,64,0.25);
@@ -141,242 +160,260 @@
   /* ===== HEADER ===== */
   header {
     position: relative;
-    margin-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f093fb 100%);
-    overflow: hidden;
+    padding: 120px 20px 80px;
+    background: 
+      linear-gradient(135deg, rgba(246,211,101,0.9) 0%, rgba(253,160,133,0.85) 50%, rgba(240,147,251,0.85) 100%),
+      url('https://picsum.photos/seed/childhood80s/1920/1080') center/cover;
     z-index: 1;
+    overflow: hidden;
   }
-
+  
   header::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.07) 40px, rgba(255,255,255,0.07) 80px),
-      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.07) 40px, rgba(255,255,255,0.07) 80px);
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px
+    );
+    animation: scanlines 8s linear infinite;
   }
-
+  
+  @keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+  
   header h1 {
     font-family: 'Noto Serif SC', serif;
-    font-size: 52px;
+    font-size: clamp(42px, 6vw, 72px);
     font-weight: 700;
     color: #fff;
-    text-shadow: 3px 3px 0 var(--brown), 5px 5px 0 rgba(0,0,0,0.12);
-    margin-bottom: 12px;
+    text-shadow: 4px 4px 0 var(--secondary), 6px 6px 0 rgba(0,0,0,0.15);
+    margin-bottom: 20px;
     position: relative;
-    animation: titleFloat 3s ease-in-out infinite;
+    animation: titleFloat 4s ease-in-out infinite;
+    letter-spacing: 8px;
   }
-
+  
   @keyframes titleFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    50% { transform: translateY(-12px); }
   }
-
-  header p {
-    font-size: 20px;
+  
+  header .subtitle {
+    font-size: clamp(18px, 3vw, 28px);
     color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
     position: relative;
     font-weight: 400;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
   }
-
-  .stars-container {
+  
+  header .years {
+    font-size: clamp(24px, 4vw, 36px);
+    color: var(--accent);
+    font-weight: 700;
+    position: relative;
+    letter-spacing: 6px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .scroll-hint {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 14px;
+    animation: bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 10;
   }
-
-  .star {
-    position: absolute;
-    font-size: 18px;
-    animation: starFall linear infinite;
-    opacity: 0.5;
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
   }
-
-  @keyframes starFall {
-    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
-  }
-
-  /* ===== SECTIONS ===== */
-  section {
+  
+  /* ===== TIMELINE SECTIONS ===== */
+  .era-section {
     position: relative;
     z-index: 1;
-    padding: 60px 20px;
-    max-width: 1100px;
+    padding: 80px 20px;
+    max-width: 1400px;
     margin: 0 auto;
   }
-
-  .section-header {
+  
+  .era-header {
     text-align: center;
-    margin-bottom: 45px;
-  }
-
-  .section-header h2 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--brown);
-    display: inline-block;
-    padding: 8px 40px;
+    margin-bottom: 60px;
     position: relative;
   }
-
-  .section-header h2::before,
-  .section-header h2::after {
-    content: '✦';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--orange);
-    font-size: 20px;
+  
+  .era-year {
+    display: inline-block;
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
   }
-
-  .section-header h2::before { left: 5px; }
-  .section-header h2::after { right: 5px; }
-
-  .section-header .divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--orange), transparent);
-    margin: 12px auto 0;
+  
+  .era-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 15px;
+  }
+  
+  .era-desc {
+    font-size: 16px;
+    color: var(--text-mid);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  
+  .divider {
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    margin: 20px auto;
     border-radius: 2px;
   }
-
-  .section-header p {
-    margin-top: 10px;
-    font-size: 16px;
-    color: var(--text-light);
-    font-weight: 400;
-  }
-
-  /* ===== GRID & CARDS ===== */
-  .grid {
+  
+  /* ===== CATEGORY GRID ===== */
+  .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+    margin-bottom: 60px;
   }
-
-  .card {
-    background: var(--card-bg);
-    border-radius: 14px;
+  
+  .memory-card {
+    background: #fff;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 6px 24px rgba(92,58,30,0.1);
+    box-shadow: 0 8px 30px rgba(92,58,30,0.12);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(139,69,19,0.08);
-    display: flex;
-    flex-direction: column;
+    border: 2px solid rgba(232,115,26,0.1);
   }
-
-  .card:hover {
-    transform: translateY(-6px) rotate(0.3deg);
-    box-shadow: 0 14px 36px rgba(92,58,30,0.18);
+  
+  .memory-card:hover {
+    transform: translateY(-10px) rotate(0.5deg);
+    box-shadow: 0 20px 50px rgba(92,58,30,0.2);
   }
-
-  .card-image {
+  
+  .card-media {
     width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 240px;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
-    transition: filter 0.3s;
+    background: linear-gradient(135deg, #667eea, #764ba2);
   }
-
-  .card-image:hover {
-    filter: brightness(1.08);
+  
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
   }
-
-  .card-image .link-overlay {
+  
+  .memory-card:hover .card-media img {
+    transform: scale(1.1);
+  }
+  
+  .media-overlay {
     position: absolute;
     inset: 0;
+    background: rgba(0,0,0,0);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0);
     transition: background 0.3s;
-    z-index: 5;
   }
-
-  .card-image:hover .link-overlay {
-    background: rgba(0,0,0,0.25);
+  
+  .memory-card:hover .media-overlay {
+    background: rgba(0,0,0,0.3);
   }
-
-  .link-overlay span {
+  
+  .play-btn {
     opacity: 0;
     transform: scale(0.7);
     transition: all 0.3s;
-    background: rgba(255,255,255,0.92);
-    color: var(--brown);
-    font-size: 14px;
-    font-weight: 700;
-    padding: 8px 20px;
-    border-radius: 25px;
-    white-space: nowrap;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 70px;
+    height: 70px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--primary);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   }
-
-  .card-image:hover .link-overlay span {
+  
+  .memory-card:hover .play-btn {
     opacity: 1;
     transform: scale(1);
   }
-
-  .card-body {
-    padding: 22px 24px 26px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  
+  .card-content {
+    padding: 28px;
   }
-
-  .card-body h3 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--brown);
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-
-  .card-body h3 a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .card-body h3 a:hover {
-    color: var(--orange);
-  }
-
-  .card-body p {
-    font-size: 14.5px;
-    color: var(--text-mid);
-    line-height: 1.85;
-    font-weight: 400;
-    flex: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(139,69,19,0.08);
-  }
-
-  .card-tag {
+  
+  .card-category {
     display: inline-block;
-    background: linear-gradient(135deg, var(--orange), var(--yellow));
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     color: #fff;
     font-size: 12px;
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  
+  .card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .card-desc {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag {
+    background: rgba(232,115,26,0.1);
+    color: var(--primary);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 15px;
     font-weight: 500;
     padding: 3px 14px;
     border-radius: 20px;
@@ -462,82 +499,48 @@
     content:''; position:absolute; width:35px; height:35px;
     background:#2c3e50; border-radius:50%; top:-15px;
   }
-  .char-mickey::before{left:-5px} .char-mickey::after{right:-5px}
-  .char-mickey .face {
-    position:absolute; bottom:5px; left:50%; transform:translateX(-50%);
-    width:45px; height:30px; background:#f5c6aa; border-radius:50%;
+  
+  /* ===== SPECIAL BACKGROUNDS FOR CATEGORIES ===== */
+  .bg-cartoon { background: linear-gradient(135deg, #667eea, #764ba2); }
+  .bg-toys { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .bg-games { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .bg-school { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .bg-digital { background: linear-gradient(135deg, #fa709a, #fee140); }
+  .bg-music { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+  .bg-activities { background: linear-gradient(135deg, #fccb90, #d57eeb); }
+  .bg-snacks { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+  
+  /* ===== VIDEO CAROUSEL ===== */
+  .video-section {
+    background: linear-gradient(135deg, rgba(92,58,30,0.05), rgba(232,115,26,0.05));
+    padding: 60px 20px;
+    margin: 60px 0;
   }
-
-  .char-flower { font-size:70px; animation:flowerSpin 4s linear infinite; }
-  @keyframes flowerSpin { 0%{transform:rotate(0) scale(1)} 50%{transform:rotate(180deg) scale(1.1)} 100%{transform:rotate(360deg) scale(1)} }
-
-  .char-cat {
-    width:60px; height:60px; background:#2c3e50;
-    border-radius:50%; position:relative;
-    animation:catPatrol 3s ease-in-out infinite;
+  
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
-  @keyframes catPatrol { 0%,100%{transform:translateX(0)} 50%{transform:translateX(20px)} }
-  .char-cat::before {
-    content:''; position:absolute; top:15px; left:12px;
-    width:12px; height:12px; background:#f1c40f;
-    border-radius:50%; box-shadow:24px 0 0 #f1c40f;
+  
+  .video-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
   }
-  .char-cat::after {
-    content:''; position:absolute; top:-10px; left:5px;
-    border-left:8px solid transparent; border-right:8px solid transparent;
-    border-bottom:14px solid #2c3e50; box-shadow:34px 4px 0 #2c3e50;
-  }
-
-  .char-transformer {
-    width:60px; height:70px;
-    background:linear-gradient(135deg,#e74c3c 50%,#3498db 50%);
-    border-radius:8px; position:relative;
-    animation:tfm 3s ease-in-out infinite;
-  }
-  @keyframes tfm { 0%,100%{transform:scaleY(1);border-radius:8px} 50%{transform:scaleY(0.7) scaleX(1.3);border-radius:4px} }
-  .char-transformer::before {
-    content:'⚡'; position:absolute; top:50%; left:50%;
-    transform:translate(-50%,-50%); font-size:30px;
-  }
-
-  .char-totoro { font-size:80px; animation:totoroFloat 3s ease-in-out infinite; }
-  @keyframes totoroFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-10px) scale(1.05)} }
-
-  .char-saint {
-    width:50px; height:70px; position:relative;
-    animation:saintPunch 1.5s ease-in-out infinite;
-  }
-  @keyframes saintPunch { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-10px)} 75%{transform:translateX(10px)} }
-  .char-saint .armor {
-    width:50px; height:40px;
-    background:linear-gradient(135deg,#f1c40f,#e67e22);
-    border-radius:8px 8px 0 0; margin:0 auto;
-  }
-  .char-saint .head {
-    width:30px; height:30px; background:#f5c6aa;
-    border-radius:50%; margin:0 auto -5px; position:relative;
-  }
-  .char-saint .head::before {
-    content:''; position:absolute; top:-8px; left:50%;
-    transform:translateX(-50%); width:40px; height:12px;
-    background:#f1c40f; border-radius:6px;
-  }
-
-  .char-doraemon {
-    width:70px; height:70px; background:#3498db;
-    border-radius:50%; position:relative;
-    animation:doraJump 2s ease-in-out infinite;
-  }
-  @keyframes doraJump { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
-  .char-doraemon::before {
-    content:''; position:absolute; bottom:5px; left:50%;
-    transform:translateX(-50%); width:50px; height:35px;
-    background:#fff; border-radius:50%;
-  }
-  .char-doraemon::after {
-    content:'🔔'; position:absolute; bottom:15px; left:50%;
-    transform:translateX(-50%); font-size:16px;
-  }
+  
+  .video-thumbnail {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
   /* Digital section characters */
   .char-qq {
@@ -597,251 +600,171 @@
     border-radius:5px 15px 3px 3px; position:relative;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
   }
-  .car-body::before {
-    content:''; position:absolute; top:-10px; left:10px;
-    width:35px; height:14px;
-    background:linear-gradient(135deg,#ff6b6b,#e74c3c);
-    border-radius:5px 10px 0 0;
+  
+  .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .car-body::after {
-    content:''; position:absolute; bottom:-6px; left:8px;
-    width:12px; height:12px; background:#333;
-    border-radius:50%; box-shadow:30px 0 0 #333; border:2px solid #666;
+  
+  .video-play {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--primary);
+    transition: all 0.3s;
   }
-  .car-spark {
-    position:absolute; right:-15px; top:50%; transform:translateY(-50%);
-    font-size:14px; animation:spark 0.5s infinite;
+  
+  .video-thumbnail:hover .video-play {
+    transform: scale(1.1);
+    background: #fff;
   }
-  @keyframes spark { 0%,100%{opacity:1;transform:translateY(-50%) scale(1)} 50%{opacity:0.5;transform:translateY(-50%) scale(0.6)} }
-
-  .demo-marble { background:linear-gradient(180deg,#e8d5b7,#d4a76a); }
-  .marble {
-    position:absolute; width:24px; height:24px; border-radius:50%;
-    box-shadow:inset -3px -3px 6px rgba(0,0,0,0.3), 2px 2px 6px rgba(0,0,0,0.2);
+  
+  .video-info {
+    padding: 20px;
   }
-  .marble-1{background:radial-gradient(circle at 35% 35%,#ff8a80,#c62828);animation:mb1 3s ease-in-out infinite}
-  .marble-2{background:radial-gradient(circle at 35% 35%,#82b1ff,#1565c0);animation:mb2 3s ease-in-out infinite 0.5s}
-  .marble-3{background:radial-gradient(circle at 35% 35%,#b9f6ca,#2e7d32);animation:mb3 3s ease-in-out infinite 1s}
-  .marble-4{background:radial-gradient(circle at 35% 35%,#fff9c4,#f9a825);animation:mb1 3s ease-in-out infinite 1.5s}
-  @keyframes mb1{0%{left:10%;top:60%}25%{left:30%;top:20%}50%{left:55%;top:50%}75%{left:75%;top:25%}100%{left:10%;top:60%}}
-  @keyframes mb2{0%{left:80%;top:30%}25%{left:60%;top:60%}50%{left:35%;top:25%}75%{left:15%;top:55%}100%{left:80%;top:30%}}
-  @keyframes mb3{0%{left:50%;top:15%}25%{left:20%;top:50%}50%{left:70%;top:65%}75%{left:85%;top:35%}100%{left:50%;top:15%}}
-
-  .demo-yoyo { background:linear-gradient(180deg,#fce4ec,#f8bbd0); display:flex; justify-content:center; }
-  .yoyo-string { width:2px; height:80px; background:#666; position:relative; margin-top:0; animation:yoyoStr 2s ease-in-out infinite; }
-  @keyframes yoyoStr { 0%,100%{height:30px} 50%{height:100px} }
-  .yoyo-ball {
-    position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
-    width:36px; height:36px;
-    background:radial-gradient(circle at 40% 40%,#ff6b6b,#c0392b);
-    border-radius:50%; box-shadow:inset -3px -3px 8px rgba(0,0,0,0.3);
-    animation:yoyoSpin 2s ease-in-out infinite;
+  
+  .video-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 8px;
   }
-  @keyframes yoyoSpin { 0%,100%{transform:translateX(-50%) rotate(0)} 50%{transform:translateX(-50%) rotate(360deg)} }
-  .yoyo-ball::after {
-    content:''; position:absolute; top:50%; left:50%;
-    transform:translate(-50%,-50%); width:12px; height:12px;
-    background:#fff; border-radius:50%;
+  
+  .video-meta {
+    font-size: 13px;
+    color: var(--text-light);
   }
-  .yoyo-hand { position:absolute; top:-5px; left:50%; transform:translateX(-50%); font-size:28px; }
-
-  .demo-cards { background:linear-gradient(180deg,#e3f2fd,#bbdefb); display:flex; align-items:center; justify-content:center; gap:14px; }
-  .game-card {
-    width:52px; height:72px; border-radius:6px; border:2px solid #fff;
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:26px; color:#fff; font-weight:700;
+  
+  /* ===== MUSIC PLAYER ===== */
+  .music-player {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background: linear-gradient(135deg, #5c3a1e, #8b5e3c);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+    border: 4px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: vinylSpin 4s linear infinite paused;
   }
-  .game-card:nth-child(1){background:linear-gradient(135deg,#e74c3c,#c0392b);animation:cFlip 3s ease-in-out infinite}
-  .game-card:nth-child(2){background:linear-gradient(135deg,#3498db,#2980b9);animation:cFlip 3s ease-in-out infinite 0.5s}
-  .game-card:nth-child(3){background:linear-gradient(135deg,#27ae60,#229954);animation:cFlip 3s ease-in-out infinite 1s}
-  .game-card:nth-child(4){background:linear-gradient(135deg,#f39c12,#e67e22);animation:cFlip 3s ease-in-out infinite 1.5s}
-  @keyframes cFlip { 0%,40%,100%{transform:rotateY(0)} 50%,90%{transform:rotateY(180deg)} }
-
-  .demo-plane { background:linear-gradient(180deg,#87ceeb,#e0f7fa); }
-  .paper-plane { position:absolute; font-size:40px; animation:planeFly 5s linear infinite; }
-  @keyframes planeFly { 0%{left:-40px;top:70%;transform:rotate(-10deg)} 25%{top:30%;transform:rotate(5deg)} 50%{top:50%;transform:rotate(-5deg)} 75%{top:20%;transform:rotate(10deg)} 100%{left:calc(100% + 40px);top:40%;transform:rotate(-10deg)} }
-  .cloud { position:absolute; font-size:28px; opacity:0.6; }
-  .cloud:nth-child(2){top:10%;left:20%;animation:cDrift 8s linear infinite}
-  .cloud:nth-child(3){top:30%;left:60%;animation:cDrift 10s linear infinite 2s}
-  .cloud:nth-child(4){top:50%;left:40%;animation:cDrift 12s linear infinite 4s}
-  @keyframes cDrift { 0%{transform:translateX(0)} 100%{transform:translateX(30px)} }
-
-  .demo-sandbag { background:linear-gradient(180deg,#fff3e0,#ffe0b2); display:flex; align-items:center; justify-content:center; }
-  .sandbag {
-    width:40px; height:50px;
-    background:linear-gradient(135deg,#8d6e63,#6d4c41);
-    border-radius:8px 8px 12px 12px; position:relative;
-    animation:sbThrow 2s ease-in-out infinite;
+  
+  .music-player.playing {
+    animation-play-state: running;
   }
-  @keyframes sbThrow { 0%,100%{transform:translateY(0) rotate(0)} 30%{transform:translateY(-60px) rotate(180deg)} 60%{transform:translateY(-30px) rotate(270deg)} }
-  .sandbag::before {
-    content:''; position:absolute; top:5px; left:5px; right:5px; bottom:5px;
-    border:2px dashed rgba(255,255,255,0.4); border-radius:4px;
+  
+  @keyframes vinylSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
-
-  /* ===== ACTIVITY DEMOS ===== */
-  .demo-spring { background:linear-gradient(180deg,#87ceeb 0%,#90ee90 60%,#228b22 100%); position:relative; overflow:hidden; }
-  .sun { position:absolute; top:10px; right:30px; font-size:40px; animation:sunGlow 3s ease-in-out infinite; }
-  @keyframes sunGlow { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-  .butterfly { position:absolute; font-size:24px; animation:bfFly 6s ease-in-out infinite; }
-  @keyframes bfFly { 0%{left:10%;top:40%} 25%{left:30%;top:20%} 50%{left:60%;top:35%} 75%{left:80%;top:15%} 100%{left:10%;top:40%} }
-  .flower-field { position:absolute; bottom:5px; left:0; right:0; display:flex; justify-content:space-around; font-size:22px; }
-  .flower-field span{animation:fSway 2s ease-in-out infinite}
-  .flower-field span:nth-child(2){animation-delay:0.3s}
-  .flower-field span:nth-child(3){animation-delay:0.6s}
-  .flower-field span:nth-child(4){animation-delay:0.9s}
-  .flower-field span:nth-child(5){animation-delay:1.2s}
-  @keyframes fSway { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
-  .kids { position:absolute; bottom:25px; left:50%; transform:translateX(-50%); font-size:30px; animation:kidsWalk 4s ease-in-out infinite; }
-  @keyframes kidsWalk { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
-
-  .demo-hide { background:linear-gradient(180deg,#87ceeb 0%,#c8e6c9 50%,#81c784 100%); position:relative; }
-  .hide-tree { position:absolute; bottom:0; font-size:80px; line-height:1; }
-  .hide-tree:nth-child(1){left:10%} .hide-tree:nth-child(2){left:60%;font-size:60px} .hide-tree:nth-child(3){right:5%;font-size:70px}
-  .hide-kid { position:absolute; bottom:10px; font-size:35px; animation:hPeek 4s ease-in-out infinite; }
-  @keyframes hPeek { 0%,40%,100%{opacity:0;transform:translateX(0)} 50%,90%{opacity:1;transform:translateX(20px)} }
-  .hide-seeker { position:absolute; bottom:10px; left:40%; font-size:35px; animation:hLook 4s ease-in-out infinite; }
-  @keyframes hLook { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-20deg)} 75%{transform:rotate(20deg)} }
-
-  .demo-kite { background:linear-gradient(180deg,#64b5f6,#e3f2fd); position:relative; }
-  .kite { position:absolute; top:15px; left:60%; animation:kFloat 4s ease-in-out infinite; }
-  @keyframes kFloat { 0%,100%{transform:translate(0,0) rotate(5deg)} 25%{transform:translate(-15px,-10px) rotate(-5deg)} 50%{transform:translate(10px,-20px) rotate(10deg)} 75%{transform:translate(-5px,-5px) rotate(-3deg)} }
-  .kite-body { width:40px; height:50px; background:linear-gradient(135deg,#e74c3c,#f39c12); clip-path:polygon(50% 0%,0% 50%,50% 100%,100% 50%); }
-  .kite-tail { position:absolute; top:48px; left:50%; transform:translateX(-50%); width:2px; height:40px; background:#666; }
-  .kite-tail::after { content:'🎀'; position:absolute; bottom:-10px; left:-8px; font-size:14px; animation:tWave 1s ease-in-out infinite; }
-  @keyframes tWave { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
-  .kite-string { position:absolute; top:85px; left:60%; width:1px; height:60px; background:#999; transform-origin:top; animation:sWave 4s ease-in-out infinite; }
-  @keyframes sWave { 0%,100%{transform:rotate(0)} 50%{transform:rotate(3deg)} }
-  .kite-person { position:absolute; bottom:5px; left:55%; font-size:30px; }
-
-  .demo-rubber { background:linear-gradient(180deg,#fce4ec,#f8bbd0); display:flex; align-items:center; justify-content:center; position:relative; }
-  .rubber-band { width:180px; height:60px; border:4px solid #e91e63; border-radius:30px; position:relative; animation:rStretch 2s ease-in-out infinite; }
-  @keyframes rStretch { 0%,100%{width:180px;height:60px} 50%{width:200px;height:40px} }
-  .rubber-person { position:absolute; font-size:28px; }
-  .rubber-person:nth-child(1){left:-15px;top:50%;transform:translateY(-50%)}
-  .rubber-person:nth-child(2){right:-15px;top:50%;transform:translateY(-50%)}
-  .rubber-jumper { position:absolute; font-size:30px; top:-20px; left:50%; transform:translateX(-50%); animation:rJump 1.5s ease-in-out infinite; }
-  @keyframes rJump { 0%,100%{top:-20px} 50%{top:-40px} }
-
-  /* ===== SCHOOL DEMOS ===== */
-  .demo-jianzi { background:linear-gradient(180deg,#e8f5e9,#c8e6c9); position:relative; display:flex; align-items:flex-end; justify-content:center; }
-  .jianzi { position:relative; margin-bottom:20px; animation:jFly 2s ease-in-out infinite; }
-  @keyframes jFly { 0%{bottom:20px;transform:rotate(0)} 25%{bottom:100px;transform:rotate(90deg)} 50%{bottom:120px;transform:rotate(180deg)} 75%{bottom:60px;transform:rotate(270deg)} 100%{bottom:20px;transform:rotate(360deg)} }
-  .jianzi-top { width:30px; height:15px; background:linear-gradient(135deg,#e91e63,#ff5722); border-radius:50% 50% 0 0; margin:0 auto; }
-  .jianzi-base { width:16px; height:25px; background:#8d6e63; margin:0 auto; border-radius:0 0 3px 3px; }
-  .jianzi-feather { position:absolute; top:-5px; width:4px; height:20px; border-radius:2px; }
-  .jianzi-feather:nth-child(1){left:2px;background:#e91e63;transform:rotate(-20deg)}
-  .jianzi-feather:nth-child(2){left:8px;background:#ff5722;transform:rotate(-10deg)}
-  .jianzi-feather:nth-child(3){right:8px;background:#ff9800;transform:rotate(10deg)}
-  .jianzi-feather:nth-child(4){right:2px;background:#e91e63;transform:rotate(20deg)}
-  .jianzi-player { position:absolute; bottom:5px; font-size:35px; }
-  .jianzi-player.left{left:20%} .jianzi-player.right{right:20%}
-
-  .demo-pingpong { background:linear-gradient(180deg,#e3f2fd,#bbdefb); position:relative; display:flex; align-items:center; justify-content:center; }
-  .pp-table { width:160px; height:8px; background:#1565c0; border-radius:4px; position:relative; }
-  .pp-net { position:absolute; top:-15px; left:50%; transform:translateX(-50%); width:2px; height:20px; background:#fff; }
-  .pp-net::before { content:''; position:absolute; top:0; left:-15px; width:32px; height:2px; background:#fff; }
-  .pp-ball { position:absolute; width:12px; height:12px; background:radial-gradient(circle at 35% 35%,#fff,#ff9800); border-radius:50%; top:-20px; animation:ppBounce 1.5s ease-in-out infinite; }
-  @keyframes ppBounce { 0%{left:10px;top:-25px} 25%{left:50%;top:-45px} 50%{left:calc(100% - 20px);top:-25px} 75%{left:50%;top:-45px} 100%{left:10px;top:-25px} }
-  .pp-player { position:absolute; font-size:28px; bottom:-35px; }
-  .pp-player.left{left:-10px;animation:ppSwing 1.5s ease-in-out infinite}
-  .pp-player.right{right:-10px;animation:ppSwing 1.5s ease-in-out infinite 0.75s}
-  @keyframes ppSwing { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
-
-  .demo-blackboard { background:#2e7d32; border:8px solid #8d6e63; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; padding:25px; }
-  .chalk-text { color:rgba(255,255,255,0.9); font-size:16px; animation:chalkWrite 4s ease-in-out infinite; text-align:center; font-weight:500; letter-spacing:2px; }
-  @keyframes chalkWrite { 0%,100%{opacity:0.6} 50%{opacity:1} }
-  .chalk-text:nth-child(1){font-size:20px;color:#ffd54f}
-  .chalk-text:nth-child(2){animation-delay:0.5s}
-  .chalk-text:nth-child(3){animation-delay:1s;color:#ef9a9a}
-
-  .demo-shop { background:linear-gradient(180deg,#fff8e1,#ffecb3); display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; padding:15px; }
-  .shop-item {
-    width:50px; height:60px; border-radius:8px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:28px; box-shadow:0 3px 10px rgba(0,0,0,0.15);
-    transition:transform 0.3s; animation:shopBounce 2s ease-in-out infinite;
+  
+  .music-player:hover {
+    transform: scale(1.1);
   }
-  .shop-item:hover{transform:scale(1.2) rotate(5deg) !important}
-  .shop-item:nth-child(1){background:#ff7043;animation-delay:0s}
-  .shop-item:nth-child(2){background:#42a5f5;animation-delay:0.2s}
-  .shop-item:nth-child(3){background:#66bb6a;animation-delay:0.4s}
-  .shop-item:nth-child(4){background:#ab47bc;animation-delay:0.6s}
-  .shop-item:nth-child(5){background:#ffa726;animation-delay:0.8s}
-  .shop-item:nth-child(6){background:#ef5350;animation-delay:1s}
-  @keyframes shopBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-
-  /* ===== TIMELINE ===== */
-  .timeline { position:relative; max-width:750px; margin:40px auto; padding:20px 0; }
-  .timeline::before {
-    content:''; position:absolute; left:50%; transform:translateX(-50%);
-    width:4px; height:100%;
-    background:linear-gradient(180deg,var(--orange),var(--brown));
-    border-radius:2px;
+  
+  .music-player span {
+    font-size: 32px;
   }
-  .timeline-item { position:relative; width:50%; padding:12px 35px; }
-  .timeline-item:nth-child(odd){left:0;text-align:right}
-  .timeline-item:nth-child(even){left:50%;text-align:left}
-  .timeline-item::before {
-    content:''; position:absolute; top:22px;
-    width:16px; height:16px; background:var(--orange);
-    border:3px solid #fff; border-radius:50%;
-    box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:1;
+  
+  .music-tooltip {
+    position: absolute;
+    bottom: 85px;
+    right: 0;
+    background: rgba(92,58,30,0.95);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    max-width: 250px;
   }
-  .timeline-item:nth-child(odd)::before{right:-8px}
-  .timeline-item:nth-child(even)::before{left:-8px}
-  .timeline-content {
-    background:#fff; padding:18px 20px; border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-    display:inline-block; max-width:100%; text-align:left;
+  
+  .music-player:hover .music-tooltip {
+    opacity: 1;
   }
-  .timeline-content h4 { color:var(--brown); font-size:17px; font-weight:700; margin-bottom:6px; line-height:1.4; }
-  .timeline-content p { font-size:14px; color:var(--text-mid); line-height:1.8; }
-  .timeline-year { font-size:13px; color:var(--orange); font-weight:700; margin-bottom:4px; letter-spacing:1px; }
-
+  
   /* ===== FOOTER ===== */
   footer {
-    position:relative; z-index:1;
-    background:linear-gradient(135deg,#5c3a1e 0%,#4a2c1a 100%);
-    color:#fdf5e6; text-align:center;
-    padding:50px 20px; margin-top:40px;
-    border-top:5px solid var(--yellow);
+    background: linear-gradient(135deg, #5c3a1e 0%, #3a2518 100%);
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 80px;
   }
-  footer h3 { font-family:'Noto Serif SC',serif; font-size:26px; margin-bottom:14px; color:var(--yellow); font-weight:700; }
-  footer p { font-size:15px; line-height:1.9; opacity:0.9; font-weight:400; }
-  .heart-beat { display:inline-block; color:#e74c3c; font-size:24px; animation:heartbeat 1.2s infinite; }
-  @keyframes heartbeat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.3)} 30%{transform:scale(1)} 45%{transform:scale(1.2)} }
-
-  .back-top {
-    position:fixed; bottom:30px; right:30px;
-    width:48px; height:48px; background:var(--orange);
-    color:#fff; border:none; border-radius:50%;
-    font-size:22px; cursor:pointer;
-    box-shadow:0 4px 15px rgba(232,115,26,0.4);
-    transition:all 0.3s; z-index:999; display:none;
+  
+  footer p {
+    font-size: 15px;
+    opacity: 0.9;
+    line-height: 1.8;
   }
-  .back-top:hover{transform:translateY(-3px);background:var(--brown)}
-
-  @media(max-width:768px){
-    header h1{font-size:34px} header p{font-size:17px}
-    .section-header h2{font-size:28px}
-    .grid{grid-template-columns:1fr}
-    nav a{padding:10px 14px;font-size:13px}
-    .timeline::before{left:20px}
-    .timeline-item{width:100%;left:0!important;text-align:left!important;padding-left:50px;padding-right:15px}
-    .timeline-item::before{left:12px!important;right:auto!important}
+  
+  footer .heart {
+    color: #e74c3c;
+    font-size: 20px;
   }
-
-  ::-webkit-scrollbar{width:10px}
-  ::-webkit-scrollbar-track{background:#f5e6c8}
-  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--orange),var(--brown));border-radius:5px}
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    nav a {
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+    
+    header {
+      min-height: 80vh;
+    }
+  }
+  
+  /* ===== FLOATING ELEMENTS ===== */
+  .floating-element {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
 </style>
 </head>
 <body>
 
+<!-- Navigation -->
 <nav>
   <ul>
+    <li><a href="#hero">首页</a></li>
+    <li><a href="#1980-1985">80-85 年</a></li>
+    <li><a href="#1986-1990">86-90 年</a></li>
+    <li><a href="#1991-1995">91-95 年</a></li>
+    <li><a href="#1996-2000">96-00 年</a></li>
+    <li><a href="#2001-2008">01-08 年</a></li>
+    <li><a href="#videos">影像馆</a></li>
     <li><a href="#cartoons">📺 动画城</a></li>
     <li><a href="#toys">🎮 玩具天地</a></li>
     <li><a href="#activities">🏃 童年活动</a></li>
@@ -851,540 +774,573 @@
   </ul>
 </nav>
 
-<header>
-  <div class="stars-container">
-    <span class="star" style="left:5%;animation-duration:6s;animation-delay:0s">⭐</span>
-    <span class="star" style="left:15%;animation-duration:8s;animation-delay:1s">✨</span>
-    <span class="star" style="left:25%;animation-duration:7s;animation-delay:2s">⭐</span>
-    <span class="star" style="left:40%;animation-duration:9s;animation-delay:0.5s">✨</span>
-    <span class="star" style="left:55%;animation-duration:6s;animation-delay:3s">⭐</span>
-    <span class="star" style="left:70%;animation-duration:8s;animation-delay:1.5s">✨</span>
-    <span class="star" style="left:85%;animation-duration:7s;animation-delay:2.5s">⭐</span>
-    <span class="star" style="left:95%;animation-duration:9s;animation-delay:0.8s">✨</span>
+<!-- Hero Header -->
+<header id="hero">
+  <div class="years">1980 - 2008</div>
+  <h1>80 后的美好回忆</h1>
+  <p class="subtitle">无价的情怀 · 致我们逝去的青春</p>
+  <div class="scroll-hint">
+    <span>▼ 下滑开启回忆之旅</span>
   </div>
-  <h1>🎮 80后回忆录 🎮</h1>
-  <p>那些年，我们一起追过的动画、玩过的游戏、度过的童年</p>
 </header>
 
-<!-- ===== 动画城 ===== -->
-<section id="cartoons">
-  <div class="section-header">
-    <h2>动画城经典</h2>
+<!-- 1980-1985 Era -->
+<section id="1980-1985" class="era-section">
+  <div class="era-header">
+    <div class="era-year">1980-1985</div>
+    <h2 class="era-title">纯真年代的开启</h2>
     <div class="divider"></div>
-    <p>每天下午五点半，准时守在电视机前的期待</p>
+    <p class="era-desc">改革开放初期，黑白电视开始普及，孩子们围坐在电视机前看动画片成为最美好的记忆。没有电子游戏，却有最简单的快乐。</p>
   </div>
-  <div class="grid">
-
-    <!-- 葫芦兄弟 -->
-    <div class="card c-hlw">
-      <a href="https://baike.baidu.com/item/葫芦兄弟" target="_blank" rel="noopener" class="card-image">
-        <div class="char-huluwa"><div class="head"></div><div class="body"></div></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/葫芦兄弟" target="_blank" rel="noopener">葫芦兄弟</a></h3>
-        <p>葫芦娃，葫芦娃，一根藤上七朵花。大娃力大无穷，二娃千里眼顺风耳，三娃铜头铁臂，每个娃都有独特的本领！</p>
-        <div class="card-footer">
-          <span class="card-tag">1986年</span>
-          <a href="https://baike.baidu.com/item/葫芦兄弟" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+  
+  <div class="category-grid">
+    <!-- Cartoon 1 -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/huluwa/600/400" alt="葫芦娃">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">经典动画</span>
+        <h3 class="card-title">葫芦兄弟 (1986)</h3>
+        <p class="card-desc">"葫芦娃，葫芦娃，一根藤上七朵花..." 这首主题曲至今仍能脱口而出。七个本领超群的兄弟与蛇精斗智斗勇，教会了我们团结就是力量。</p>
+        <div class="card-tags">
+          <span class="tag">国产经典</span>
+          <span class="tag">剪纸动画</span>
+          <span class="tag">童年神曲</span>
         </div>
       </div>
     </div>
-
-    <!-- 狮子王 -->
-    <div class="card c-szw">
-      <a href="https://baike.baidu.com/item/狮子王" target="_blank" rel="noopener" class="card-image">
-        <div class="char-lion">🦁</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/狮子王" target="_blank" rel="noopener">狮子王</a></h3>
-        <p>Hakuna Matata！辛巴的成长故事，教会我们勇敢面对困难。彭彭和丁满的友情最珍贵！</p>
-        <div class="card-footer">
-          <span class="card-tag">1994年</span>
-          <a href="https://baike.baidu.com/item/狮子王" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+    
+    <!-- Cartoon 2 -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/sunwukong/600/400" alt="大闹天宫">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">经典动画</span>
+        <h3 class="card-title">大闹天宫 (1961-1964)</h3>
+        <p class="card-desc">中国动画的巅峰之作，孙悟空的形象深入人心。那时候的我们，都梦想着能像齐天大圣一样腾云驾雾，七十二变。</p>
+        <div class="card-tags">
+          <span class="tag">上海美术电影制片厂</span>
+          <span class="tag">孙悟空</span>
+          <span class="tag">民族骄傲</span>
         </div>
       </div>
     </div>
-
-    <!-- 米老鼠和唐老鸭 -->
-    <div class="card c-ml">
-      <a href="https://baike.baidu.com/item/米老鼠和唐老鸭" target="_blank" rel="noopener" class="card-image">
-        <div class="char-mickey"><div class="face"></div></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/米老鼠和唐老鸭" target="_blank" rel="noopener">米老鼠和唐老鸭</a></h3>
-        <p>每周六下午的约定！米奇的智慧、唐老鸭的暴躁、高飞的憨厚，迪士尼带来的无尽欢乐。</p>
-        <div class="card-footer">
-          <span class="card-tag">经典动画</span>
-          <a href="https://baike.baidu.com/item/米老鼠和唐老鸭" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+    
+    <!-- Toys 1 -->
+    <div class="memory-card">
+      <div class="card-media bg-toys">
+        <img src="https://picsum.photos/seed/toys80s/600/400" alt="80 年代玩具">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">童年玩具</span>
+        <h3 class="card-title">铁皮青蛙 & 弹珠</h3>
+        <p class="card-desc">上紧发条就能跳半天的铁皮青蛙，五彩斑斓的玻璃弹珠，这些简单的玩具承载了无数欢乐时光。男孩子们趴在地上打弹珠的场景，是那个年代独有的风景。</p>
+        <div class="card-tags">
+          <span class="tag">铁皮玩具</span>
+          <span class="tag">弹珠游戏</span>
+          <span class="tag">街头童年</span>
         </div>
       </div>
     </div>
-
-    <!-- 花仙子 -->
-    <div class="card c-hxz">
-      <a href="https://baike.baidu.com/item/花仙子" target="_blank" rel="noopener" class="card-image">
-        <div class="char-flower">🌸</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/花仙子" target="_blank" rel="noopener">花仙子</a></h3>
-        <p>小蓓带着花钥匙，寻找七色花的旅程。每个女孩心中都有一个花仙子的梦想，那是关于美的启蒙。</p>
-        <div class="card-footer">
-          <span class="card-tag">1979年</span>
-          <a href="https://baike.baidu.com/item/花仙子" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+    
+    <!-- Activities 1 -->
+    <div class="memory-card">
+      <div class="card-media bg-activities">
+        <img src="https://picsum.photos/seed/catchfish/600/400" alt="捉泥鳅">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
         </div>
       </div>
-    </div>
-
-    <!-- 黑猫警长 -->
-    <div class="card c-hm">
-      <a href="https://baike.baidu.com/item/黑猫警长" target="_blank" rel="noopener" class="card-image">
-        <div class="char-cat"></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/黑猫警长" target="_blank" rel="noopener">黑猫警长</a></h3>
-        <p>眼睛瞪得像铜铃，射出闪电般的机灵！黑猫警长骑着摩托车保卫森林和平，一只耳永远在逃跑。</p>
-        <div class="card-footer">
-          <span class="card-tag">1984年</span>
-          <a href="https://baike.baidu.com/item/黑猫警长" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
+      <div class="card-content">
+        <span class="card-category">童年活动</span>
+        <h3 class="card-title">田间捉泥鳅 & 摸鱼</h3>
+        <p class="card-desc">夏日的午后，光着脚丫在稻田里捉泥鳅，在小溪里摸鱼。满身泥泞却笑得最开心，那是最纯真的快乐，是城市孩子无法体会的田园乐趣。</p>
+        <div class="card-tags">
+          <span class="tag">夏日回忆</span>
+          <span class="tag">农村童年</span>
+          <span class="tag">自然乐趣</span>
         </div>
-      </div>
-    </div>
-
-    <!-- 变形金刚 -->
-    <div class="card c-bx">
-      <a href="https://baike.baidu.com/item/变形金刚" target="_blank" rel="noopener" class="card-image">
-        <div class="char-transformer"></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/变形金刚" target="_blank" rel="noopener">变形金刚</a></h3>
-        <p>汽车人，变形出发！擎天柱大哥的正义宣言，威震天的邪恶阴谋。每个男孩都想要一个变形金刚玩具！</p>
-        <div class="card-footer">
-          <span class="card-tag">1984年</span>
-          <a href="https://baike.baidu.com/item/变形金刚" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 龙猫 -->
-    <div class="card c-lm">
-      <a href="https://baike.baidu.com/item/龙猫" target="_blank" rel="noopener" class="card-image">
-        <div class="char-totoro">🐱</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/龙猫" target="_blank" rel="noopener">龙猫</a></h3>
-        <p>多多洛！大大的毛茸茸的身体，撑着荷叶在雨中等待猫巴士。宫崎骏带给我们的温暖童话。</p>
-        <div class="card-footer">
-          <span class="card-tag">1988年</span>
-          <a href="https://baike.baidu.com/item/龙猫" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 圣斗士星矢 -->
-    <div class="card c-sds">
-      <a href="https://baike.baidu.com/item/圣斗士星矢" target="_blank" rel="noopener" class="card-image">
-        <div class="char-saint"><div class="head"></div><div class="armor"></div></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/圣斗士星矢" target="_blank" rel="noopener">圣斗士星矢</a></h3>
-        <p>燃烧吧，我的小宇宙！天马流星拳！为了雅典娜，五位青铜圣斗士永不放弃的热血战斗。</p>
-        <div class="card-footer">
-          <span class="card-tag">1986年</span>
-          <a href="https://baike.baidu.com/item/圣斗士星矢" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 哆啦A梦 -->
-    <div class="card c-dla">
-      <a href="https://baike.baidu.com/item/哆啦A梦" target="_blank" rel="noopener" class="card-image">
-        <div class="char-doraemon"></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/哆啦A梦" target="_blank" rel="noopener">哆啦A梦</a></h3>
-        <p>蓝胖子从四维口袋里掏出各种神奇道具：竹蜻蜓、任意门、时光机。谁不想要一个哆啦A梦呢？</p>
-        <div class="card-footer">
-          <span class="card-tag">经典动画</span>
-          <a href="https://baike.baidu.com/item/哆啦A梦" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== 玩具天地 ===== -->
-<section id="toys">
-  <div class="section-header">
-    <h2>玩具天地</h2>
-    <div class="divider"></div>
-    <p>没有iPad的年代，这些就是我们的全部快乐</p>
-  </div>
-  <div class="grid">
-
-    <!-- 四驱车 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/四驱车" target="_blank" rel="noopener" class="card-image toy-demo demo-car">
-        <div class="road"></div>
-        <div class="car"><div class="car-body"><span class="car-spark">💨</span></div></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/四驱车" target="_blank" rel="noopener">🏎️ 四驱车</a></h3>
-        <p>冲锋战神、旋风冲锋、音速战神！攒零花钱买电池，在轨道上飞驰。马达的嗡嗡声是最美妙的音乐。</p>
-        <div class="card-footer">
-          <span class="card-tag">男孩最爱</span>
-          <a href="https://baike.baidu.com/item/四驱车" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 玻璃弹珠 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/弹珠" target="_blank" rel="noopener" class="card-image toy-demo demo-marble">
-        <div class="marble marble-1"></div>
-        <div class="marble marble-2"></div>
-        <div class="marble marble-3"></div>
-        <div class="marble marble-4"></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/弹珠" target="_blank" rel="noopener">🔮 玻璃弹珠</a></h3>
-        <p>蹲在地上，眯着一只眼瞄准，大拇指一弹——啪！每颗弹珠都是宝贝，花纹越漂亮越珍贵。</p>
-        <div class="card-footer">
-          <span class="card-tag">经典游戏</span>
-          <a href="https://baike.baidu.com/item/弹珠" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 悠悠球 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/悠悠球" target="_blank" rel="noopener" class="card-image toy-demo demo-yoyo">
-        <div class="yoyo-hand">🤚</div>
-        <div class="yoyo-string"><div class="yoyo-ball"></div></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/悠悠球" target="_blank" rel="noopener">🪀 悠悠球</a></h3>
-        <p>睡眠、遛狗、环绕世界、巴黎铁塔！手上的功夫决定了你在小伙伴中的地位。</p>
-        <div class="card-footer">
-          <span class="card-tag">技巧之王</span>
-          <a href="https://baike.baidu.com/item/悠悠球" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 拍画片 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/水浒卡" target="_blank" rel="noopener" class="card-image toy-demo demo-cards">
-        <div class="game-card">关</div>
-        <div class="game-card">张</div>
-        <div class="game-card">赵</div>
-        <div class="game-card">马</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/水浒卡" target="_blank" rel="noopener">🃏 拍画片 / 水浒卡</a></h3>
-        <p>用力一拍，翻过来就赢了！小浣熊干脆面里的水浒卡，为了集齐108将，吃了多少包干脆面。</p>
-        <div class="card-footer">
-          <span class="card-tag">收集控</span>
-          <a href="https://baike.baidu.com/item/水浒卡" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 纸飞机 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/纸飞机" target="_blank" rel="noopener" class="card-image toy-demo demo-plane">
-        <span class="paper-plane">✈️</span>
-        <span class="cloud">☁️</span>
-        <span class="cloud">☁️</span>
-        <span class="cloud">☁️</span>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/纸飞机" target="_blank" rel="noopener">✈️ 纸飞机</a></h3>
-        <p>用作业本折的纸飞机，哈一口气，用力掷出！比谁飞得远、飞得高。</p>
-        <div class="card-footer">
-          <span class="card-tag">最简单的快乐</span>
-          <a href="https://baike.baidu.com/item/纸飞机" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 丢沙包 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/沙包" target="_blank" rel="noopener" class="card-image toy-demo demo-sandbag">
-        <div class="sandbag"></div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/沙包" target="_blank" rel="noopener">🎯 丢沙包</a></h3>
-        <p>妈妈用碎布缝的沙包，里面装满沙子。被砸中的下场，接住的可以救人！</p>
-        <div class="card-footer">
-          <span class="card-tag">课间必备</span>
-          <a href="https://baike.baidu.com/item/沙包" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== 童年活动 ===== -->
-<section id="activities">
-  <div class="section-header">
-    <h2>童年活动</h2>
-    <div class="divider"></div>
-    <p>没有补习班的周末，我们在阳光下奔跑</p>
-  </div>
-  <div class="grid">
-
-    <!-- 春游 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/春游" target="_blank" rel="noopener" class="card-image demo-spring">
-        <span class="sun">☀️</span>
-        <span class="butterfly">🦋</span>
-        <span class="kids">👧👦👧</span>
-        <div class="flower-field">
-          <span>🌷</span><span>🌻</span><span>🌸</span><span>🌺</span><span>🌼</span>
-        </div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/春游" target="_blank" rel="noopener">🌳 春游 / 秋游</a></h3>
-        <p>每学期最期待的日子！背着小书包，装满零食：旺旺雪饼、AD钙奶、火腿肠。和同学们一路唱歌一路走。</p>
-        <div class="card-footer">
-          <span class="card-tag">最期待的日子</span>
-          <a href="https://baike.baidu.com/item/春游" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 捉迷藏 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/捉迷藏" target="_blank" rel="noopener" class="card-image demo-hide">
-        <span class="hide-tree">🌳</span>
-        <span class="hide-tree">🌲</span>
-        <span class="hide-tree">🌳</span>
-        <span class="hide-kid">🧒</span>
-        <span class="hide-seeker">🙈</span>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/捉迷藏" target="_blank" rel="noopener">🙈 捉迷藏</a></h3>
-        <p>一、二、三……九十九、一百！我来啦！藏在大树后、楼道里，心跳加速，屏住呼吸。</p>
-        <div class="card-footer">
-          <span class="card-tag">经典游戏</span>
-          <a href="https://baike.baidu.com/item/捉迷藏" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 放风筝 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/风筝" target="_blank" rel="noopener" class="card-image demo-kite">
-        <div class="kite">
-          <div class="kite-body"></div>
-          <div class="kite-tail"></div>
-        </div>
-        <div class="kite-string"></div>
-        <span class="kite-person">🧒</span>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/风筝" target="_blank" rel="noopener">🪁 放风筝</a></h3>
-        <p>春天的田野上，举着爸爸做的风筝奔跑。燕子、蝴蝶、蜈蚣……看着风筝越飞越高。</p>
-        <div class="card-footer">
-          <span class="card-tag">春天的记忆</span>
-          <a href="https://baike.baidu.com/item/风筝" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 跳皮筋 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/跳皮筋" target="_blank" rel="noopener" class="card-image demo-rubber">
-        <div class="rubber-band">
-          <span class="rubber-person">👧</span>
-          <span class="rubber-person">👧</span>
-          <span class="rubber-jumper">🤸‍♀️</span>
-        </div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/跳皮筋" target="_blank" rel="noopener">🤸‍♀️ 跳皮筋</a></h3>
-        <p>马兰开花二十一，二五六、二五七！女孩子们的专属游戏，皮筋从脚踝升到头顶。</p>
-        <div class="card-footer">
-          <span class="card-tag">女孩最爱</span>
-          <a href="https://baike.baidu.com/item/跳皮筋" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== 校园记忆 ===== -->
-<section id="school">
-  <div class="section-header">
-    <h2>校园记忆</h2>
-    <div class="divider"></div>
-    <p>那些年，教室、操场、走廊里的欢声笑语</p>
-  </div>
-  <div class="grid">
-
-    <!-- 踢毽子 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/踢毽子" target="_blank" rel="noopener" class="card-image demo-jianzi">
-        <div class="jianzi">
-          <div class="jianzi-feather"></div>
-          <div class="jianzi-feather"></div>
-          <div class="jianzi-feather"></div>
-          <div class="jianzi-feather"></div>
-          <div class="jianzi-top"></div>
-          <div class="jianzi-base"></div>
-        </div>
-        <span class="jianzi-player left">🧒</span>
-        <span class="jianzi-player right">👧</span>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/踢毽子" target="_blank" rel="noopener">🦵 踢毽子</a></h3>
-        <p>课间十分钟，走廊里、操场上，到处是踢毽子的身影。单踢、双踢、花样踢，比比谁踢得多。</p>
-        <div class="card-footer">
-          <span class="card-tag">课间十分钟</span>
-          <a href="https://baike.baidu.com/item/踢毽子" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 乒乓球 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/乒乓球" target="_blank" rel="noopener" class="card-image demo-pingpong">
-        <div class="pp-table">
-          <div class="pp-net"></div>
-          <div class="pp-ball"></div>
-          <span class="pp-player left">🏓</span>
-          <span class="pp-player right">🏓</span>
-        </div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/乒乓球" target="_blank" rel="noopener">🏓 打乒乓球</a></h3>
-        <p>水泥乒乓球台，用砖头当球网。放学后的操场是最热闹的，围观的人比打球的人还多。</p>
-        <div class="card-footer">
-          <span class="card-tag">国球启蒙</span>
-          <a href="https://baike.baidu.com/item/乒乓球" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 黑板报 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/黑板报" target="_blank" rel="noopener" class="card-image demo-blackboard">
-        <div class="chalk-text">📐 好好学习 天天向上 📐</div>
-        <div class="chalk-text">—— 本期黑板报 ——</div>
-        <div class="chalk-text">🌟 庆祝六一儿童节 🌟</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/黑板报" target="_blank" rel="noopener">📝 黑板报</a></h3>
-        <p>每次出黑板报都是大展身手的机会！粉笔在黑板上画出五彩斑斓的世界，出完满手都是粉笔灰。</p>
-        <div class="card-footer">
-          <span class="card-tag">班级荣誉</span>
-          <a href="https://baike.baidu.com/item/黑板报" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 小卖部 -->
-    <div class="card">
-      <a href="https://baike.baidu.com/item/小卖部" target="_blank" rel="noopener" class="card-image demo-shop">
-        <div class="shop-item">🍭</div>
-        <div class="shop-item">🧃</div>
-        <div class="shop-item">🍫</div>
-        <div class="shop-item">🍦</div>
-        <div class="shop-item">🌶️</div>
-        <div class="shop-item">🥤</div>
-        <div class="link-overlay"><span>🔍 了解更多</span></div>
-      </a>
-      <div class="card-body">
-        <h3><a href="https://baike.baidu.com/item/小卖部" target="_blank" rel="noopener">🏪 学校小卖部</a></h3>
-        <p>五毛钱的辣条、一毛钱的冰棍、两毛钱的无花果。下课铃一响，冲向小卖部的速度比体育课还快！</p>
-        <div class="card-footer">
-          <span class="card-tag">美食天堂</span>
-          <a href="https://baike.baidu.com/item/小卖部" target="_blank" rel="noopener" class="card-link">百度百科 <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== 时光轴 ===== -->
-<section id="timeline">
-  <div class="section-header">
-    <h2>时光轴</h2>
-    <div class="divider"></div>
-    <p>80后的一天，从早到晚都是快乐</p>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">🌅 早上 7:00</div>
-        <h4>背着书包上学去</h4>
-        <p>脖子上挂着钥匙，背着黄色小书包，和邻居小伙伴一起走路上学。</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">📖 上午 8:00</div>
-        <h4>早读与上课</h4>
-        <p>朗朗读书声从教室传出。数学课上偷偷在桌洞里看漫画书。</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">🏃 课间 10:00</div>
-        <h4>课间十分钟</h4>
-        <p>冲出教室！踢毽子、跳皮筋、丢沙包……上课铃响了才恋恋不舍跑回。</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">🍚 中午 12:00</div>
-        <h4>午饭与午休</h4>
-        <p>铝饭盒里装着妈妈做的饭菜，吃完在课桌上趴着午休。</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">📺 下午 17:30</div>
-        <h4>动画城时间！</h4>
-        <p>放学飞奔回家打开电视，动画城、大风车，每天最幸福的时刻！</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-year">🌙 晚上 19:00</div>
-        <h4>晚饭后玩耍</h4>
-        <p>捉迷藏、一二三木头人……直到妈妈喊"回家睡觉啦！"才散去。</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 1986-1990 Era -->
+<section id="1986-1990" class="era-section">
+  <div class="era-header">
+    <div class="era-year">1986-1990</div>
+    <h2 class="era-title">动画黄金时代</h2>
+    <div class="divider"></div>
+    <p class="era-desc">日本动画大量引进，圣斗士、机器猫、花仙子...每周准时守在电视机前，成为我们生活中最重要的仪式感。</p>
+  </div>
+  
+  <div class="category-grid">
+    <!-- Saint Seiya -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/saintseiya/600/400" alt="圣斗士星矢">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">热血动画</span>
+        <h3 class="card-title">圣斗士星矢 (1986)</h3>
+        <p class="card-desc">"天马流星拳！" 燃烧吧小宇宙！星矢、紫龙、冰河、瞬、一辉，五个青铜圣斗士为了雅典娜而战。那件神圣衣，是多少男孩梦寐以求的装备。</p>
+        <div class="card-tags">
+          <span class="tag">车田正美</span>
+          <span class="tag">十二宫</span>
+          <span class="tag">燃烧小宇宙</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sailor Moon -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/sailormoon/600/400" alt="美少女战士">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">少女动画</span>
+        <h3 class="card-title">美少女战士 (1992)</h3>
+        <p class="card-desc">"代表月亮消灭你！" 月野兔变身的那一刻，多少女孩拿着扫帚模仿。这是属于女孩们的英雄梦，爱与正义的化身。</p>
+        <div class="card-tags">
+          <span class="tag">武内直子</span>
+          <span class="tag">变身</span>
+          <span class="tag">少女心</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cardcaptor Sakura -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/cardcaptorsakura/600/400" alt="魔卡少女樱">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">魔法动画</span>
+        <h3 class="card-title">魔卡少女樱 (1998)</h3>
+        <p class="card-desc">"库洛牌，听我命令！" 小樱的魔法杖、可鲁贝洛斯、透明牌...这部作品不仅画风精美，更教会了我们勇气与爱的重要性。</p>
+        <div class="card-tags">
+          <span class="tag">CLAMP</span>
+          <span class="tag">库洛牌</span>
+          <span class="tag">魔法少女</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Doraemon -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/doraemon/600/400" alt="哆啦 A 梦">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">经典动画</span>
+        <h3 class="card-title">哆啦 A 梦/机器猫 (1979)</h3>
+        <p class="card-desc">谁不想要一个哆啦 A 梦呢？任意门、竹蜻蜓、时光机、记忆面包...每一个道具都承载着我们的幻想和期待。大雄就像是我们自己。</p>
+        <div class="card-tags">
+          <span class="tag">藤子·F·不二雄</span>
+          <span class="tag">百宝袋</span>
+          <span class="tag">童年梦想</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- School Supplies -->
+    <div class="memory-card">
+      <div class="card-media bg-school">
+        <img src="https://picsum.photos/seed/stationery/600/400" alt="文具盒">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">学生文具</span>
+        <h3 class="card-title">铁质文具盒 & 课程表</h3>
+        <p class="card-desc">双层铁质文具盒，里面藏着课程表、乘法口诀表。铅笔要用中华牌的，橡皮要香香的。那个年代的学习用品，简单却充满仪式感。</p>
+        <div class="card-tags">
+          <span class="tag">铁文具盒</span>
+          <span class="tag">课程表</span>
+          <span class="tag">学生时代</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Games -->
+    <div class="memory-card">
+      <div class="card-media bg-games">
+        <img src="https://picsum.photos/seed/rubberband/600/400" alt="跳皮筋">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">童年游戏</span>
+        <h3 class="card-title">跳皮筋 & 丢沙包</h3>
+        <p class="card-desc">"马兰开花二十一，二五六二五七..." 女孩子们的跳皮筋歌谣响彻大街小巷。男孩子们则热衷于丢沙包、拍洋画，简单却快乐无穷。</p>
+        <div class="card-tags">
+          <span class="tag">传统游戏</span>
+          <span class="tag">童谣</span>
+          <span class="tag">街头游戏</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 1991-1995 Era -->
+<section id="1991-1995" class="era-section">
+  <div class="era-header">
+    <div class="era-year">1991-1995</div>
+    <h2 class="era-title">娱乐多元化时代</h2>
+    <div class="divider"></div>
+    <p class="era-desc">彩电普及，VCD 出现，娱乐方式更加丰富。海尔兄弟、黑猫警长陪伴我们成长，小霸王学习机开启了我们的游戏启蒙。</p>
+  </div>
+  
+  <div class="category-grid">
+    <!-- Haier Brothers -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/haierbrothers/600/400" alt="海尔兄弟">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">科普动画</span>
+        <h3 class="card-title">海尔兄弟 (1995)</h3>
+        <p class="card-desc">"打雷要下雨，下雨要打伞..." 这部 200 多集的科普动画，陪伴了我们整个童年。智慧老人创造的两个孩子，环游世界解答各种科学问题。</p>
+        <div class="card-tags">
+          <span class="tag">科普教育</span>
+          <span class="tag">环游世界</span>
+          <span class="tag">童年神曲</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Black Cat Detective -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/blackcat/600/400" alt="黑猫警长">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">经典动画</span>
+        <h3 class="card-title">黑猫警长 (1984)</h3>
+        <p class="card-desc">"眼睛瞪得像铜铃，耳朵竖得像天线..." 黑猫警长维护森林和平，打击犯罪分子。虽然只有 5 集，却影响了一代人。</p>
+        <div class="card-tags">
+          <span class="tag">上海美术电影制片厂</span>
+          <span class="tag">侦探</span>
+          <span class="tag">正义化身</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Famicom -->
+    <div class="memory-card">
+      <div class="card-media bg-games">
+        <img src="https://picsum.photos/seed/famicom/600/400" alt="小霸王">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">电子游戏</span>
+        <h3 class="card-title">小霸王学习机</h3>
+        <p class="card-desc">名义上是学习机，实际上都在打游戏。超级玛丽、魂斗罗、坦克大战、双截龙...那些通宵达旦的游戏时光，是青春最燃的记忆。</p>
+        <div class="card-tags">
+          <span class="tag">FC 游戏</span>
+          <span class="tag">红白机</span>
+          <span class="tag">游戏启蒙</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Snacks -->
+    <div class="memory-card">
+      <div class="card-media bg-snacks">
+        <img src="https://picsum.photos/seed/snacks90s/600/400" alt="零食">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">怀旧零食</span>
+        <h3 class="card-title">大大卷 & 跳跳糖</h3>
+        <p class="card-desc">大大泡泡糖能吹好大，跳跳糖在嘴里噼里啪啦，无花果丝一毛钱一包，酸梅粉用小勺舀着吃。这些味道，现在再也找不到了。</p>
+        <div class="card-tags">
+          <span class="tag">童年味道</span>
+          <span class="tag">小卖部</span>
+          <span class="tag">零花钱</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 1996-2000 Era -->
+<section id="1996-2000" class="era-section">
+  <div class="era-header">
+    <div class="era-year">1996-2000</div>
+    <h2 class="era-title">互联网萌芽时代</h2>
+    <div class="divider"></div>
+    <p class="era-desc">电脑开始进入家庭，QQ 诞生，网络聊天成为新时尚。我们迎来了千禧年，也告别了纯粹的童年。</p>
+  </div>
+  
+  <div class="category-grid">
+    <!-- QQ Messenger -->
+    <div class="memory-card">
+      <div class="card-media bg-digital">
+        <img src="https://picsum.photos/seed/qq1999/600/400" alt="QQ 企鹅">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">社交软件</span>
+        <h3 class="card-title">QQ 即时通讯 (1999)</h3>
+        <p class="card-desc">那只戴着红围巾的企鹅，成为了我们网络生活的起点。"咳咳"的咳嗽声是消息提示，头像亮起时的欣喜，隐身怕被发现的紧张，都是青春的印记。</p>
+        <div class="card-tags">
+          <span class="tag">OICQ</span>
+          <span class="tag">企鹅图标</span>
+          <span class="tag">网聊时代</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Q-Zone -->
+    <div class="memory-card">
+      <div class="card-media bg-digital">
+        <img src="https://picsum.photos/seed/qzone/600/400" alt="QQ 空间">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">社交平台</span>
+        <h3 class="card-title">QQ 空间 & 火星文</h3>
+        <p class="card-desc">精心装扮的 QQ 空间，非主流的火星文签名，"莪們の嗳，卟媞亾亾嘟配"。踩空间、留脚印、互删好友，那是属于我们的社交媒体元年。</p>
+        <div class="card-tags">
+          <span class="tag">非主流</span>
+          <span class="tag">火星文</span>
+          <span class="tag">青春纪念</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- MP3 Player -->
+    <div class="memory-card">
+      <div class="card-media bg-music">
+        <img src="https://picsum.photos/seed/mp3player/600/400" alt="MP3 播放器">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">数码产品</span>
+        <h3 class="card-title">MP3 随身听</h3>
+        <p class="card-desc">存满周杰伦、孙燕姿、林俊杰的歌，上课偷偷听，被老师没收也要买新的。那是我们第一次拥有私人音乐库，也是华语乐坛的黄金年代。</p>
+        <div class="card-tags">
+          <span class="tag">周杰伦</span>
+          <span class="tag">下载歌曲</span>
+          <span class="tag">耳机分一半</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Animation City -->
+    <div class="memory-card">
+      <div class="card-media bg-cartoon">
+        <img src="https://picsum.photos/seed/animationcity/600/400" alt="动画城">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">电视节目</span>
+        <h3 class="card-title">CCTV 动画城</h3>
+        <p class="card-desc">每天下午 5 点半，准时守在电视机前看动画城。《西游记》《哪吒传奇》《宝莲灯》，国产动画的辉煌时期，鹿姐姐的声音至今难忘。</p>
+        <div class="card-tags">
+          <span class="tag">央视</span>
+          <span class="tag">国产动画</span>
+          <span class="tag">定时守候</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2001-2008 Era -->
+<section id="2001-2008" class="era-section">
+  <div class="era-header">
+    <div class="era-year">2001-2008</div>
+    <h2 class="era-title">青春散场之前</h2>
+    <div class="divider"></div>
+    <p class="era-desc">网络游戏兴起，偷菜热潮，彩铃时代。我们在成长的路上越走越远，童年的回忆却永远珍藏心底。</p>
+  </div>
+  
+  <div class="category-grid">
+    <!-- QQ Farm -->
+    <div class="memory-card">
+      <div class="card-media bg-digital">
+        <img src="https://picsum.photos/seed/qqfarm/600/400" alt="QQ 农场">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">社交游戏</span>
+        <h3 class="card-title">QQ 农场偷菜 (2008)</h3>
+        <p class="card-desc">定闹钟半夜起来偷菜，计算成熟时间，互相浇水除草。"今天你偷了吗？"成为问候语。这款简单的网页游戏，创造了全民狂欢的奇迹。</p>
+        <div class="card-tags">
+          <span class="tag">社交游戏</span>
+          <span class="tag">偷菜热</span>
+          <span class="tag">全民参与</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Color Ring -->
+    <div class="memory-card">
+      <div class="card-media bg-music">
+        <img src="https://picsum.photos/seed/colorring/600/400" alt="彩铃">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">移动通信</span>
+        <h3 class="card-title">手机彩铃时代</h3>
+        <p class="card-desc">"我愿意为你，我愿意为你..." 设置一首好听的彩铃是件很有面子的事。彩铃排行榜、明星彩铃，那是手机个性化开始的年代。</p>
+        <div class="card-tags">
+          <span class="tag">诺基亚</span>
+          <span class="tag">个性铃声</span>
+          <span class="tag">移动梦网</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Photo Booth -->
+    <div class="memory-card">
+      <div class="card-media bg-digital">
+        <img src="https://picsum.photos/seed/photobooth/600/400" alt="大头贴">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">青春纪念</span>
+        <h3 class="card-title">拍大头贴</h3>
+        <p class="card-desc">和好朋友去拍大头贴，选各种可爱的边框和贴纸，一本相册记录着我们的友谊。那是自拍杆和美颜相机出现之前的"自拍"方式。</p>
+        <div class="card-tags">
+          <span class="tag">闺蜜时光</span>
+          <span class="tag">相框贴纸</span>
+          <span class="tag">青春留念</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Online Games -->
+    <div class="memory-card">
+      <div class="card-media bg-games">
+        <img src="https://picsum.photos/seed/onlinegames/600/400" alt="网络游戏">
+        <div class="media-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <span class="card-category">网络游戏</span>
+        <h3 class="card-title">传奇 & 梦幻西游</h3>
+        <p class="card-desc">网吧里此起彼伏的"砍传奇"声音，组队刷副本的热血时光。从单机到网游，我们的游戏方式在变，但快乐从未改变。</p>
+        <div class="card-tags">
+          <span class="tag">网吧文化</span>
+          <span class="tag">组队副本</span>
+          <span class="tag">游戏青春</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Gallery Section -->
+<section id="videos" class="video-section">
+  <div class="era-header">
+    <div class="era-year">影像馆</div>
+    <h2 class="era-title">珍贵影像资料</h2>
+    <div class="divider"></div>
+    <p class="era-desc">收集整理的经典动画片段、广告回忆、节目集锦，带你重回那个美好的年代</p>
+  </div>
+  
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-thumbnail">
+        <img src="https://picsum.photos/seed/classicanim/600/400" alt="经典动画合集">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-info">
+        <h3 class="video-title">80 后经典动画 OP/ED 合集</h3>
+        <p class="video-meta">时长：15:30 | 播放量：99 万+</p>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-thumbnail">
+        <img src="https://picsum.photos/seed/oldads/600/400" alt="经典广告">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-info">
+        <h3 class="video-title">童年经典广告回忆杀</h3>
+        <p class="video-meta">时长：12:45 | 播放量：88 万+</p>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-thumbnail">
+        <img src="https://picsum.photos/seed/tvgames/600/400" alt="电视节目">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-info">
+        <h3 class="video-title">动画城/大风车经典片段</h3>
+        <p class="video-meta">时长：20:15 | 播放量：76 万+</p>
+      </div>
+    </div>
+    
+    <div class="video-card">
+      <div class="video-thumbnail">
+        <img src="https://picsum.photos/seed/schoolgames/600/400" alt="校园游戏">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-info">
+        <h3 class="video-title">那些年我们玩过的游戏</h3>
+        <p class="video-meta">时长：18:20 | 播放量：65 万+</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
 <!-- ===== 数码回忆 ===== -->
 <section id="digital">
   <div class="section-header">
@@ -1494,27 +1450,86 @@
 </section>
 
 <footer>
-  <h3>致我们永不褪色的童年 <span class="heart-beat">❤️</span></h3>
-  <p>那些年没有智能手机，没有WiFi，但我们有最纯粹的快乐</p>
-  <p>80后的童年，是一生中最美好的时光</p>
-  <p style="margin-top:20px;opacity:0.6;font-size:14px">—— 献给所有80后的小伙伴们 ——</p>
+  <p>谨以此页面献给所有 80 后</p>
+  <p>那些年我们一起追过的动画 <span class="heart">❤</span> 一起走过的青春</p>
+  <p style="margin-top: 20px; font-size: 13px; opacity: 0.7;">© 2024 80 后回忆录 | 用爱制作的怀旧网站</p>
 </footer>
 
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+<!-- Music Player -->
+<div class="music-player" id="musicPlayer">
+  <span>🎵</span>
+  <div class="music-tooltip">点击播放怀旧金曲</div>
+</div>
 
 <script>
-  window.addEventListener('scroll', function() {
-    document.getElementById('backTop').style.display = window.scrollY > 500 ? 'block' : 'none';
+  // Music Player Functionality
+  const musicPlayer = document.getElementById('musicPlayer');
+  const songs = [
+    { name: '童年', artist: '罗大佑' },
+    { name: '光阴的故事', artist: '罗大佑' },
+    { name: '同桌的你', artist: '老狼' },
+    { name: '爱', artist: '小虎队' },
+    { name: '红蜻蜓', artist: '小虎队' },
+    { name: '葫芦娃', artist: '动画主题曲' },
+    { name: '圣斗士星矢', artist: '动画主题曲' },
+    { name: '美少女战士', artist: '动画主题曲' }
+  ];
+  
+  let isPlaying = false;
+  let currentSongIndex = 0;
+  
+  musicPlayer.addEventListener('click', function() {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      this.classList.add('playing');
+      this.querySelector('.music-tooltip').textContent = '正在播放：' + songs[currentSongIndex].name + ' - ' + songs[currentSongIndex].artist;
+      alert('🎵 正在播放：' + songs[currentSongIndex].name + '\n歌手：' + songs[currentSongIndex].artist + '\n\n（实际使用时可添加真实音频文件）');
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+    } else {
+      this.classList.remove('playing');
+      this.querySelector('.music-tooltip').textContent = '点击播放怀旧金曲';
+    }
   });
-
+  
+  // Smooth scroll for navigation
   document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
     });
   });
-
+  
+  // Add floating elements for decoration
+  function createFloatingElements() {
+    const emojis = ['⭐', '🌙', '🎈', '🎮', '📺', '🎵', '🎬', '🧸'];
+    const header = document.querySelector('header');
+    
+    for (let i = 0; i < 15; i++) {
+      const element = document.createElement('div');
+      element.className = 'floating-element';
+      element.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      element.style.left = Math.random() * 100 + '%';
+      element.style.top = Math.random() * 100 + '%';
+      element.style.animationDelay = Math.random() * 3 + 's';
+      header.appendChild(element);
+    }
+  }
+  
+  createFloatingElements();
+  
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1522,13 +1537,13 @@
         entry.target.style.transform = 'translateY(0)';
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card, .timeline-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+  }, observerOptions);
+  
+  document.querySelectorAll('.memory-card, .video-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
   });
 
   // Music Player - Classic 80s/90s Chinese songs
