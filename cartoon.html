@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>动画城 - 80后美好的回忆</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=ZCOOL+KuaiLe&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #ff6b6b; --secondary: #4ecdc4; --accent: #ffe66d;
+    --purple: #a55eea; --orange: #fd9644; --dark: #2d3436;
+    --gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+  body { font-family: 'Noto Sans SC', sans-serif; background: linear-gradient(180deg, #fff5f8 0%, #fce4ec 100%); min-height: 100vh; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+  nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+  nav a { display: block; color: var(--dark); text-decoration: none; font-size: 15px; font-weight: 600; padding: 18px 20px; transition: all 0.3s; }
+  nav a:hover { color: var(--primary); background: rgba(255,107,107,0.1); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 150px 20px 100px; text-align: center; }
+  h1 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(48px, 8vw, 72px); background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; letter-spacing: 6px; }
+  .subtitle { font-size: 20px; color: #888; margin-bottom: 50px; letter-spacing: 3px; }
+  .empty-state { background: #fff; border-radius: 30px; padding: 80px 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+  .emoji { font-size: 100px; margin-bottom: 30px; animation: bounce 2s ease-in-out infinite; display: inline-block; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+  .message { font-size: 24px; color: var(--dark); margin-bottom: 20px; }
+  .hint { font-size: 16px; color: #aaa; }
+  .back-link { display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--gradient); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s; }
+  .back-link:hover { transform: scale(1.05); }
+</style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">首页</a></li>
+      <li><a href="cartoon.html">动画城</a></li>
+      <li><a href="toys.html">我的玩具盒</a></li>
+      <li><a href="school.html">我的校园日子</a></li>
+      <li><a href="afternoon.html">我游荡的放学日子</a></li>
+      <li><a href="summer.html">我的暑假</a></li>
+      <li><a href="internet.html">我的青春网吧</a></li>
+      <li><a href="events.html">时代的大事件</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>📺 动画城</h1>
+    <p class="subtitle">那些守候在电视机前的美好时光</p>
+    <div class="empty-state">
+      <span class="emoji">🎬</span>
+      <p class="message">内容正在加载中...</p>
+      <p class="hint">这里将展示属于 80 后的经典动画片回忆</p>
+      <a href="index.html" class="back-link">返回首页</a>
+    </div>
+  </div>
+</body>
+</html>
