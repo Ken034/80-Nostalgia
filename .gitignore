@@ -1,5 +1,1 @@
-(cartoon.html is a source file, so no ignores needed)
-
-```html
-
-```
+Nothing should be ignored based on the provided file changes. The only modified file is 'events.html', which is a source file and should not be added to .gitignore.
