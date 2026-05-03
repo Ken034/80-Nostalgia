@@ -20,11 +20,12 @@
   .container { max-width: 1200px; margin: 0 auto; padding: 150px 20px 100px; text-align: center; }
   h1 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(48px, 8vw, 72px); background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; letter-spacing: 6px; }
   .subtitle { font-size: 20px; color: #888; margin-bottom: 50px; letter-spacing: 3px; }
-  .empty-state { background: #fff; border-radius: 30px; padding: 80px 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-  .emoji { font-size: 100px; margin-bottom: 30px; animation: bounce 2s ease-in-out infinite; display: inline-block; }
-  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-  .message { font-size: 24px; color: var(--dark); margin-bottom: 20px; }
-  .hint { font-size: 16px; color: #aaa; }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+  .video-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+  .video-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+  .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
+  .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-title { padding: 20px; font-size: 18px; font-weight: 600; color: var(--dark); text-align: center; }
   .back-link { display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--gradient); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s; }
   .back-link:hover { transform: scale(1.05); }
 </style>
@@ -45,12 +46,31 @@
   <div class="container">
     <h1>📺 动画城</h1>
     <p class="subtitle">那些守候在电视机前的美好时光</p>
-    <div class="empty-state">
-      <span class="emoji">🎬</span>
-      <p class="message">内容正在加载中...</p>
-      <p class="hint">这里将展示属于 80 后的经典动画片回忆</p>
-      <a href="index.html" class="back-link">返回首页</a>
+    
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="//player.bilibili.com/player.html?bvid=BV17GArzTEHS&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="video-title">圣斗士星矢：经典回顾</div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="//player.bilibili.com/player.html?bvid=BV1cx41137Cu&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="video-title">黑猫警长：童年经典动画</div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="//player.bilibili.com/player.html?bvid=BV1bV4y1c729&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="video-title">葫芦兄弟：经典回忆</div>
+      </div>
     </div>
+    
+    <a href="index.html" class="back-link">返回首页</a>
   </div>
 </body>
 </html>
