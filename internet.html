@@ -32,6 +32,8 @@
   .hint { font-size: 16px; color: #aaa; }
   .back-link { display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--gradient); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s; }
   .back-link:hover { transform: scale(1.05); }
+  .video-container { max-width: 900px; margin: 40px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+  .video-container iframe { width: 100%; aspect-ratio: 16/9; border: none; }
 </style>
 </head>
 <body>
@@ -50,12 +52,26 @@
   <div class="container">
     <h1>💻 我的青春网吧</h1>
     <p class="subtitle">传奇、CS、红警...那个通宵达旦的青葱岁月</p>
-    <div class="empty-state">
-      <span class="emoji">💻</span>
-      <p class="message">内容正在加载中...</p>
-      <p class="hint">这里将展示属于 80 后的珍贵回忆</p>
-      <a href="index.html" class="back-link">返回首页</a>
+    <div class="video-container">
+      <iframe src="//player.bilibili.com/player.html?bvid=BV1Ax411d7ip&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
     </div>
+    <p class="message">可爱女人 - 周杰伦</p>
+    
+    <div class="video-container">
+      <iframe src="//player.bilibili.com/player.html?bvid=BV1Ax411d7ip&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+    <p class="message">暗号 - 周杰伦</p>
+    
+    <div class="video-container">
+      <iframe src="//player.bilibili.com/player.html?bvid=BV1Ax411d7ip&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+    <p class="message">开不了口 - 周杰伦</p>
+    
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/TXK1-mylnik" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+    <p class="message">冰吻</p>
+    <a href="index.html" class="back-link">返回首页</a>
   </div>
 </body>
 </html>
