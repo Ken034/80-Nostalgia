@@ -37,6 +37,20 @@
   .video-title { padding: 20px; font-size: 18px; font-weight: 600; color: var(--dark); text-align: center; }
   .back-link { display: inline-block; margin-top: 40px; padding: 15px 40px; background: var(--gradient); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s; }
   .back-link:hover { transform: scale(1.05); }
+  @media (max-width: 768px) { 
+    /* Mobile Navigation - Hide on scroll with hamburger menu */
+    .nav-toggle { display: flex; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 1001; }
+    .nav-toggle span { width: 25px; height: 3px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+    
+    nav ul { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    nav.open ul { max-height: 500px; }
+    nav.hidden { transform: translateY(-100%); }
+    nav.hidden.open { transform: translateY(0); }
+  }
+  @media (min-width: 769px) { .nav-toggle { display: none !important; } }
 </style>
 </head>
 <body>
@@ -49,8 +63,10 @@
       <li><a href="afternoon.html">我游荡的放学日子</a></li>
       <li><a href="summer.html">我的暑假</a></li>
       <li><a href="internet.html">我的青春网吧</a></li>
+      <li><a href="console.html">我的游戏机</a></li>
       <li><a href="events.html">时代的大事件</a></li>
     </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </nav>
   <div class="container">
     <h1>📺 动画城</h1>
@@ -109,5 +125,31 @@
     
     <a href="index.html" class="back-link">返回首页</a>
   </div>
+  <script>
+    // Mobile navigation - hide on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    const nav = document.querySelector('nav');
+    
+    function toggleNav() {
+      nav.classList.toggle('open');
+      document.querySelector('.nav-toggle').classList.toggle('active');
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Scrolling down - hide nav
+          nav.classList.add('hidden');
+          nav.classList.remove('open');
+          document.querySelector('.nav-toggle').classList.remove('active');
+        } else {
+          // Scrolling up - show nav
+          nav.classList.remove('hidden');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }
+    });
+  </script>
 </body>
 </html>
