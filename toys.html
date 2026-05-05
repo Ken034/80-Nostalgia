@@ -84,9 +84,8 @@
       
       <!-- Taobao Shopping Link -->
       <div style="margin-top: 20px;">
-        <a href="https://item.taobao.com/item.htm?ali_refid=a3_430582_1006%3A1104777354%3AH%3AoHBge%2FyXpS42malfC5OLeg%3D%3D%3Abb29e066bc9e09bd176842143387717e&ali_trackid=318_bb29e066bc9e09bd176842143387717e&id=962950947011&mi_id=00009iIXCyer69Nk0vg0wVnKyN6SpdcY5V72k4m8D6IhUL0&mm_sceneid=0_0_31100339_0&priceTId=2100c90117779427787195533e0d38&skuId=5919082156723&spm=a21n57.1.hoverItem.1&utparam=%7B%22aplus_abtest%22%3A%22228c693418e5edf9a424ac99ad35c64e%22%7D&xxc=ad_ztc" 
-           target="_blank" 
-           rel="noopener noreferrer"
+        <a href="#" 
+           onclick="openTaobaoApp('962950947011'); return false;"
            style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 18px; transition: transform 0.3s; box-shadow: 0 10px 30px rgba(255,107,107,0.3);">
           🛒 购买四驱车 (淘宝)
         </a>
@@ -103,6 +102,20 @@
     function toggleNav() {
       nav.classList.toggle('open');
       document.querySelector('.nav-toggle').classList.toggle('active');
+    }
+    
+    // Open Taobao app or fallback to web
+    function openTaobaoApp(itemId) {
+      const taobaoUrl = 'https://item.taobao.com/item.htm?id=' + itemId;
+      const taobaoScheme = 'taobao://' + itemId;
+      
+      // Try to open Taobao app first
+      window.location.href = taobaoScheme;
+      
+      // Fallback to web after a short delay if app doesn't open
+      setTimeout(function() {
+        window.location.href = taobaoUrl;
+      }, 1500);
     }
     
     window.addEventListener('scroll', () => {
