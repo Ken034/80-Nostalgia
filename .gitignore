@@ -51,3 +51,4 @@ Thumbs.db
 *.so
 *.a
 *.class
+(toy's.html is a source file, so nothing needs to be ignored)
