@@ -104,6 +104,28 @@
     nav.hidden.open { transform: translateY(0); }
   }
   @media (min-width: 769px) { .nav-toggle { display: none !important; } }
+  
+  /* Feedback Section Styles */
+  .feedback-section { position: relative; z-index: 1; padding: 80px 20px; background: linear-gradient(180deg, #fff5f5 0%, #ffe3e3 100%); }
+  .feedback-container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+  .feedback-container h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(28px, 5vw, 40px); text-align: center; margin-bottom: 10px; letter-spacing: 3px; background: linear-gradient(135deg, var(--primary), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .feedback-subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 16px; }
+  .feedback-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full-width { grid-column: 1 / -1; }
+  .form-group label { font-weight: 600; color: var(--dark); font-size: 14px; }
+  .form-group input, .form-group select, .form-group textarea { padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; font-family: 'Noto Sans SC', sans-serif; transition: all 0.3s; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255,107,107,0.1); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .submit-btn { grid-column: 1 / -1; padding: 15px 30px; background: linear-gradient(135deg, var(--primary), var(--orange)); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,107,0.4); }
+  .form-success { display: none; text-align: center; padding: 40px 20px; }
+  .form-success.show { display: block; animation: fadeIn 0.5s ease; }
+  .success-icon { font-size: 48px; display: block; margin-bottom: 15px; }
+  .form-success h3 { font-size: 24px; color: var(--primary); margin-bottom: 10px; }
+  .form-success p { color: #666; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .feedback-form { grid-template-columns: 1fr; } .feedback-container { padding: 30px 20px; } }
 </style>
 </head>
 <body>
@@ -143,6 +165,42 @@
       <a href="events.html" class="category-card cat-events"><div class="card-icon"><span class="icon-emoji">🌟</span></div><div class="card-content"><h3 class="card-title">时代的大事件</h3><p class="card-desc">改革开放、奥运、回归...见证历史的我们</p><span class="card-arrow">进入 <span>→</span></span></div></a>
     </div>
   </section>
+  <section class="feedback-section" id="feedback">
+    <div class="feedback-container">
+      <h2>💬 给我们反馈</h2>
+      <p class="feedback-subtitle">如果您在寻找更多信息，或有任何建议，请告诉我们！</p>
+      <form class="feedback-form" id="feedbackForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">您的称呼</label>
+          <input type="text" id="name" name="name" placeholder="请输入您的称呼" required>
+        </div>
+        <div class="form-group">
+          <label for="email">电子邮箱</label>
+          <input type="email" id="email" name="email" placeholder="请输入您的邮箱（选填）">
+        </div>
+        <div class="form-group">
+          <label for="type">反馈类型</label>
+          <select id="type" name="type" required>
+            <option value="">请选择反馈类型</option>
+            <option value="info">寻找更多信息</option>
+            <option value="suggestion">改进建议</option>
+            <option value="memory">分享您的回忆</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="message">详细内容</label>
+          <textarea id="message" name="message" rows="5" placeholder="请详细描述您的想法或需要的信息..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">发送反馈 ✉️</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <span class="success-icon">✅</span>
+        <h3>感谢您的反馈！</h3>
+        <p>我们会尽快查看并回复您。</p>
+      </div>
+    </div>
+  </section>
   <footer><p>Made with <span class="heart">❤</span> for the 80s generation | 献给所有 80 后的你</p><p style="margin-top:15px;font-size:12px;opacity:0.6;">© 2024 80 后美好的回忆 • 青春永不散场</p></footer>
   <script>
     document.addEventListener('mousemove', e => { const emojis = document.querySelectorAll('.floating-emoji'); const x = e.clientX/window.innerWidth; const y = e.clientY/window.innerHeight; emojis.forEach((emoji, i) => { emoji.style.transform = `translate(${x*(i+1)*10}px, ${y*(i+1)*10}px)`; }); });
@@ -173,6 +231,15 @@
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       }
     });
+    
+    // Feedback form handler
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = document.getElementById('feedbackForm');
+      const success = document.getElementById('formSuccess');
+      form.style.display = 'none';
+      success.classList.add('show');
+    }
   </script>
 </body>
 </html>
