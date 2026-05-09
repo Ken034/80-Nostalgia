@@ -106,26 +106,28 @@
   @media (min-width: 769px) { .nav-toggle { display: none !important; } }
   
   /* Feedback Section Styles */
-  .feedback-section { position: relative; z-index: 1; padding: 80px 20px; background: linear-gradient(180deg, #fff5f5 0%, #ffe3e3 100%); }
-  .feedback-container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-  .feedback-container h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(28px, 5vw, 40px); text-align: center; margin-bottom: 10px; letter-spacing: 3px; background: linear-gradient(135deg, var(--primary), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .feedback-subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 16px; }
-  .feedback-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group.full-width { grid-column: 1 / -1; }
-  .form-group label { font-weight: 600; color: var(--dark); font-size: 14px; }
-  .form-group input, .form-group select, .form-group textarea { padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; font-family: 'Noto Sans SC', sans-serif; transition: all 0.3s; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255,107,107,0.1); }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .submit-btn { grid-column: 1 / -1; padding: 15px 30px; background: linear-gradient(135deg, var(--primary), var(--orange)); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; }
-  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,107,0.4); }
-  .form-success { display: none; text-align: center; padding: 40px 20px; }
-  .form-success.show { display: block; animation: fadeIn 0.5s ease; }
-  .success-icon { font-size: 48px; display: block; margin-bottom: 15px; }
-  .form-success h3 { font-size: 24px; color: var(--primary); margin-bottom: 10px; }
-  .form-success p { color: #666; }
+  .feedback-section { position: relative; z-index: 1; padding: 100px 20px; background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); }
+  .feedback-container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 50px 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.5); }
+  .feedback-container h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(28px, 5vw, 36px); text-align: center; margin-bottom: 8px; letter-spacing: 2px; background: linear-gradient(135deg, var(--primary), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .feedback-subtitle { text-align: center; color: #6c757d; margin-bottom: 35px; font-size: 15px; line-height: 1.6; }
+  .feedback-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-weight: 600; color: #495057; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input, .form-group select, .form-group textarea { padding: 14px 18px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 15px; font-family: 'Noto Sans SC', sans-serif; transition: all 0.3s ease; background: #fafbfc; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255,107,107,0.08); background: #fff; }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+  .submit-btn { padding: 16px 30px; background: linear-gradient(135deg, var(--primary), #ff6b6b); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.5px; text-transform: uppercase; position: relative; overflow: hidden; }
+  .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(255,107,107,0.35); }
+  .submit-btn:active { transform: translateY(-1px); }
+  .form-success { display: none; text-align: center; padding: 50px 30px; }
+  .form-success.show { display: block; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .success-icon { font-size: 56px; display: inline-block; margin-bottom: 20px; animation: bounce 0.8s ease; }
+  .form-success h3 { font-size: 26px; color: var(--primary); margin-bottom: 12px; font-weight: 700; }
+  .form-success p { color: #6c757d; line-height: 1.6; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @media (max-width: 600px) { .feedback-form { grid-template-columns: 1fr; } .feedback-container { padding: 30px 20px; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (max-width: 600px) { .feedback-container { padding: 40px 25px; } }
 </style>
 </head>
 <body>
@@ -171,12 +173,8 @@
       <p class="feedback-subtitle">如果您在寻找更多信息，或有任何建议，请告诉我们！</p>
       <form class="feedback-form" id="feedbackForm" onsubmit="handleSubmit(event)">
         <div class="form-group">
-          <label for="name">您的称呼</label>
-          <input type="text" id="name" name="name" placeholder="请输入您的称呼" required>
-        </div>
-        <div class="form-group">
           <label for="email">电子邮箱</label>
-          <input type="email" id="email" name="email" placeholder="请输入您的邮箱（选填）">
+          <input type="email" id="email" name="email" placeholder="请输入您的邮箱（用于回复）" required>
         </div>
         <div class="form-group">
           <label for="type">反馈类型</label>
@@ -188,7 +186,7 @@
             <option value="other">其他</option>
           </select>
         </div>
-        <div class="form-group full-width">
+        <div class="form-group">
           <label for="message">详细内容</label>
           <textarea id="message" name="message" rows="5" placeholder="请详细描述您的想法或需要的信息..." required></textarea>
         </div>
@@ -232,13 +230,41 @@
       }
     });
     
-    // Feedback form handler
+    // Feedback form handler - sends to FormSubmit.co
     function handleSubmit(event) {
       event.preventDefault();
       const form = document.getElementById('feedbackForm');
       const success = document.getElementById('formSuccess');
-      form.style.display = 'none';
-      success.classList.add('show');
+      const email = document.getElementById('email').value;
+      const type = document.getElementById('type').value;
+      const message = document.getElementById('message').value;
+      
+      // Send to FormSubmit.co (free service, no backend needed)
+      fetch('https://formsubmit.co/kytad95@yahoo.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          type: type,
+          message: message,
+          _subject: 'New Feedback from 80s Nostalgia Site',
+          _captcha: 'false',
+          _template: 'table'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        form.style.display = 'none';
+        success.classList.add('show');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('发送失败，请稍后重试。或发送邮件至：kytad95@yahoo.com');
+      });
     }
   </script>
 </body>
