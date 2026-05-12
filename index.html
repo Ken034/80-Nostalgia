@@ -104,32 +104,6 @@
     nav.hidden.open { transform: translateY(0); }
   }
   @media (min-width: 769px) { .nav-toggle { display: none !important; } }
-  
-  /* Comment Section Styles */
-  .comment-section { position: relative; z-index: 1; padding: 100px 20px; background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); }
-  .comment-container { max-width: 700px; margin: 0 auto; }
-  .comment-container h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(28px, 5vw, 36px); text-align: center; margin-bottom: 8px; letter-spacing: 2px; background: linear-gradient(135deg, var(--primary), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .comment-subtitle { text-align: center; color: #6c757d; margin-bottom: 35px; font-size: 15px; line-height: 1.6; }
-  .comment-form { display: flex; flex-direction: column; gap: 20px; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); margin-bottom: 40px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group label { font-weight: 600; color: #495057; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .form-group input, .form-group textarea { padding: 14px 18px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 15px; font-family: 'Noto Sans SC', sans-serif; transition: all 0.3s ease; background: #fafbfc; }
-  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255,107,107,0.08); background: #fff; }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .submit-btn { padding: 16px 30px; background: linear-gradient(135deg, var(--primary), #ff6b6b); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.5px; text-transform: uppercase; position: relative; overflow: hidden; }
-  .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(255,107,107,0.35); }
-  .submit-btn:active { transform: translateY(-1px); }
-  .comments-list { display: flex; flex-direction: column; gap: 20px; }
-  .comment-item { background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); animation: slideUp 0.4s ease; }
-  .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .comment-author { font-weight: 700; color: var(--primary); font-size: 16px; }
-  .comment-date { font-size: 12px; color: #adb5bd; }
-  .comment-text { color: #495057; line-height: 1.7; font-size: 15px; }
-  .empty-comments { text-align: center; padding: 40px; color: #adb5bd; font-style: italic; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  @media (max-width: 600px) { .comment-form { padding: 25px; } }
 </style>
 </head>
 <body>
@@ -169,26 +143,6 @@
       <a href="events.html" class="category-card cat-events"><div class="card-icon"><span class="icon-emoji">🌟</span></div><div class="card-content"><h3 class="card-title">时代的大事件</h3><p class="card-desc">改革开放、奥运、回归...见证历史的我们</p><span class="card-arrow">进入 <span>→</span></span></div></a>
     </div>
   </section>
-  <section class="comment-section" id="comments">
-    <div class="comment-container">
-      <h2>💬 留言区</h2>
-      <p class="comment-subtitle">写下你想说的话，分享你的回忆和趣事！</p>
-      <form class="comment-form" id="commentForm" onsubmit="handleCommentSubmit(event)">
-        <div class="form-group">
-          <label for="name">昵称</label>
-          <input type="text" id="name" name="name" placeholder="请输入你的昵称" required>
-        </div>
-        <div class="form-group">
-          <label for="comment">想说的话</label>
-          <textarea id="comment" name="comment" rows="4" placeholder="写点什么吧，分享你的回忆或趣事..." required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">发布留言 ✨</button>
-      </form>
-      <div class="comments-list" id="commentsList">
-        <p class="empty-comments">还没有留言，快来抢沙发吧！🎉</p>
-      </div>
-    </div>
-  </section>
   <footer><p>Made with <span class="heart">❤</span> for the 80s generation | 献给所有 80 后的你</p><p style="margin-top:15px;font-size:12px;opacity:0.6;">© 2024 80 后美好的回忆 • 青春永不散场</p></footer>
   <script>
     document.addEventListener('mousemove', e => { const emojis = document.querySelectorAll('.floating-emoji'); const x = e.clientX/window.innerWidth; const y = e.clientY/window.innerHeight; emojis.forEach((emoji, i) => { emoji.style.transform = `translate(${x*(i+1)*10}px, ${y*(i+1)*10}px)`; }); });
@@ -219,60 +173,6 @@
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       }
     });
-    
-    // Comment form handler - stores comments in localStorage
-    const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
-    
-    function renderComments() {
-      const commentsList = document.getElementById('commentsList');
-      if (comments.length === 0) {
-        commentsList.innerHTML = '<p class="empty-comments">还没有留言，快来抢沙发吧！🎉</p>';
-        return;
-      }
-      commentsList.innerHTML = comments.map(c => `
-        <div class="comment-item">
-          <div class="comment-header">
-            <span class="comment-author">${escapeHtml(c.name)}</span>
-            <span class="comment-date">${c.date}</span>
-          </div>
-          <p class="comment-text">${escapeHtml(c.comment)}</p>
-        </div>
-      `).join('');
-    }
-    
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-    
-    function handleCommentSubmit(event) {
-      event.preventDefault();
-      const form = document.getElementById('commentForm');
-      const name = document.getElementById('name').value.trim();
-      const comment = document.getElementById('comment').value.trim();
-      
-      if (!name || !comment) return;
-      
-      const now = new Date();
-      const dateStr = now.toLocaleDateString('zh-CN', { 
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      
-      comments.unshift({ name, comment, date: dateStr });
-      localStorage.setItem('siteComments', JSON.stringify(comments));
-      
-      form.reset();
-      renderComments();
-      alert('留言发布成功！✨');
-    }
-    
-    // Initial render
-    renderComments();
   </script>
 </body>
 </html>
