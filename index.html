@@ -1,1 +1,178 @@
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>80 后美好的回忆 - 致我们逝去的青春</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8Z06DQVX9C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8Z06DQVX9C');
+</script>
+<!-- End Google Analytics -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;700;900&family=ZCOOL+KuaiLe&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #ff6b6b; --secondary: #4ecdc4; --accent: #ffe66d;
+    --purple: #a55eea; --orange: #fd9644; --dark: #2d3436;
+    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-6: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    --gradient-7: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+    --gradient-8: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    --gradient-9: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans SC', sans-serif; background: linear-gradient(180deg, #fff5f5 0%, #e8f4f8 100%); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+  .bg-shapes { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .shape { position: absolute; opacity: 0.1; animation: float 20s ease-in-out infinite; }
+  .shape:nth-child(1) { width: 100px; height: 100px; background: var(--primary); border-radius: 50%; top: 10%; left: 10%; }
+  .shape:nth-child(2) { width: 80px; height: 80px; background: var(--secondary); border-radius: 30% 70% 70% 30%; top: 60%; left: 80%; animation-delay: -5s; }
+  .shape:nth-child(3) { width: 120px; height: 120px; background: var(--accent); border-radius: 50%; top: 80%; left: 20%; animation-delay: -10s; }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.1); border-bottom: 3px solid transparent; }
+  nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+  nav a { display: block; color: var(--dark); text-decoration: none; font-size: 15px; font-weight: 600; padding: 18px 20px; transition: all 0.3s; }
+  nav a:hover { color: var(--primary); background: rgba(255,107,107,0.1); }
+  header { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 80px; z-index: 1; }
+  .floating-emoji { position: absolute; font-size: 40px; animation: emojiFloat 15s ease-in-out infinite; opacity: 0.6; }
+  .floating-emoji:nth-child(1) { top: 10%; left: 10%; }
+  .floating-emoji:nth-child(2) { top: 20%; right: 15%; animation-delay: -3s; }
+  .floating-emoji:nth-child(3) { bottom: 30%; left: 20%; animation-delay: -6s; }
+  .floating-emoji:nth-child(4) { bottom: 20%; right: 10%; animation-delay: -9s; }
+  .floating-emoji:nth-child(5) { top: 50%; left: 5%; animation-delay: -12s; }
+  @keyframes emojiFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.1); } }
+  header h1 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(48px, 8vw, 96px); font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--orange), var(--secondary), var(--purple), var(--primary)); background-size: 200% 200%; animation: gradientShift 8s ease infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; letter-spacing: 3px; }
+  @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  header .subtitle { font-size: clamp(20px, 4vw, 32px); color: var(--dark); font-weight: 300; margin-bottom: 30px; letter-spacing: 6px; }
+  header .years { font-size: clamp(28px, 5vw, 42px); font-weight: 700; letter-spacing: 12px; padding: 10px 30px; border-radius: 50px; background: rgba(102,126,234,0.15); border: 3px solid var(--primary); display: inline-block; }
+  .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 16px; animation: bounce 2s ease-in-out infinite; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(15px); } }
+  .categories-section { position: relative; z-index: 1; padding: 100px 20px; max-width: 1600px; margin: 0 auto; }
+  .section-title { text-align: center; margin-bottom: 80px; }
+  .section-title h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(36px, 6vw, 56px); margin-bottom: 15px; letter-spacing: 4px; }
+  .section-title p { font-size: 18px; color: #888; letter-spacing: 2px; }
+  .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 20px; }
+  .category-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .category-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+  .card-icon { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; position: relative; overflow: hidden; }
+  .cat-home .card-icon { background: var(--gradient-1); }
+  .cat-cartoon .card-icon { background: var(--gradient-2); }
+  .cat-toys .card-icon { background: var(--gradient-3); }
+  .cat-school .card-icon { background: var(--gradient-4); }
+  .cat-afternoon .card-icon { background: var(--gradient-5); }
+  .cat-summer .card-icon { background: var(--gradient-6); }
+  .cat-internet .card-icon { background: var(--gradient-7); }
+  .cat-console .card-icon { background: var(--gradient-9); }
+  .cat-events .card-icon { background: var(--gradient-8); }
+  .icon-emoji { animation: iconBounce 2s ease-in-out infinite; display: inline-block; }
+  .category-card:hover .icon-emoji { animation: iconSpin 0.6s ease-in-out; }
+  @keyframes iconBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes iconSpin { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
+  .card-content { padding: 30px; text-align: center; }
+  .card-title { font-family: 'ZCOOL KuaiLe', cursive; font-size: 24px; font-weight: 700; margin-bottom: 12px; letter-spacing: 2px; }
+  .card-desc { font-size: 14px; color: #888; line-height: 1.8; margin-bottom: 20px; }
+  .card-arrow { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); font-weight: 600; transition: gap 0.3s; }
+  .category-card:hover .card-arrow { gap: 15px; }
+  .ribbon { position: absolute; top: 0; right: 0; width: 80px; height: 80px; overflow: hidden; z-index: 2; }
+  .ribbon::before { content: 'NEW'; position: absolute; top: 15px; right: -25px; transform: rotate(45deg); background: var(--primary); color: #fff; padding: 5px 30px; font-size: 11px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+  footer { position: relative; z-index: 1; background: linear-gradient(135deg, var(--dark), #1a1a1a); color: #fff; padding: 60px 20px; text-align: center; }
+  footer p { font-size: 14px; opacity: 0.8; }
+  footer .heart { color: var(--primary); animation: heartBeat 1.5s ease-in-out infinite; display: inline-block; }
+  @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+  @media (max-width: 768px) { 
+    nav ul { flex-direction: column; } 
+    .category-grid { grid-template-columns: 1fr; }
+    
+    /* Mobile Navigation - Hide on scroll with hamburger menu */
+    .nav-toggle { display: flex; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 1001; }
+    .nav-toggle span { width: 25px; height: 3px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+    
+    nav ul { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    nav.open ul { max-height: 500px; }
+    nav.hidden { transform: translateY(-100%); }
+    nav.hidden.open { transform: translateY(0); }
+  }
+  @media (min-width: 769px) { .nav-toggle { display: none !important; } }
+</style>
+</head>
+<body>
+  <div class="bg-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">首页</a></li>
+      <li><a href="cartoon.html">动画城</a></li>
+      <li><a href="toys.html">我的玩具盒</a></li>
+      <li><a href="school.html">我的校园日子</a></li>
+      <li><a href="afternoon.html">我游荡的放学日子</a></li>
+      <li><a href="summer.html">我的暑假</a></li>
+      <li><a href="internet.html">我的青春网吧</a></li>
+      <li><a href="console.html">我的游戏机</a></li>
+      <li><a href="events.html">时代的大事件</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+  <header>
+    <div class="floating-emoji">🎮</div><div class="floating-emoji">📺</div><div class="floating-emoji">🧸</div><div class="floating-emoji">📚</div><div class="floating-emoji">🍦</div>
+    <h1>80 后美好的回忆</h1>
+    <p class="subtitle">致我们逝去的青春</p>
+    <p class="years">1980 - 1989</p>
+    <div class="scroll-hint" onclick="document.querySelector('.categories-section').scrollIntoView({behavior:'smooth'})"><span>↓</span><span>探索回忆</span></div>
+  </header>
+  <section class="categories-section">
+    <div class="section-title"><h2>✨ 时光分类 ✨</h2><p>点击任意卡片，进入那段美好时光</p></div>
+    <div class="category-grid">
+      <a href="index.html" class="category-card cat-home"><div class="card-icon"><span class="icon-emoji">🏠</span></div><div class="card-content"><h3 class="card-title">首页</h3><p class="card-desc">回到家的感受</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="cartoon.html" class="category-card cat-cartoon"><div class="ribbon"></div><div class="card-icon"><span class="icon-emoji">📺</span></div><div class="card-content"><h3 class="card-title">动画城</h3><p class="card-desc">童年的电视回忆</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="toys.html" class="category-card cat-toys"><div class="card-icon"><span class="icon-emoji">🧸</span></div><div class="card-content"><h3 class="card-title">我的玩具盒</h3><p class="card-desc">那些陪伴的玩具</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="school.html" class="category-card cat-school"><div class="card-icon"><span class="icon-emoji">📚</span></div><div class="card-content"><h3 class="card-title">我的校园日子</h3><p class="card-desc">学校的美好时光</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="afternoon.html" class="category-card cat-afternoon"><div class="ribbon"></div><div class="card-icon"><span class="icon-emoji">🛴</span></div><div class="card-content"><h3 class="card-title">我游荡的放学日子</h3><p class="card-desc">放学后的自由</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="summer.html" class="category-card cat-summer"><div class="card-icon"><span class="icon-emoji">🍉</span></div><div class="card-content"><h3 class="card-title">我的暑假</h3><p class="card-desc">整个夏天属于我们</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="internet.html" class="category-card cat-internet"><div class="ribbon"></div><div class="card-icon"><span class="icon-emoji">💻</span></div><div class="card-content"><h3 class="card-title">我的青春网吧</h3><p class="card-desc">网络改变的年代</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="console.html" class="category-card cat-console"><div class="ribbon"></div><div class="card-icon"><span class="icon-emoji">🎮</span></div><div class="card-content"><h3 class="card-title">我的游戏机</h3><p class="card-desc">掌机的黄金时代</p><div class="card-arrow">进入 →</div></div></a>
+      <a href="events.html" class="category-card cat-events"><div class="card-icon"><span class="icon-emoji">🌟</span></div><div class="card-content"><h3 class="card-title">时代的大事件</h3><p class="card-desc">影响我们的时代</p><div class="card-arrow">进入 →</div></div></a>
+    </div>
+  </section>
+  <footer><p>Made with <span class="heart">❤</span> for the 80s generation | 献给所有 80 后的你</p><p style="margin-top:15px;font-size:12px;opacity:0.6;">© 2024 80 后美好的回忆 • 青春永远不散</p></footer>
+  <script>
+    document.addEventListener('mousemove', e => { const emojis = document.querySelectorAll('.floating-emoji'); const x = e.clientX/window.innerWidth; const y = e.clientY/window.innerHeight; emojis.forEach((emoji, i) => { emoji.style.transform = `translate(${x*20}px, ${y*20}px)`; }); });
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; } }); }, { threshold: 0.1 });
+    document.querySelectorAll('.category-card').forEach((card, i) => { card.style.opacity='0'; card.style.transform='translateY(30px)'; card.style.transition=`all 0.6s ease ${i*0.1}s`; observer.observe(card); });
+    
+    // Mobile navigation - hide on scroll down, show on scroll up
+    let lastScrollTop = 0;
+    const nav = document.querySelector('nav');
+    
+    function toggleNav() {
+      nav.classList.toggle('open');
+      document.querySelector('.nav-toggle').classList.toggle('active');
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Scrolling down - hide nav
+          nav.classList.add('hidden');
+          nav.classList.remove('open');
+          document.querySelector('.nav-toggle').classList.remove('active');
+        } else {
+          // Scrolling up - show nav
+          nav.classList.remove('hidden');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }
+    });
+  </script>
+</body>
+</html>
